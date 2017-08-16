@@ -14,10 +14,10 @@
   
 
   <link rel="stylesheet" href="/text/assets/main.css">
-  <link rel="canonical" href="/text/about/">
+  <link rel="canonical" href="https://junhewk.github.io/text/about/">
   
   
-  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="/text/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="https://junhewk.github.io/text/feed.xml">
 
   
 
@@ -45,6 +45,18 @@
 </script>
 
   
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-102102649-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
 
 </head>
 
@@ -65,9 +77,6 @@
         
         <a class="page-link" href="/text/archives/">Archives</a>
       
-        
-        <a class="page-link" href="https://github.com/yous/whiteglass">GitHub</a>
-      
     </nav>
 
   </div>
@@ -84,101 +93,13 @@
   </header>
 
   <div class="post-content">
-    <p>whiteglass is a minimal, responsive Jekyll theme for hackers.</p>
+    <p>I’m Junhewk Kim, a pediatric dentist and writer/translator. I’m studying medical humanities and ethics.</p>
 
-<h2 id="installation">Installation</h2>
+<p>I’m constructing this project site by using jekyll theme <a href="https://github.com/yous/whiteglass">whiteglass</a>: whiteglass is a minimal, responsive Jekyll theme for hackers.</p>
 
-<p>Add this link to your Jekyll site’s Gemfile:</p>
+<hr />
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">gem</span> <span class="s2">"jekyll-whiteglass"</span>
-</code></pre>
-</div>
-
-<p>And add this line to your Jekyll site’s <code class="highlighter-rouge">_config.yml</code>:</p>
-
-<div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="s">theme</span><span class="pi">:</span> <span class="s">jekyll-whiteglass</span>
-</code></pre>
-</div>
-
-<p>And then execute:</p>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>bundle
-</code></pre>
-</div>
-
-<p>Or install it yourself as:</p>
-
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code>gem install jekyll-whiteglass
-</code></pre>
-</div>
-
-<h2 id="quick-start">Quick Start</h2>
-
-<ol>
-  <li>
-    <p>Generate a new Jekyll blog:</p>
-
-    <div class="language-sh highlighter-rouge"><pre class="highlight"><code>jekyll new blog --skip-bundle
-<span class="nb">cd </span>blog
-</code></pre>
-    </div>
-  </li>
-  <li>
-    <p>Edit <code class="highlighter-rouge">Gemfile</code> to use whiteglass theme:</p>
-
-    <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">gem</span> <span class="s2">"jekyll-whiteglass"</span>
-</code></pre>
-    </div>
-  </li>
-  <li>
-    <p>Edit <code class="highlighter-rouge">_config.yml</code> to use whiteglass theme and its plugins:</p>
-
-    <div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="s">theme</span><span class="pi">:</span> <span class="s">jekyll-whiteglass</span>
-<span class="s">gems</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s">jekyll-archives</span>
-  <span class="pi">-</span> <span class="s">jekyll-paginate</span>
-  <span class="pi">-</span> <span class="s">jekyll-sitemap</span>
-
-<span class="s">permalink</span><span class="pi">:</span> <span class="s">/:year/:month/:day/:title/</span>
-<span class="s">paginate_path</span><span class="pi">:</span> <span class="s">/posts/:num/</span>
-<span class="s">paginate</span><span class="pi">:</span> <span class="s">5</span>
-
-<span class="s">jekyll-archives</span><span class="pi">:</span>
-  <span class="s">enabled</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">categories</span>
-  <span class="s">layout</span><span class="pi">:</span> <span class="s">category_archives</span>
-  <span class="s">permalinks</span><span class="pi">:</span>
-    <span class="s">category</span><span class="pi">:</span> <span class="s">/categories/:name/</span>
-</code></pre>
-    </div>
-  </li>
-  <li>
-    <p>Copy
-<a href="https://github.com/yous/whiteglass/blob/master/index.html"><code class="highlighter-rouge">index.html</code></a>,
-<a href="https://github.com/yous/whiteglass/blob/master/about.md"><code class="highlighter-rouge">about.md</code></a>,
-<a href="https://github.com/yous/whiteglass/blob/master/archives.md"><code class="highlighter-rouge">archives.md</code></a>,
-<a href="https://github.com/yous/whiteglass/blob/master/feed.xml"><code class="highlighter-rouge">feed.xml</code></a>, and
-<a href="https://github.com/yous/whiteglass/blob/master/_data/navigation.yml"><code class="highlighter-rouge">_data/navigation.yml</code></a>
-from the theme:</p>
-
-    <div class="language-sh highlighter-rouge"><pre class="highlight"><code>rm index.md
-curl -L -O <span class="s2">"https://github.com/yous/whiteglass/raw/master/{index.html,about.md,archives.md,feed.xml}"</span>
-curl -L --create-dirs -o _data/navigation.yml https://github.com/yous/whiteglass/raw/master/_data/navigation.yml
-</code></pre>
-    </div>
-  </li>
-  <li>
-    <p>Install gems and you’re good to go! The blog will be available on
-<code class="highlighter-rouge">http://127.0.0.1:4000</code>.</p>
-
-    <div class="language-sh highlighter-rouge"><pre class="highlight"><code>bundle install
-bundle <span class="nb">exec </span>jekyll serve
-</code></pre>
-    </div>
-  </li>
-</ol>
-
-<h2 id="usage">Usage</h2>
+<h2 id="todo">TODO</h2>
 
 <h3 id="customization">Customization</h3>
 
@@ -218,54 +139,6 @@ has to exist at your site source. Do either of the following:</p>
   </li>
 </ul>
 
-<h3 id="locale">Locale</h3>
-
-<p><code class="highlighter-rouge">site.lang</code> is used to declare the primary language for each web page within the
-site.</p>
-
-<p><code class="highlighter-rouge">lang: en-US</code> sets the <code class="highlighter-rouge">lang</code> attribute for the site to the United States flavor
-of English, while <code class="highlighter-rouge">en-GB</code> would be for the United Kingdom style of English.
-Country codes are optional and the shorter variation <code class="highlighter-rouge">lang: en</code> is also
-acceptable. You may want to write a post in different language, then add <code class="highlighter-rouge">lang</code>
-attribute to the frontmatter of that post:</p>
-
-<div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="s">layout</span><span class="pi">:</span> <span class="s">post</span>
-<span class="s">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">안녕하세요"</span>
-<span class="s">lang</span><span class="pi">:</span> <span class="s">ko</span>
-</code></pre>
-</div>
-
-<h3 id="description">Description</h3>
-
-<p><code class="highlighter-rouge">site.description</code> describes the site. This is mainly used in meta descriptions
-for improving SEO. Also, you can set <code class="highlighter-rouge">description</code> attribute for each post:</p>
-
-<div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="s">layout</span><span class="pi">:</span> <span class="s">post</span>
-<span class="s">title</span><span class="pi">:</span> <span class="s">Awesome Post</span>
-<span class="s">description</span><span class="pi">:</span> <span class="s">This is an awesome post.</span>
-</code></pre>
-</div>
-
-<h3 id="category">Category</h3>
-
-<p>Each post can have <code class="highlighter-rouge">categories</code> attribute. It can be a string or an array. This
-will be displayed on index, archive and each post, and provide a link to the
-archive of category.</p>
-
-<div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="s">layout</span><span class="pi">:</span> <span class="s">post</span>
-<span class="s">title</span><span class="pi">:</span> <span class="s">Awesome Post</span>
-<span class="s">categories</span><span class="pi">:</span> <span class="s">Misc</span>
-</code></pre>
-</div>
-
-<div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="s">layout</span><span class="pi">:</span> <span class="s">post</span>
-<span class="s">title</span><span class="pi">:</span> <span class="s">Another Awesome Post</span>
-<span class="s">categories</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s">Misc</span>
-  <span class="pi">-</span> <span class="s">Idea</span>
-</code></pre>
-</div>
-
 <h3 id="comments">Comments</h3>
 
 <p>whiteglass provides the ability to include your favourite commenting service, like <a href="https://disqus.com">Disqus</a> or <a href="https://posativ.org/isso">Isso</a>.</p>
@@ -279,26 +152,6 @@ archive of category.</p>
 <p>To disable comments on certain pages or posts specify <code class="highlighter-rouge">comments: false</code> in the front matter of the page or post.</p>
 
 <h3 id="metadata-for-seo">Metadata for SEO</h3>
-
-<h4 id="keywords">Keywords</h4>
-
-<p>Each post can have <code class="highlighter-rouge">keywords</code> attribute. This is a comma-separated list which is
-used in meta descriptions for improving SEO.</p>
-
-<div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="s">layout</span><span class="pi">:</span> <span class="s">post</span>
-<span class="s">title</span><span class="pi">:</span> <span class="s">How to configure jekyll-whiteglass</span>
-<span class="s">keywords</span><span class="pi">:</span> <span class="s">jekyll, whiteglass, github pages</span>
-</code></pre>
-</div>
-
-<p>YAML list is also available:</p>
-
-<div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="s">keywords</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s">jekyll</span>
-  <span class="pi">-</span> <span class="s">whiteglass</span>
-  <span class="pi">-</span> <span class="s">github pages</span>
-</code></pre>
-</div>
 
 <h4 id="twitter">Twitter</h4>
 
@@ -323,29 +176,6 @@ used in meta descriptions for improving SEO.</p>
   <li><code class="highlighter-rouge">site.facebook_image</code> sets <code class="highlighter-rouge">og:image</code> meta tag</li>
   <li><code class="highlighter-rouge">page.facebook.image</code> sets <code class="highlighter-rouge">og:image</code> meta tag. It overrides <code class="highlighter-rouge">site.facebook_image</code></li>
 </ul>
-
-<h3 id="navigation">Navigation</h3>
-
-<p>To define header links, add titles and URLs under the <code class="highlighter-rouge">main</code> key in
-<code class="highlighter-rouge">_data/navigation.yml</code>:</p>
-
-<div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="s">main</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">About"</span>
-    <span class="s">url</span><span class="pi">:</span> <span class="s">/about/</span>
-  <span class="pi">-</span> <span class="s">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Archives"</span>
-    <span class="s">url</span><span class="pi">:</span> <span class="s">/archives/</span>
-  <span class="pi">-</span> <span class="s">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">GitHub"</span>
-    <span class="s">url</span><span class="pi">:</span> <span class="s">https://github.com/yous/whiteglass</span>
-</code></pre>
-</div>
-
-<h3 id="enabling-google-analytics">Enabling Google Analytics</h3>
-
-<p>To enable Google Analytics, add the following lines to your Jekyll site:</p>
-
-<div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="s">google_analytics</span><span class="pi">:</span> <span class="s">UA-NNNNNNNN-N</span>
-</code></pre>
-</div>
 
   </div>
 

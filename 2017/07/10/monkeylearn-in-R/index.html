@@ -10,14 +10,14 @@
   
   
   <title>Monkeylearn in R 소개 - 쉽게 텍스트 분석하기</title>
-  <meta name="description" content="Monkeylearn은 머신 러닝을 통한 텍스트 분석 결과를 제시하고, 만든 모델을 API로 제공하여 이후 자료에 계속적으로 적용할 수 있도록 하는 서비스를 제공합니다. 복잡한 분석은 할 수 없는 대신, 대량의 자료를 쉬운 인터페이스로 처리할 수 있다는 것과, 한 번 모델을 구축하면 이후에 계속 자료를 분석할 수 있는 시스템을 쉽게 만들 수 있다는 장점이 있습니다. 한국어도 지원하고, 간단히 돌려보니 unigram &amp;amp; bigram으로 나름 괜찮은 분석 모형을 만들 수 있어서 다음에 Python Scrapy로 한글 사이트 크롤링 및 분석 모형 제작 포스트를 올려보도록 하겠습니다. 오늘은 먼저, R에서 Monkeylearn API를 사용할 수 있도록 만들어 놓은 ropensci/monkeylearn package를 소개하도록 하겠습니다.">
+  <meta name="description" content="Monkeylearn API를 통해 쉽게 텍스트 분석에 접근하는 방법을 설명해 보았습니다.">
   <meta name="keywords" content="Rtext analysisMonkeylearnapi">
 
   <link rel="stylesheet" href="/text/assets/main.css">
-  <link rel="canonical" href="/text/2017/07/10/monkeylearn-in-R/">
+  <link rel="canonical" href="https://junhewk.github.io/text/2017/07/10/monkeylearn-in-R/">
   
   
-  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="/text/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="https://junhewk.github.io/text/feed.xml">
 
   
 
@@ -25,7 +25,7 @@
   <meta name="twitter:card" content="summary">
   
   <meta name="twitter:title" content="Monkeylearn in R 소개 - 쉽게 텍스트 분석하기">
-  <meta name="twitter:description" content="Monkeylearn은 머신 러닝을 통한 텍스트 분석 결과를 제시하고, 만든 모델을 API로 제공하여 이후 자료에 계속적으로 적용할 수 있도록 하는 서비스를 제공합니다. 복잡한 분석은 할 수 없는 대신, 대량의 자료를 쉬운 인터페이스로 처리할 수 있다는 것과, 한 번 모델을 구축하면 이후에 계속 자료를 분석할 수 있는 시스템을 쉽게 만들 수 있다는 장...">
+  <meta name="twitter:description" content="Monkeylearn API를 통해 쉽게 텍스트 분석에 접근하는 방법을 설명해 보았습니다.">
   
   
 
@@ -45,6 +45,18 @@
 </script>
 
   
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-102102649-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
 
 </head>
 
@@ -64,9 +76,6 @@
       
         
         <a class="page-link" href="/text/archives/">Archives</a>
-      
-        
-        <a class="page-link" href="https://github.com/yous/whiteglass">GitHub</a>
       
     </nav>
 

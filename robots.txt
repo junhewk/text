@@ -1,1 +1,1 @@
-Sitemap: /text/sitemap.xml
+Sitemap: https://junhewk.github.io/text/sitemap.xml

@@ -10,14 +10,14 @@
   
   
   <title>R에서 해보는 한국 일제강점기 시의 단어 분석</title>
-  <meta name="description" content="본 포스트는 Single World Analysis of Early 19th Century Poetry Using tidytext의 내용을 수정, 발전시킨 것입니다. 분석 방법은 기본적으로 모두 원 블로그에서 따온 것임을 밝힙니다. 전희원님의 KoNLP는 정말 멋진 패키지이지만, 본문에서는 적용하지 않았습니다. 다음번 포스팅에는 독자분들이 좀 더 쉽게 접근하실 수 있도록 KoNLP를 통한 분석도 싣도록 하겠습니다. 여기에서는 코모란 3.0을 적용했습니다. 아쉽게도 R 포팅은 없기 때문에, rJava interface를 통해 Komoran 3.0 Java Archive를 직접 불러와 태깅했습니다. 본문에서 사용한 감정사전은 두 종류입니다. 하나는 NRC Emoticon Lexicon이며, 다른 하나는 Bing Opinion Lexicon입니다. 전자는 Saif Mohammad에게 이메일을 통해 사용 허가를 받았으며, 후자는 자료가 공개 형태로 올라와 있어 특별히 허가를 받지는 않았습니다.">
+  <meta name="description" content="Tidytext를 통해 접근하는 한국어 감정 분석을 다뤘습니다. 한국어 NLP에 한계가 있기 때문에, 완벽하지 않습니다.">
   <meta name="keywords" content="text analysisRsentiment alalysisKorean">
 
   <link rel="stylesheet" href="/text/assets/main.css">
-  <link rel="canonical" href="/text/2017/06/18/single-word-analysis-korean-poem/">
+  <link rel="canonical" href="https://junhewk.github.io/text/2017/06/18/single-word-analysis-korean-poem/">
   
   
-  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="/text/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="https://junhewk.github.io/text/feed.xml">
 
   
 
@@ -25,7 +25,7 @@
   <meta name="twitter:card" content="summary">
   
   <meta name="twitter:title" content="R에서 해보는 한국 일제강점기 시의 단어 분석">
-  <meta name="twitter:description" content="본 포스트는 Single World Analysis of Early 19th Century Poetry Using tidytext의 내용을 수정, 발전시킨 것입니다. 분석 방법은 기본적으로 모두 원 블로그에서 따온 것임을 밝힙니다. 전희원님의 KoNLP는 정말 멋진 패키지이지만, 본문에서는 적용하지 않았습니다. 다음번 포스팅에는 독자분들이 좀 더 쉽게...">
+  <meta name="twitter:description" content="Tidytext를 통해 접근하는 한국어 감정 분석을 다뤘습니다. 한국어 NLP에 한계가 있기 때문에, 완벽하지 않습니다.">
   
   
 
@@ -45,6 +45,18 @@
 </script>
 
   
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-102102649-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
 
 </head>
 
@@ -64,9 +76,6 @@
       
         
         <a class="page-link" href="/text/archives/">Archives</a>
-      
-        
-        <a class="page-link" href="https://github.com/yous/whiteglass">GitHub</a>
       
     </nav>
 
@@ -561,9 +570,7 @@
   </span><span class="n">theme</span><span class="p">(</span><span class="n">axis.text.x</span><span class="o">=</span><span class="n">element_text</span><span class="p">(</span><span class="n">angle</span><span class="o">=</span><span class="m">45</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">hjust</span><span class="o">=</span><span class="m">1</span><span class="p">),</span><span class="w">
         </span><span class="n">text</span><span class="o">=</span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="o">=</span><span class="s2">"NanumGothic"</span><span class="p">))</span></code></pre></figure>
 
-<p><a href="/assets/figure/2017-06-18-single-word-date-freq-1.png" data-lightbox="쓰인 시의 연도별 빈도" data-title="쓰인 시의 연도별 빈도">
-  <img src="/assets/figure/2017-06-18-single-word-date-freq-1.png" />
-</a></p>
+<p><img src="/text/assets/figure/2017-06-18-single-word-date-freq-1.png" alt="쓰인 시의 연도별 빈도" /></p>
 
 <p>시가 많지 않아서 한해에 하나 정도밖에 없으니, 10년마다 묶도록 하겠습니다.</p>
 
@@ -594,9 +601,7 @@
   </span><span class="n">theme</span><span class="p">(</span><span class="n">axis.text.x</span><span class="o">=</span><span class="n">element_text</span><span class="p">(</span><span class="n">angle</span><span class="o">=</span><span class="m">45</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">hjust</span><span class="o">=</span><span class="m">1</span><span class="p">),</span><span class="w">
         </span><span class="n">text</span><span class="o">=</span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="o">=</span><span class="s2">"NanumGothic"</span><span class="p">))</span></code></pre></figure>
 
-<p><a href="/assets/figure/2017-06-18-single-word-decade-freq-1.png" data-lightbox="쓰인 시의 10년당 빈도" data-title="쓰인 시의 10년당 빈도">
-  <img src="/assets/figure/2017-06-18-single-word-decade-freq-1.png" />
-</a></p>
+<p><img src="/text/assets/figure/2017-06-18-single-word-decade-freq-1.png" alt="쓰인 시의 10년당 빈도" /></p>
 
 <p>1920년대에 시가 편중되어 있어서 너무 아쉬웠습니다. 다음번엔 좀 더 많은 자료를 모아보겠습니다.</p>
 
@@ -631,9 +636,7 @@
   </span><span class="n">guides</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="n">guide_legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">"Bing 점수"</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="o">=</span><span class="s2">"NanumGothic"</span><span class="p">))</span></code></pre></figure>
 
-<p><a href="/assets/figure/2017-06-18-single-word-bing-box-1.png" data-lightbox="Bing 감정 점수 분율의 막대그래프" data-title="Bing 감정 점수 분율의 막대그래프">
-  <img src="/assets/figure/2017-06-18-single-word-bing-box-1.png" />
-</a></p>
+<p><img src="/text/assets/figure/2017-06-18-single-word-bing-box-1.png" alt="Bing 감정 점수 분율의 막대그래프" /></p>
 
 <p>1900년대는 최남선 시인의 시 하나뿐이라서 좀 말하긴 어렵지만, 1930년대가 가장 어둡고 그 다음이 1900년대가 낮습니다. 오히려 1910년대는 좀 높게 나타나네요. 1930년대, 독립의 희망이 사라지던 시기에 가장 점수가 낮은 것은 그럴듯해 보입니다.</p>
 
@@ -646,9 +649,7 @@
   </span><span class="n">guides</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="n">guide_legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">"Bing 점수"</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="o">=</span><span class="s2">"NanumGothic"</span><span class="p">))</span></code></pre></figure>
 
-<p><a href="/assets/figure/2017-06-18-single-word-bing-line-1.png" data-lightbox="Bing 감정 점수 분율의 선형그래프" data-title="Bing 감정 점수 분율의 선형그래프">
-  <img src="/assets/figure/2017-06-18-single-word-bing-line-1.png" />
-</a></p>
+<p><img src="/text/assets/figure/2017-06-18-single-word-bing-line-1.png" alt="Bing 감정 점수 분율의 선형그래프" /></p>
 
 <p>선형 그래프로 표현한 결과입니다.</p>
 
@@ -664,9 +665,7 @@
   </span><span class="n">guides</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="n">guide_legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">"시인"</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="o">=</span><span class="s2">"NanumGothic"</span><span class="p">))</span></code></pre></figure>
 
-<p><a href="/assets/figure/2017-06-18-single-word-bing-poet-1.png" data-lightbox="가장 부정적인 시를 발표한 시인은?" data-title="가장 부정적인 시를 발표한 시인은?">
-  <img src="/assets/figure/2017-06-18-single-word-bing-poet-1.png" />
-</a></p>
+<p><img src="/text/assets/figure/2017-06-18-single-word-bing-poet-1.png" alt="가장 부정적인 시를 발표한 시인은?" /></p>
 
 <p>시인 별로 보면, 최남선 시인이 가장 부정적인 시어를 사용하고 있는 것을 볼 수 있습니다. “해에게서 소년에게”를 부정적인 시라고 보기는 어렵지만, 바다가 세상의 부정적인 것들에게 도전하고 있으며, 긍정의 표상인 바다와 파도는 의태어(“철썩”, “쏴아”)로만 제시되고 있으니 수긍할만 한 것 같습니다. 그래서 1900년대의 감정 점수가 낮군요.</p>
 
@@ -713,9 +712,7 @@
        </span><span class="n">title</span><span class="o">=</span><span class="s2">"연도별 감정 분율 막대 그래프"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="o">=</span><span class="s2">"NanumGothic"</span><span class="p">))</span></code></pre></figure>
 
-<p><a href="/assets/figure/2017-06-18-single-word-per-date-1.png" data-lightbox="연도별 감정 분율 막대 그래프" data-title="연도별 감정 분율 막대 그래프">
-  <img src="/assets/figure/2017-06-18-single-word-per-date-1.png" />
-</a></p>
+<p><img src="/text/assets/figure/2017-06-18-single-word-per-date-1.png" alt="연도별 감정 분율 막대 그래프" /></p>
 
 <p>10년 단위로 본 NRC 감정 분석 그래프입니다. 1900년에서 1930년으로 가면서 분노는 점점 사라지고, 슬픔이 증가하는 것을 볼 수 있습니다. 1930년대에는 즐거움도 같이 증가하고 있다는 게 특징적입니다. 슬픔이 지나간 뒤의 기쁨에 관한 소망이 같이 표현되고 있기 때문일까요? 1920년대와 1940년대의 양상은 비슷하지만, 분노가 좀 더 높아졌네요. 전체적으로는 1930년대를 제외하면 신뢰가 가장 높게 나타납니다.</p>
 
@@ -737,9 +734,7 @@
        </span><span class="n">title</span><span class="o">=</span><span class="s2">"시인별 감정 분율 막대 그래프"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">theme</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="o">=</span><span class="s2">"NanumGothic"</span><span class="p">))</span></code></pre></figure>
 
-<p><a href="/assets/figure/2017-06-18-single-word-per-poet-1.png" data-lightbox="시인별 감정 분율 막대 그래프" data-title="시인별 감정 분율 막대 그래프">
-  <img src="/assets/figure/2017-06-18-single-word-per-poet-1.png" />
-</a></p>
+<p><img src="/text/assets/figure/2017-06-18-single-word-per-poet-1.png" alt="시인별 감정 분율 막대 그래프" /></p>
 
 <p>시인별 감정 분석입니다. 김억 시인은 전반적으로 비슷한데 신뢰가 가장 높고, 다음 혐오와 슬픔이 나타난다는 것이 특징입니다. 윤동주 시인은 기대와 슬픔이 좀 더 높으 편이고, 최남선 시인은 (역시) 즐거움은 별로 없고 나머지는 비슷합니다. 한용운 시인은 기대와 슬픔이 두드러지네요. 전체적으로 놀람이 잘 나타나지 않는데 한용운 시인에서 제일 높게 나타난 것을 볼 수 있습니다.</p>
 

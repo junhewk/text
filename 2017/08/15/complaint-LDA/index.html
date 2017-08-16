@@ -10,14 +10,14 @@
   
   
   <title>환자 불편 상담에 관한 Latent Dirichlet Allocation 분석</title>
-  <meta name="description" content="이번에는 지난 번에 활용했던 1372 소비자보호원 상담 자료를 통해 LDA (Latent Dirichlet Allocation)을 통한 분석을 진행해 보려 합니다. 먼저 참고한 페이지는 다음과 같습니다.">
+  <meta name="description" content="치과 환자 상담 자료를 기반으로 잠재 디리슐레 할당으로 텍스트 분류를 진행한 예제입니다.">
   <meta name="keywords" content="text analysisRLDAlatent dirichlet allocationpatient complaintKorean">
 
   <link rel="stylesheet" href="/text/assets/main.css">
-  <link rel="canonical" href="/text/2017/08/15/complaint-LDA/">
+  <link rel="canonical" href="https://junhewk.github.io/text/2017/08/15/complaint-LDA/">
   
   
-  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="/text/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="https://junhewk.github.io/text/feed.xml">
 
   
 
@@ -25,7 +25,7 @@
   <meta name="twitter:card" content="summary">
   
   <meta name="twitter:title" content="환자 불편 상담에 관한 Latent Dirichlet Allocation 분석">
-  <meta name="twitter:description" content="이번에는 지난 번에 활용했던 1372 소비자보호원 상담 자료를 통해 LDA (Latent Dirichlet Allocation)을 통한 분석을 진행해 보려 합니다. 먼저 참고한 페이지는 다음과 같습니다.">
+  <meta name="twitter:description" content="치과 환자 상담 자료를 기반으로 잠재 디리슐레 할당으로 텍스트 분류를 진행한 예제입니다.">
   
   
 
@@ -45,6 +45,18 @@
 </script>
 
   
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-102102649-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
 
 </head>
 
@@ -64,9 +76,6 @@
       
         
         <a class="page-link" href="/text/archives/">Archives</a>
-      
-        
-        <a class="page-link" href="https://github.com/yous/whiteglass">GitHub</a>
       
     </nav>
 
