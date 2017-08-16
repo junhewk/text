@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>Monkeylearn in R 소개 - 쉽게 텍스트 분석하기</title>
+  <meta name="description" content="Monkeylearn은 머신 러닝을 통한 텍스트 분석 결과를 제시하고, 만든 모델을 API로 제공하여 이후 자료에 계속적으로 적용할 수 있도록 하는 서비스를 제공합니다. 복잡한 분석은 할 수 없는 대신, 대량의 자료를 쉬운 인터페이스로 처리할 수 있다는 것과, 한 번 모델을 구축하면 이후에 계속 자료를 분석할 수 있는 시스템을 쉽게 만들 수 있다는 장점이 있습니다. 한국어도 지원하고, 간단히 돌려보니 unigram &amp;amp; bigram으로 나름 괜찮은 분석 모형을 만들 수 있어서 다음에 Python Scrapy로 한글 사이트 크롤링 및 분석 모형 제작 포스트를 올려보도록 하겠습니다. 오늘은 먼저, R에서 Monkeylearn API를 사용할 수 있도록 만들어 놓은 ropensci/monkeylearn package를 소개하도록 하겠습니다.">
+  <meta name="keywords" content="Rtext analysisMonkeylearnapi">
+
+  <link rel="stylesheet" href="/text/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/text/2017/07/10/monkeylearn-in-R/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="http://localhost:4000/text/feed.xml">
+
+  
+
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="Monkeylearn in R 소개 - 쉽게 텍스트 분석하기">
+  <meta name="twitter:description" content="Monkeylearn은 머신 러닝을 통한 텍스트 분석 결과를 제시하고, 만든 모델을 API로 제공하여 이후 자료에 계속적으로 적용할 수 있도록 하는 서비스를 제공합니다. 복잡한 분석은 할 수 없는 대신, 대량의 자료를 쉬운 인터페이스로 처리할 수 있다는 것과, 한 번 모델을 구축하면 이후에 계속 자료를 분석할 수 있는 시스템을 쉽게 만들 수 있다는 장...">
+  
+  
+
+  <script type="text/javascript">
+  WebFontConfig = {
+    google: { families: [ 'Bitter:400,700,400italic:latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })();
+</script>
+
+  
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/text/">Study of Narrative Texts</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/text/about/">About</a>
+      
+        
+        <a class="page-link" href="/text/archives/">Archives</a>
+      
+        
+        <a class="page-link" href="https://github.com/yous/whiteglass">GitHub</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Monkeylearn in R 소개 - 쉽게 텍스트 분석하기</h1>
+    
+    <p class="post-meta"><time datetime="2017-07-10T06:10:20-04:00" itemprop="datePublished">Jul 10, 2017</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Junhewk Kim</span></span> • 
+  
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p><a href="http://monkeylearn.com">Monkeylearn</a>은 머신 러닝을 통한 텍스트 분석 결과를 제시하고, 만든 모델을 API로 제공하여 이후 자료에 계속적으로 적용할 수 있도록 하는 서비스를 제공합니다. 복잡한 분석은 할 수 없는 대신, 대량의 자료를 쉬운 인터페이스로 처리할 수 있다는 것과, 한 번 모델을 구축하면 이후에 계속 자료를 분석할 수 있는 시스템을 쉽게 만들 수 있다는 장점이 있습니다. 한국어도 지원하고, 간단히 돌려보니 unigram &amp; bigram으로 나름 괜찮은 분석 모형을 만들 수 있어서 다음에 Python <a href="https://scrapy.org">Scrapy</a>로 한글 사이트 크롤링 및 분석 모형 제작 포스트를 올려보도록 하겠습니다. 오늘은 먼저, R에서 Monkeylearn API를 사용할 수 있도록 만들어 놓은 <a href="https://github.com/ropensci/monkeylearn">ropensci/monkeylearn package</a>를 소개하도록 하겠습니다.</p>
+
+<p>아래 코드는 package github에 올라와 있는 것을 그대로 따라한 것입니다.</p>
+
+<hr />
+
+<h2 id="설치">설치</h2>
+
+<p>아직 cran에 올라와 있지는 않습니다. 혹시 devtools package가 없으시면, 먼저 설치하셔야 합니다. <a href="https://github.com/hadley/devtools">devtools</a>는 R package 개발과 설치를 유용하게 만들어주는 도구입니다.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="s2">"devtools"</span><span class="p">)</span><span class="w">
+</span><span class="n">devtools</span><span class="o">::</span><span class="n">install_github</span><span class="p">(</span><span class="s2">"ropensci/monkeylearn"</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<h2 id="package-불러오기">package 불러오기</h2>
+
+<p>설치하셨으면, monkeylearn 홈페이지를 방문하셔서 API key를 발급받아야 합니다. 홈페이지 가입 후 [My Account] -&gt; [API Keys]로 들어가면 40 자리의 키를 보실 수 있습니다. 하나, monkeylearn package 이용에서 중요한 점 하나는, 키를 환경 변수로 올려야 한다는 점입니다. 환경변수로 등록하기 위해서는, <code class="highlighter-rouge">Sys.setenv()</code> 함수를 사용합니다.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="s2">"monkeylearn"</span><span class="p">)</span><span class="w">
+</span><span class="n">Sys.setenv</span><span class="p">(</span><span class="n">MONKEYLEARN_KEY</span><span class="o">=</span><span class="s2">"40-digit api key"</span><span class="p">)</span><span class="w"> </span><span class="c1"># 발급받은 api key 입력
+</span><span class="n">monkeylearn_key</span><span class="p">()</span><span class="w"> </span><span class="c1"># 제대로 package가 key를 인식하는지 확인
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## [1] "40-digit api key" # 발급받은 api key가 나오는지 확인해주세요.
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="nernamed-entity-recognition-예제">NER(Named-Entity Recognition) 예제</h2>
+
+<p>먼저 텍스트에서 고유명사를 추출하는 예제를 진행해볼 것입니다. NER이라고 부르는 이 과정은, 텍스트에 위치하는 고유명사를 뽑아내는 방식입니다. openNLP package로도 가능하지만, 다음 기회에 한번 따로 다뤄볼게요. monkeylearn으로는 상당히 쉽게 고유명사를 추출할 수 있습니다. 자료가 영어가 죄송해요. <code class="highlighter-rouge">extractor_id</code>가 뭔지는 다다음 절에서 설명하겠습니다. 출력값의 header로 홈페이지와 통신 상태도 확인할 수 있네요. 텍스트에서 지역명, 사람 이름을 추출해서 테이블로 돌려주는 것을 볼 수 있습니다. 참, 슬프게도 한국어는 지원하지 않아요.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">text</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"In the 19th century, the major European powers had gone to great lengths to maintain a balance of power throughout Europe, resulting in the existence of a complex network of political and military alliances throughout the continent by 1900.[7] These had started in 1815, with the Holy Alliance between Prussia, Russia, and Austria. Then, in October 1873, German Chancellor Otto von Bismarck negotiated the League of the Three Emperors (German: Dreikaiserbund) between the monarchs of Austria-Hungary, Russia and Germany."</span><span class="w">
+
+</span><span class="n">output</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">monkeylearn_extract</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">text</span><span class="p">,</span><span class="w">
+                              </span><span class="n">extractor_id</span><span class="o">=</span><span class="s1">'ex_isnnZRbS'</span><span class="p">)</span><span class="w">
+</span><span class="n">output</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>##   count      tag            entity                         text_md5
+## 1     1 LOCATION            Europe 95132b831aa7a4ba1a666b93490b3c9c
+## 2     1 LOCATION           Prussia 95132b831aa7a4ba1a666b93490b3c9c
+## 3     1 LOCATION   Austria-Hungary 95132b831aa7a4ba1a666b93490b3c9c
+## 4     1 LOCATION           Austria 95132b831aa7a4ba1a666b93490b3c9c
+## 5     1 LOCATION           Germany 95132b831aa7a4ba1a666b93490b3c9c
+## 6     1   PERSON Otto von Bismarck 95132b831aa7a4ba1a666b93490b3c9c
+## 7     2 LOCATION            Russia 95132b831aa7a4ba1a666b93490b3c9c
+</code></pre>
+</div>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="nf">attr</span><span class="p">(</span><span class="n">output</span><span class="p">,</span><span class="w"> </span><span class="s2">"headers"</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## # A tibble: 1 × 11
+##         server                          date     content.type
+##         &lt;fctr&gt;                        &lt;fctr&gt;           &lt;fctr&gt;
+## 1 nginx/1.11.5 Mon, 10 Jul 2017 14:50:41 GMT application/json
+## # ... with 8 more variables: transfer.encoding &lt;fctr&gt;, connection &lt;fctr&gt;,
+## #   x.query.limit.limit &lt;fctr&gt;, x.query.limit.remaining &lt;fctr&gt;,
+## #   x.query.limit.request.queries &lt;fctr&gt;, allow &lt;fctr&gt;,
+## #   content.encoding &lt;fctr&gt;, text_md5 &lt;list&gt;
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="keyword-추출-예제">Keyword 추출 예제</h2>
+
+<p>이번에는 텍스트에서 키워드를 추출하는 예제입니다. 마찬가지로 영어만 가능합니다. 키워드 갯수를 설정할 수 있으며, 결과에 관련도가 수치로 제시되고 있음을 볼 수 있습니다.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">text</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"A panel of Goldman Sachs employees spent a recent Tuesday night at the Columbia University faculty club trying to convince a packed room of potential recruits that Wall Street, not Silicon Valley, was the place to be for computer scientists.\n\n The Goldman employees knew they had an uphill battle. They were fighting against perceptions of Wall Street as boring and regulation-bound and Silicon Valley as the promised land of flip-flops, beanbag chairs and million-dollar stock options.\n\n Their argument to the room of technologically inclined students was that Wall Street was where they could find far more challenging, diverse and, yes, lucrative jobs working on some of the worlds most difficult technical problems.\n\n Whereas in other opportunities you might be considering, it is working one type of data or one type of application, we deal in hundreds of products in hundreds of markets, with thousands or tens of thousands of clients, every day, millions of times of day worldwide, Afsheen Afshar, a managing director at Goldman Sachs, told the students."</span><span class="w">
+
+</span><span class="n">output</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">monkeylearn_extract</span><span class="p">(</span><span class="n">text</span><span class="p">,</span><span class="w">
+                              </span><span class="n">extractor_id</span><span class="o">=</span><span class="s2">"ex_y7BPYzNG"</span><span class="p">,</span><span class="w">
+                              </span><span class="n">params</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">max_keywords</span><span class="o">=</span><span class="m">3</span><span class="p">))</span><span class="w">
+</span><span class="n">output</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>##   count relevance positions_in_text                      keyword
+## 1     3     0.978     164, 340, 562                  Wall Street
+## 2     2     0.652          181, 387               Silicon Valley
+## 3     1     0.543               457 million-dollar stock options
+##                           text_md5
+## 1 623d46caac3ae1247804556653acba73
+## 2 623d46caac3ae1247804556653acba73
+## 3 623d46caac3ae1247804556653acba73
+</code></pre>
+</div>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">output2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">monkeylearn_extract</span><span class="p">(</span><span class="n">text</span><span class="p">,</span><span class="w">
+                               </span><span class="n">extractor_id</span><span class="o">=</span><span class="s2">"ex_y7BPYzNG"</span><span class="p">,</span><span class="w">
+                               </span><span class="n">params</span><span class="o">=</span><span class="nf">list</span><span class="p">(</span><span class="n">max_keywords</span><span class="o">=</span><span class="m">1</span><span class="p">))</span><span class="w">
+</span><span class="n">output2</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>##   count relevance positions_in_text     keyword
+## 1     3     0.978     164, 340, 562 Wall Street
+##                           text_md5
+## 1 623d46caac3ae1247804556653acba73
+</code></pre>
+</div>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="nf">attr</span><span class="p">(</span><span class="n">output2</span><span class="p">,</span><span class="w"> </span><span class="s2">"headers"</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## # A tibble: 1 × 11
+##         server                          date     content.type
+##         &lt;fctr&gt;                        &lt;fctr&gt;           &lt;fctr&gt;
+## 1 nginx/1.11.5 Mon, 10 Jul 2017 14:50:42 GMT application/json
+## # ... with 8 more variables: transfer.encoding &lt;fctr&gt;, connection &lt;fctr&gt;,
+## #   x.query.limit.limit &lt;fctr&gt;, x.query.limit.remaining &lt;fctr&gt;,
+## #   x.query.limit.request.queries &lt;fctr&gt;, allow &lt;fctr&gt;,
+## #   content.encoding &lt;fctr&gt;, text_md5 &lt;list&gt;
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="extractor">Extractor</h2>
+
+<p><code class="highlighter-rouge">extractor_id</code>에 어떤 값을 넣느냐에 따라, 다른 결과를 보여줍니다. 위에서 본 것처럼 <code class="highlighter-rouge">extractor_id="ex_isnnZRbS"</code>는 고유 명사 추출기입니다. 또, <code class="highlighter-rouge">extractor_id="ex_y7BPYzNG"</code>는 키워드 추출기입니다. 아쉽게 둘다 영어만 지원합니다.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">text</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"A panel of Goldman Sachs employees spent a recent Tuesday night at the Columbia University faculty club trying to convince a packed room of potential recruits that Wall Street, not Silicon Valley, was the place to be for computer scientists.
+
+The Goldman employees knew they had an uphill battle. They were fighting against perceptions of Wall Street as boring and regulation-bound and Silicon Valley as the promised land of flip-flops, beanbag chairs and million-dollar stock options.
+
+Their argument to the room of technologically inclined students was that Wall Street was where they could find far more challenging, diverse and, yes, lucrative jobs working on some of the world’s most difficult technical problems.
+
+“Whereas in other opportunities you might be considering, it is working one type of data or one type of application, we deal in hundreds of products in hundreds of markets, with thousands or tens of thousands of clients, every day, millions of times of day worldwide,” Afsheen Afshar, a managing director at Goldman Sachs, told the students."</span><span class="w">
+
+</span><span class="n">output</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">monkeylearn_extract</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">text</span><span class="p">,</span><span class="w">
+                              </span><span class="n">extractor_id</span><span class="o">=</span><span class="s2">"ex_y7BPYzNG"</span><span class="p">)</span><span class="w">
+</span><span class="n">output</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>##    count relevance positions_in_text                      keyword
+## 1      3     0.978     164, 339, 560                  Wall Street
+## 2      2     0.652          181, 386               Silicon Valley
+## 3      1     0.543               456 million-dollar stock options
+## 4      1     0.543                11      Goldman Sachs employees
+## 5      1     0.543                80      University faculty club
+## 6      1     0.543                43         recent Tuesday night
+## 7      1     0.543               689 difficult technical problems
+## 8      2     0.435          898, 919                    thousands
+## 9      2     0.435          796, 816                         type
+## 10     2     0.435          848, 872                     hundreds
+##                            text_md5
+## 1  06674f3b0fc7a6135c0afb3e8b5f87f1
+## 2  06674f3b0fc7a6135c0afb3e8b5f87f1
+## 3  06674f3b0fc7a6135c0afb3e8b5f87f1
+## 4  06674f3b0fc7a6135c0afb3e8b5f87f1
+## 5  06674f3b0fc7a6135c0afb3e8b5f87f1
+## 6  06674f3b0fc7a6135c0afb3e8b5f87f1
+## 7  06674f3b0fc7a6135c0afb3e8b5f87f1
+## 8  06674f3b0fc7a6135c0afb3e8b5f87f1
+## 9  06674f3b0fc7a6135c0afb3e8b5f87f1
+## 10 06674f3b0fc7a6135c0afb3e8b5f87f1
+</code></pre>
+</div>
+
+<p>정보 추출기도 있습니다. <code class="highlighter-rouge">extractor_id="ex_dqRio5sG"</code>로 작동하고, 텍스트에서 전화번호, 이메일 등 유용한 자료를 추출합니다. 한글도 넣을 수 있긴 하지만, “월, 일” 같은 건 추출하지 못하네요.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">text</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"Hi, my email is john@example.com and my credit card is 4242-4242-4242-4242 so you can charge me with $10. My phone number is 15555 9876. We can get in touch on April 16, at 10:00am"</span><span class="w">
+</span><span class="n">text2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"Hi, my email is mary@example.com and my credit card is 4242-4232-4242-4242. My phone number is 16655 9876. We can get in touch on April 16, at 10:00am"</span><span class="w">
+</span><span class="n">output</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">monkeylearn_extract</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="n">text</span><span class="p">,</span><span class="w"> </span><span class="n">text2</span><span class="p">),</span><span class="w">
+                              </span><span class="n">extractor_id</span><span class="o">=</span><span class="s2">"ex_dqRio5sG"</span><span class="p">)</span><span class="w">
+</span><span class="n">output</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>##       dates       links     phones ipv6s hex_colors  ips
+## 1 April 16, example.com 15555 9876  NULL       NULL NULL
+## 2 April 16, example.com 16655 9876  NULL       NULL NULL
+##          credit_cards prices   times           emails bitcoin_addresses
+## 1 4242-4242-4242-4242    $10 10:00am john@example.com              NULL
+## 2 4242-4232-4242-4242        10:00am mary@example.com              NULL
+##                           text_md5
+## 1 8c2b65bfca064616356c6a2cae2f5519
+## 2 c97eba30f94868ba6b7c3d250f59133a
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="분류-작업-classifier">분류 작업 (Classifier)</h2>
+
+<p>다음은 분류기입니다. 사실 이 부분을 다루고 싶어서 글을 올립니다. 한글로도 작업이 가능하거든요. 다음 글에서 더 자세히 소개할게요. 일단 영어로 어떻게 돌아가는지 보겠습니다. 일단, 기본 레이블링입니다. <code class="highlighter-rouge">category_id</code>로 각 텍스트를 구분하고 있다는 점을 확인하실 필요가 있습니다. 첫 번째 텍스트는 “Dogs”, 두 번째 텍스트는 “Accessories”가 가장 큰 점수를 받았네요. 그 아래는 사용할 수 있는 분류기의 목록입니다.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">text1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"my dog is an avid rice eater"</span><span class="w">
+</span><span class="n">text2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"i want to buy an iphone"</span><span class="w">
+</span><span class="n">request</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">text1</span><span class="p">,</span><span class="w"> </span><span class="n">text2</span><span class="p">)</span><span class="w">
+</span><span class="n">monkeylearn_classify</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w">
+                     </span><span class="n">classifier_id</span><span class="o">=</span><span class="s2">"cl_oFKL5wft"</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## # A tibble: 6 × 4
+##   category_id probability              label
+##         &lt;int&gt;       &lt;dbl&gt;              &lt;chr&gt;
+## 1    18313097       0.130               Pets
+## 2    18313108       0.239               Dogs
+## 3    18313113       0.082           Dog Food
+## 4    18314739       0.113        Cell Phones
+## 5    18314740       0.186        Accessories
+## 6    18314741       0.094 Cases &amp; Protectors
+## # ... with 1 more variables: text_md5 &lt;chr&gt;
+</code></pre>
+</div>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">monkeylearn_classifiers</span><span class="p">(</span><span class="n">private</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## # A tibble: 39 × 19
+##    classifier_id                                              name
+##            &lt;chr&gt;                                             &lt;chr&gt;
+## 1    cl_AbW44A2X                                     Asbestos Data
+## 2    cl_nLW3yR6m      Telcos -  Customer Support Ticket Classifier
+## 3    cl_4LqLD7cN  Telcos - Customer Complaint Classifier (Twitter)
+## 4    cl_rtdVEb8p            Telcos - Sentiment analysis (Facebook)
+## 5    cl_szya8upj Telcos - Customer Complaint Classifier (Facebook)
+## 6    cl_uEzzFRHh          Telcos - Needs Help Detection (Facebook)
+## 7    cl_gYDZjEnS                       NPS SaaS Product Classifier
+## 8    cl_zSDSt8QP                Outbound Sales Response Classifier
+## 9    cl_GhPhiVYE     E-commerce Customer Support Ticket Classifier
+## 10   cl_VCykxryo                         News classifier (spanish)
+## # ... with 29 more rows, and 17 more variables: description &lt;chr&gt;,
+## #   train_state &lt;chr&gt;, train_job_id &lt;lgl&gt;, language &lt;chr&gt;,
+## #   ngram_range &lt;chr&gt;, use_stemmer &lt;lgl&gt;, stop_words &lt;chr&gt;,
+## #   max_features &lt;int&gt;, strip_stopwords &lt;lgl&gt;, is_multilabel &lt;lgl&gt;,
+## #   is_twitter_data &lt;lgl&gt;, normalize_weights &lt;lgl&gt;, classifier &lt;chr&gt;,
+## #   industry &lt;chr&gt;, classifier_type &lt;chr&gt;, text_type &lt;chr&gt;,
+## #   permissions &lt;chr&gt;
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="언어-감지">언어 감지</h2>
+
+<p><code class="highlighter-rouge">classifier_id="cl_oJNMkt2V"</code>를 넣으면, 텍스트의 언어가 무엇인지 알려줍니다. 원 예시에, 한글도 하나 추가해볼게요.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">text1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"Hauràs de dirigir-te al punt de trobada del grup al que et vulguis unir."</span><span class="w">
+</span><span class="n">text2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"i want to buy an iphone"</span><span class="w">
+</span><span class="n">text3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"Je déteste ne plus avoir de dentifrice."</span><span class="w">
+</span><span class="n">text4</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"시험을 위해, 한글 예제를 추가해 보았습니다."</span><span class="w">
+</span><span class="n">request</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">text1</span><span class="p">,</span><span class="w"> </span><span class="n">text2</span><span class="p">,</span><span class="w"> </span><span class="n">text3</span><span class="p">,</span><span class="w"> </span><span class="n">text4</span><span class="p">)</span><span class="w">
+</span><span class="n">monkeylearn_classify</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w">
+                     </span><span class="n">classifier_id</span><span class="o">=</span><span class="s2">"cl_oJNMkt2V"</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## # A tibble: 6 × 4
+##   category_id probability         label                         text_md5
+##         &lt;int&gt;       &lt;dbl&gt;         &lt;chr&gt;                            &lt;chr&gt;
+## 1     2324978       1.000        Italic e8d671fbd9d74e6fc58e6d5a34025534
+## 2     2324979       1.000    Catalan-ca e8d671fbd9d74e6fc58e6d5a34025534
+## 3     2325016       0.686 Vietnamese-vi af5c621a49a008f6e6a0d5ad47f2e1f4
+## 4     2324978       1.000        Italic d3b4ce291cfb147a8246f71e0534c7c8
+## 5     2324980       1.000     French-fr d3b4ce291cfb147a8246f71e0534c7c8
+## 6     2324987       1.000     Korean-ko e7978f974988fd4b6ad3c5f21b4994b0
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="신성-모독-언어-폭력-감지기">신성 모독, 언어 폭력 감지기</h2>
+
+<p><code class="highlighter-rouge">classifier_id="cl_KFXhoTdt"</code>로 확인할 수 있습니다. 마찬가지로 한국어는 아직 지원하지 않네요.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">text1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"I think this is awesome."</span><span class="w">
+</span><span class="n">text2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"Holy shit! You did great!"</span><span class="w">
+</span><span class="n">request</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">text1</span><span class="p">,</span><span class="w"> </span><span class="n">text2</span><span class="p">)</span><span class="w">
+</span><span class="n">monkeylearn_classify</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w">
+                     </span><span class="n">classifier_id</span><span class="o">=</span><span class="s2">"cl_KFXhoTdt"</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## # A tibble: 2 × 4
+##   category_id probability     label                         text_md5
+##         &lt;int&gt;       &lt;dbl&gt;     &lt;chr&gt;                            &lt;chr&gt;
+## 1      103768       0.839     clean 641e443d9485034d30fec6c36d67d4cd
+## 2      103767       0.998 profanity 2b9e3eb08b256277e4c2b3dfcc8d5c75
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="토픽-분류기-general-topic-classifier">토픽 분류기 (General Topic Classifier)</h2>
+
+<p>마지막으로 관심 있으실 토픽 분류기입니다. <code class="highlighter-rouge">classifier_id="cl_5icAVzKR"</code>로 가능하고, 의견 분류랑 마찬가지로 한글이 지원됩니다. (사전을 사용해야 하는 작업은 아직 지원하지 않는 반면, n-gram token으로 하는 작업은 40개 언어를 지원하고 있어요.) 다음 글에서, 좀 더 자세히 다뤄볼게요. 일단 예제입니다. 5개 카테고리가 나왔고, 첫 텍스트가 길어서 그런지 주로 동물로 분류되었네요. 참, 한글 분석을 위해서는 직접 분류를 정해주어야 합니다.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">text1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"Let me tell you about my dog and my cat. They are really friendly and like going on walks. They both like chasing mice."</span><span class="w">
+</span><span class="n">text2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"My first R package was probably a disaster but I keep learning how to program."</span><span class="w">
+</span><span class="n">request</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">text1</span><span class="p">,</span><span class="w"> </span><span class="n">text2</span><span class="p">)</span><span class="w">
+</span><span class="n">monkeylearn_classify</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w">
+                     </span><span class="n">classifier_id</span><span class="o">=</span><span class="s2">"cl_5icAVzKR"</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## # A tibble: 5 × 4
+##   category_id probability                label
+##         &lt;int&gt;       &lt;dbl&gt;                &lt;chr&gt;
+## 1       64600       0.894              Animals
+## 2       64608       0.649              Mammals
+## 3       64611       0.869         Land Mammals
+## 4       64638       0.240 Computers &amp; Internet
+## 5       64640       0.252             Internet
+## # ... with 1 more variables: text_md5 &lt;chr&gt;
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="맺으며">맺으며</h2>
+
+<p>텍스트 분석에서 활용할 수 있는 재미있는 API라서 소개해 보았습니다. 다음 글에서는 어떻게 인터넷의 글을 모아서 분석할 수 있는지를 소개해 보도록 하겠습니다. <code class="highlighter-rouge">rvest</code>랑 결합해서 소개할지, 크롤링은 <code class="highlighter-rouge">scrapy</code>로 받을지는 조금 고민이네요. 곧 뵙겠습니다.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      <link rel="icon" type="image/x-icon" href="/text/favicon.ico">
+
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
