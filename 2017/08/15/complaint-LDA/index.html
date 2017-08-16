@@ -14,10 +14,10 @@
   <meta name="keywords" content="text analysisRLDAlatent dirichlet allocationpatient complaintKorean">
 
   <link rel="stylesheet" href="/text/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/text/2017/08/15/complaint-LDA/">
+  <link rel="canonical" href="https://junhewk.github.io/text/2017/08/15/complaint-LDA/">
   
   
-  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="http://localhost:4000/text/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="https://junhewk.github.io/text/feed.xml">
 
   
 
@@ -197,7 +197,7 @@
 </span></code></pre>
 </div>
 
-<p><img src="/text/assets/figure/2017-08-15-lda-occur year-1.png" alt="plot of chunk occur year" /></p>
+<p><img src="/text/assets/figure/2017-08-15-lda-occur-year.png" alt="plot of chunk occur year" /></p>
 
 <hr />
 
@@ -273,7 +273,7 @@
 </span></code></pre>
 </div>
 
-<p><img src="/text/assets/figure/2017-08-15-lda-LDA 1-1.png" alt="plot of chunk LDA 1" /></p>
+<p><img src="/text/assets/figure/2017-08-15-lda-LDA-1.png" alt="plot of chunk LDA 1" /></p>
 
 <p>두 집단으로 나눠본 결과, 비슷하게 등장하는 단어들을 빼면 topic 1에는 교정, 임플란트가, topic 2에는 의사, 대하(다)가 눈에 띄네요. 위의 결과는 각 집단에서 가장 출현확률(beta)이 높은 단어를 모은 방식입니다. 이번에는, 두 집단 출현확를의 차이로 나열해 보겠습니다.</p>
 
@@ -292,7 +292,7 @@
 </span></code></pre>
 </div>
 
-<p><img src="/text/assets/figure/2017-08-15-lda-LDA 1 beta-1.png" alt="plot of chunk LDA 1 beta" /></p>
+<p><img src="/text/assets/figure/2017-08-15-lda-LDA-1-beta.png" alt="plot of chunk LDA 1 beta" /></p>
 
 <p>두 집단에서 출현확률의 차이로 비교해보면, topic 1은 어머님, 브릿지가, topic 2는 항생제, 흉터가 중요하게 나타납니다. 위의 결과와 종합하여 생각해보면, topic 1은 진료 관련 상담, topic 2는 진료 서비스 및 후유증 등에 관한 상담인 것으로 생각해볼 수 있습니다. 실제로 각 텍스트가 어느 집단으로 분류되었는지 볼까요?</p>
 
@@ -367,7 +367,7 @@
 </span></code></pre>
 </div>
 
-<p><img src="/text/assets/figure/2017-08-15-lda-LDA 4-1.png" alt="plot of chunk LDA 4" /></p>
+<p><img src="/text/assets/figure/2017-08-15-lda-LDA-4.png" alt="plot of chunk LDA 4" /></p>
 
 <p>네 개의 topic으로 분류하여 주요 단어 7개를 나열해 보았습니다. topic 1은 아니(다), 대하(다), 비용 등이, topic 2는 대하(다), 임플란트, 의사가, topic 3은 교정, 의사, 비용이, topic 4는 의사, 대하(다), 임플란트 등이 중요 단어로 나타나네요. 어느 정도는 topic이 짐작되지만 정확히 확인하기는 어렵죠. 따라서, 실제로 문헌 분석을 위해서 <a href="http://vanatteveldt.com/p/jacobi2015_lda.pdf">Jacobi 등</a>은 topic browser를 만들어서 활용할 것을 권하고 있습니다. Topic brower란, topic의 중요 단어와 가장 일치도가 높은 텍스트를 같이 보면서 해당 topic의 주제를 추측할 수 있도록 하는 방식을 의미합니다.</p>
 
@@ -392,7 +392,7 @@
 </span></code></pre>
 </div>
 
-<p><img src="/text/assets/figure/2017-08-15-lda-harmonic mean plot-1.png" alt="plot of chunk harmonic mean plot" /></p>
+<p><img src="/text/assets/figure/2017-08-15-lda-harmonic-mean-plot-1.png" alt="plot of chunk harmonic mean plot" /></p>
 
 <p>17에서 harmonic mean이 최대로 나오네요. <code class="highlighter-rouge">K=17</code>로 모형을 구축해 볼까요?</p>
 
