@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>시진은 뛰고, 모연은 건넨다 - &quot;태양의 후예&quot; 대본 텍스트 분석</title>
+  <meta name="description" content="아래 분석은 Silge J. She giggles, he gallops가 제시한 텍스트 분석 기법을 한글 텍스트에 적용해본 예제입니다. 원문은 Anderson H, Daniels M. Film dialogue의 작업에서 만든 2000개의 영화 대본을 바탕으로 연어(bigram)를 검토, 대명사인 “he”와 “she”에 붙어 있는 단어를 찾아 나갑니다. 영어 구조 상, 대명사 뒤에는 동사가 따라나올 것이며, 따라서 영화 대본이 남자와 여자에게 어떤 행동을 지시하는 지를 파악할 수 있게 되겠지요. 결과, “he”는 “straps(채찍질하다)”, “gallops(말 달리다)”, “shot(쏘다)” 등의 행동을, “she”는 “snuggles(껴안다)”, “giggles(낄낄거리다)”, “squeals(울고 비명지르다)” 등의 행동을 더 많이 수행합니다. 영화에서 남, 여 등장인물에 관한 고정관념을 수치로 확인할 수 있는 훌륭한 분석이라고 생각합니다. 시대, 작가 등에 따른 차이도 제시해 놓았으니 링크는 한번 꼭 보셔요.">
+  <meta name="keywords" content="text analysisRmorpheme analysisscript analysis of scriptstatistical analysis of textsKorean">
+
+  <link rel="stylesheet" href="/text/assets/main.css">
+  <link rel="canonical" href="https://junhewk.github.io/text/2017/08/23/script-analysis.ds/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="https://junhewk.github.io/text/feed.xml">
+
+  
+
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="시진은 뛰고, 모연은 건넨다 - &quot;태양의 후예&quot; 대본 텍스트 분석">
+  <meta name="twitter:description" content="아래 분석은 Silge J. She giggles, he gallops가 제시한 텍스트 분석 기법을 한글 텍스트에 적용해본 예제입니다. 원문은 Anderson H, Daniels M. Film dialogue의 작업에서 만든 2000개의 영화 대본을 바탕으로 연어(bigram)를 검토, 대명사인 “he”와 “she”에 붙어 있는 단어를 찾아 나갑니다....">
+  
+  
+
+  <script type="text/javascript">
+  WebFontConfig = {
+    google: { families: [ 'Bitter:400,700,400italic:latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })();
+</script>
+
+  
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-102102649-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/text/">Study of Narrative Texts</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/text/about/">About</a>
+      
+        
+        <a class="page-link" href="/text/archives/">Archives</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">시진은 뛰고, 모연은 건넨다 - &quot;태양의 후예&quot; 대본 텍스트 분석</h1>
+    
+    <p class="post-meta"><time datetime="2017-08-23T19:08:00-04:00" itemprop="datePublished">Aug 23, 2017</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Junhewk Kim</span></span> • 
+  
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>아래 분석은 <a href="https://pudding.cool/2017/08/screen-direction/">Silge J. She giggles, he gallops</a>가 제시한 텍스트 분석 기법을 한글 텍스트에 적용해본 예제입니다. 원문은 <a href="https://pudding.cool/2017/03/film-dialogue/">Anderson H, Daniels M. Film dialogue</a>의 작업에서 만든 2000개의 영화 대본을 바탕으로 연어(bigram)를 검토, 대명사인 “he”와 “she”에 붙어 있는 단어를 찾아 나갑니다. 영어 구조 상, 대명사 뒤에는 동사가 따라나올 것이며, 따라서 영화 대본이 남자와 여자에게 어떤 행동을 지시하는 지를 파악할 수 있게 되겠지요. 결과, “he”는 “straps(채찍질하다)”, “gallops(말 달리다)”, “shot(쏘다)” 등의 행동을, “she”는 “snuggles(껴안다)”, “giggles(낄낄거리다)”, “squeals(울고 비명지르다)” 등의 행동을 더 많이 수행합니다. 영화에서 남, 여 등장인물에 관한 고정관념을 수치로 확인할 수 있는 훌륭한 분석이라고 생각합니다. 시대, 작가 등에 따른 차이도 제시해 놓았으니 링크는 한번 꼭 보셔요.</p>
+
+<p>이런 작업을 보면 한글로 한번 해봐야 하지 않겠습니까. 영화 대본 수집은 다른 기회에 한번 도전해보도록 하고, 이번에는 검색하다가 인기 드라마였던 “태양의 후예” 1~16화 대본을 발견해서, 이 자료를 통해 분석해보기로 했습니다. 다음에는 김은숙 작가의 작품들을 모아서 해볼까 싶기도 해요. 오늘은 일단, 어떤 식으로 분석을 진행하는지만 간단히 확인해 보겠습니다.</p>
+
+<hr />
+
+<h3 id="사전-처리">사전 처리</h3>
+
+<p>이번에 사용한 라이브러라는 특별한 건 없습니다. 시각화를 위해 <a href="https://github.com/eclarke/ggbeeswarm">ggbeeswarm</a>을 사용한 것 정도일까요. 대본은 pdf 형태여서, html로 변환하여 불러왔습니다. 표 형태처럼 되어 있는 부분이 많고 다단 편집이 된 경우도 있어서, <code class="highlighter-rouge">pdftools</code> 등으로 바로 불러오면 문단 구조가 어긋나게 됩니다. <code class="highlighter-rouge">rvest</code>로 불러와서 필요한 문장을 선택합니다.</p>
+
+<ul>
+  <li>대사의 경우 “등장인물    대사”의 형태로 기록되어 있어서, 정규식으로 삭제했습니다.</li>
+  <li>줄바꿈이 들쭉날쭉해서 합친 뒤 마침표, 느낌표 기준으로 다시 분리하고,</li>
+  <li>남은 대사와 기호를 제거합니다.</li>
+</ul>
+
+<p>완성한 결과를 data frame 형태로 뽑았는데, 이번 작업에서는 그냥 character vector만 추출했어도 됐을 것 같아요. 합쳐서 용언, 체언만 추출하고 두 주인공의 이름이 들어간 문장들을 모아, 새로운 data frame을 만듭니다. 한국어는 “he”, “she”의 구분이 없기 때문에, 주인공 이름이 적당하리라고 생각했어요.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">tidytext</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">rvest</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">stringr</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">KoNLP</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggbeeswarm</span><span class="p">)</span><span class="w">
+
+</span><span class="n">user_d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">term</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s2">"민지"</span><span class="p">),</span><span class="w"> </span><span class="n">tag</span><span class="o">=</span><span class="nf">rep</span><span class="p">(</span><span class="s2">"nq"</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w">
+</span><span class="n">buildDictionary</span><span class="p">(</span><span class="n">ext_dic</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s2">"woorimalsam"</span><span class="p">,</span><span class="w"> </span><span class="s2">"insighter"</span><span class="p">),</span><span class="w"> </span><span class="n">user_dic</span><span class="o">=</span><span class="n">user_d</span><span class="p">,</span><span class="w"> </span><span class="n">replace_usr_dic</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">files</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">list.files</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s2">"html$"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">get_txt_html</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">html_file</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">page</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_html</span><span class="p">(</span><span class="n">html_file</span><span class="p">)</span><span class="w">
+  </span><span class="n">doc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">html_nodes</span><span class="p">(</span><span class="n">xpath</span><span class="o">=</span><span class="s2">"//p[@class='MsoBodyText']"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">html_text</span><span class="p">()</span><span class="w">
+  </span><span class="n">doc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">doc</span><span class="p">[</span><span class="n">str_detect</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span><span class="w"> </span><span class="s2">"^[가-힣]{2,4} "</span><span class="p">)]</span><span class="w">
+  </span><span class="n">doc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">paste</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span><span class="w"> </span><span class="n">collapse</span><span class="o">=</span><span class="s2">" "</span><span class="p">)</span><span class="w">
+  </span><span class="n">doc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unlist</span><span class="p">(</span><span class="n">strsplit</span><span class="p">(</span><span class="n">gsub</span><span class="p">(</span><span class="s2">"([가-힣][\\.|!])"</span><span class="p">,</span><span class="w"> </span><span class="s2">"\\1~"</span><span class="p">,</span><span class="w"> </span><span class="n">doc</span><span class="p">),</span><span class="w"> </span><span class="s2">"~"</span><span class="p">))</span><span class="w">
+  </span><span class="n">doc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">doc</span><span class="p">[</span><span class="o">!</span><span class="n">str_detect</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span><span class="w"> </span><span class="s2">"[가-힣1E]{2,5}[\\s]{2}"</span><span class="p">)]</span><span class="w">
+  </span><span class="n">doc</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">doc</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">str_replace_all</span><span class="p">(</span><span class="s2">"[:punct:]"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">str_replace_all</span><span class="p">(</span><span class="s2">"[\\r\\n]"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">str_trim</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="s2">"both"</span><span class="p">)</span><span class="w">
+  </span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data_frame</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">doc</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="n">str_extract</span><span class="p">(</span><span class="n">html_file</span><span class="p">,</span><span class="w"> </span><span class="s2">"[0-9]+"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">mutate</span><span class="p">(</span><span class="n">line</span><span class="o">=</span><span class="n">row_number</span><span class="p">())</span><span class="w">
+  </span><span class="n">df</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">docs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">bind_rows</span><span class="p">(</span><span class="n">lapply</span><span class="p">(</span><span class="n">files</span><span class="p">,</span><span class="w"> </span><span class="n">get_txt_html</span><span class="p">))</span><span class="w">
+
+</span><span class="n">ko_words</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.character</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span><span class="w">
+  </span><span class="n">pos</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">unlist</span><span class="p">(</span><span class="n">SimplePos09</span><span class="p">(</span><span class="n">d</span><span class="p">))</span><span class="w">
+
+  </span><span class="n">extracted</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">str_match</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="s1">'([가-힣]+)/[NP]'</span><span class="p">)</span><span class="w">
+
+  </span><span class="n">keyword</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">extracted</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w">
+  </span><span class="n">keyword</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">keyword</span><span class="p">)]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">texts</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Map</span><span class="p">(</span><span class="n">ko_words</span><span class="p">,</span><span class="w"> </span><span class="n">docs</span><span class="o">$</span><span class="n">text</span><span class="p">)</span><span class="w">
+
+</span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">bind_rows</span><span class="p">(</span><span class="n">data_frame</span><span class="p">(</span><span class="n">word</span><span class="o">=</span><span class="n">unlist</span><span class="p">(</span><span class="n">texts</span><span class="p">[</span><span class="n">str_detect</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span><span class="w"> </span><span class="s2">"시진/N"</span><span class="p">)]),</span><span class="w"> </span><span class="n">character</span><span class="o">=</span><span class="s2">"he"</span><span class="p">),</span><span class="w">
+                </span><span class="n">data_frame</span><span class="p">(</span><span class="n">word</span><span class="o">=</span><span class="n">unlist</span><span class="p">(</span><span class="n">texts</span><span class="p">[</span><span class="n">str_detect</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span><span class="w"> </span><span class="s2">"모연/N"</span><span class="p">)]),</span><span class="w"> </span><span class="n">character</span><span class="o">=</span><span class="s2">"she"</span><span class="p">))</span><span class="w">
+</span></code></pre>
+</div>
+
+<hr />
+
+<h3 id="시각화-1-difference-of-log-ratio">시각화 1. Difference of log ratio</h3>
+
+<p>이제 시각화입니다. 먼저 용언을 추출하고, 여기에 “다”를 붙여서 동사형으로 바꿔주었습니다. 다음, 전체 단어에서의 비율과 상대 로그비를 구해서 로그비 기준으로 정렬합니다. 시각화는 로그비 절대값 기준으로 높은 단어들을 모아 보았어요.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">ratio</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">filter</span><span class="p">(</span><span class="n">str_detect</span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="w"> </span><span class="s2">"/P"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">word2</span><span class="o">=</span><span class="n">str_replace_all</span><span class="p">(</span><span class="n">.</span><span class="o">$</span><span class="n">word</span><span class="p">,</span><span class="w"> </span><span class="s2">"/P"</span><span class="p">,</span><span class="w"> </span><span class="s2">"다"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="o">-</span><span class="n">word</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">count</span><span class="p">(</span><span class="n">character</span><span class="p">,</span><span class="w"> </span><span class="n">word2</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">spread</span><span class="p">(</span><span class="n">character</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">he</span><span class="o">+</span><span class="n">she</span><span class="p">,</span><span class="w">
+         </span><span class="n">he</span><span class="o">=</span><span class="p">(</span><span class="n">he</span><span class="m">+1</span><span class="p">)</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">he</span><span class="m">+1</span><span class="p">),</span><span class="w">
+         </span><span class="n">she</span><span class="o">=</span><span class="p">(</span><span class="n">she</span><span class="m">+1</span><span class="p">)</span><span class="o">/</span><span class="nf">sum</span><span class="p">(</span><span class="n">she</span><span class="m">+1</span><span class="p">),</span><span class="w">
+         </span><span class="n">logratio</span><span class="o">=</span><span class="n">log2</span><span class="p">(</span><span class="n">she</span><span class="o">/</span><span class="n">he</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">arrange</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="n">logratio</span><span class="p">))</span><span class="w">
+
+</span><span class="n">ratio</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">top_n</span><span class="p">(</span><span class="m">200</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">logratio</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">top_n</span><span class="p">(</span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="nf">abs</span><span class="p">(</span><span class="n">logratio</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ungroup</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">word</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reorder</span><span class="p">(</span><span class="n">word2</span><span class="p">,</span><span class="w"> </span><span class="n">logratio</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="w"> </span><span class="n">logratio</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">logratio</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_segment</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">word</span><span class="p">,</span><span class="w"> </span><span class="n">xend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">word</span><span class="p">,</span><span class="w">
+                   </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">yend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">logratio</span><span class="p">),</span><span class="w">
+               </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.1</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">coord_flip</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span><span class="w">
+       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Relative appearance after 'she' compared to 'he'"</span><span class="p">,</span><span class="w">
+       </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"&lt;태양의 후예&gt;, 시진과 모연의 행동"</span><span class="p">,</span><span class="w">
+       </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"대본 지시문을 바탕으로"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_color_discrete</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"More 'she'"</span><span class="p">,</span><span class="w"> </span><span class="s2">"More 'he'"</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_y_continuous</span><span class="p">(</span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w">
+                     </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"0.125x"</span><span class="p">,</span><span class="w"> </span><span class="s2">"0.25x"</span><span class="p">,</span><span class="w"> </span><span class="s2">"0.5x"</span><span class="p">,</span><span class="w">
+                                </span><span class="s2">"Same"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2x"</span><span class="p">,</span><span class="w"> </span><span class="s2">"4x"</span><span class="p">,</span><span class="w"> </span><span class="s2">"8x"</span><span class="p">))</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><img src="/text/assets/figure/2017-08-23-script-ratio-1.png" alt="plot of chunk ratio" /></p>
+
+<p>시진은 뛰고, 매섭고, 주고, 고마워하고, 나타납니다. 한편 모연은 건네고, 울리고(소리가 울리다의 울리다 입니다), 문지르고, 떨고, 힘들어하네요. 단일 작품에서의 분석이기 때문에 이것을 남여의 고정관념에 관한 결과라고 볼 수는 없을 것입니다. 하지만, 남녀 주인공의 행동에 어떤 차이가 있는지는 잘 나타나네요.</p>
+
+<hr />
+
+<h3 id="시각화-2-beeswarm-plot">시각화 2. Beeswarm Plot</h3>
+
+<p>다음은 beeswarm plot입니다. beeswarm plot은 산포도인데, 위아래로 늘어놓고 같은 값의 경우는 옆으로 퍼뜨린 그림이예요. 먼저 위 그림을 beeswarm plot으로 그려본 결과입니다.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">ratio</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">top_n</span><span class="p">(</span><span class="m">400</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">mutate</span><span class="p">(</span><span class="n">blank</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"blank"</span><span class="p">,</span><span class="w">
+           </span><span class="n">word</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reorder</span><span class="p">(</span><span class="n">word2</span><span class="p">,</span><span class="w"> </span><span class="n">logratio</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">blank</span><span class="p">,</span><span class="w"> </span><span class="n">logratio</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">word2</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">geom_beeswarm</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"midnightblue"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">geom_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Apple SD Gothic Neo"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2.5</span><span class="p">,</span><span class="w">
+              </span><span class="n">vjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.2</span><span class="p">,</span><span class="w"> </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.2</span><span class="p">,</span><span class="w">
+              </span><span class="n">check_overlap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">theme_void</span><span class="p">()</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><img src="/text/assets/figure/2017-08-23-script-circles1-1.png" alt="plot of chunk circles1" /></p>
+
+<p>위쪽으로 갈수록 여주, 아래쪽으로 갈수록 남주의 행동을 지시하는 단어입니다. 가운데의 단어들은 비슷한 비율로 나타나고 있는 단어들이겠죠. 그럼, 비율에 따라서 남, 여 별도로 시각화해볼게요.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">ratio</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">top_n</span><span class="p">(</span><span class="m">200</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="o">-</span><span class="n">total</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">gather</span><span class="p">(</span><span class="n">she</span><span class="p">,</span><span class="w"> </span><span class="n">he</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">word2</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">logratio</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">rename</span><span class="p">(</span><span class="n">gender</span><span class="o">=</span><span class="n">she</span><span class="p">,</span><span class="w"> </span><span class="n">ratio</span><span class="o">=</span><span class="n">he</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">word</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reorder</span><span class="p">(</span><span class="n">word2</span><span class="p">,</span><span class="w"> </span><span class="n">logratio</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">gender</span><span class="p">,</span><span class="w"> </span><span class="n">ratio</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">word2</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_beeswarm</span><span class="p">(</span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"midnightblue"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Apple SD Gothic Neo"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2.5</span><span class="p">,</span><span class="w">
+            </span><span class="n">vjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.2</span><span class="p">,</span><span class="w"> </span><span class="n">hjust</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.2</span><span class="p">,</span><span class="w">
+            </span><span class="n">check_overlap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><img src="/text/assets/figure/2017-08-23-script-circles2-1.png" alt="plot of chunk circles2" /></p>
+
+<p>오히려 별다른 차이를 잘 모르겠어요. 단어 분포가 다르다는 건 알겠지만 라벨을 다 붙일 수가 없으니, 시각화 결과로는 조금 애매하지 싶네요.</p>
+
+<hr />
+
+<h3 id="예시-문장-검색">예시 문장 검색</h3>
+
+<p>마지막으로, 해당 단어가 출현한 문장 예시를 추출해 보았습니다. 먼저 중요 단어를 모아서 data frame으로 만들고, 처음 구축한 자료에서 여주(모연)와 여주의 행동을 지시하는 단어가 들어간 문장의 sample을, 다음 남주(시진)와 남주의 행동을 지시하는 단어가 들어간 문장의 sample을 추출해 data frame을 구축합니다.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">example_words</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ratio</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">top_n</span><span class="p">(</span><span class="m">400</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">head</span><span class="p">(</span><span class="m">20</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">word</span><span class="o">=</span><span class="n">str_replace_all</span><span class="p">(</span><span class="n">.</span><span class="o">$</span><span class="n">word2</span><span class="p">,</span><span class="w"> </span><span class="s2">"다$"</span><span class="p">,</span><span class="w"> </span><span class="s2">"/P"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">select</span><span class="p">(</span><span class="n">word</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">bind_rows</span><span class="p">(</span><span class="n">ratio</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+              </span><span class="n">top_n</span><span class="p">(</span><span class="m">400</span><span class="p">,</span><span class="w"> </span><span class="n">total</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+              </span><span class="n">tail</span><span class="p">(</span><span class="m">20</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+              </span><span class="n">mutate</span><span class="p">(</span><span class="n">word</span><span class="o">=</span><span class="n">str_replace_all</span><span class="p">(</span><span class="n">.</span><span class="o">$</span><span class="n">word2</span><span class="p">,</span><span class="w"> </span><span class="s2">"다$"</span><span class="p">,</span><span class="w"> </span><span class="s2">"/P"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+              </span><span class="n">select</span><span class="p">(</span><span class="n">word</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">pull</span><span class="p">(</span><span class="n">word</span><span class="p">)</span><span class="w">
+
+</span><span class="n">docs</span><span class="o">$</span><span class="n">pos</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">texts</span><span class="w">
+
+</span><span class="n">example_text</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">bind_rows</span><span class="p">(</span><span class="n">data_frame</span><span class="p">(</span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">example_words</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">])</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_chr</span><span class="p">(</span><span class="n">base</span><span class="p">,</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">docs</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+                          </span><span class="n">filter</span><span class="p">(</span><span class="n">nchar</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">180</span><span class="p">,</span><span class="w">
+                                 </span><span class="n">str_detect</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="s2">"모연/N"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+                          </span><span class="n">filter</span><span class="p">(</span><span class="n">str_detect</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+                          </span><span class="n">sample_n</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+                          </span><span class="n">pull</span><span class="p">(</span><span class="n">text</span><span class="p">)))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">word</span><span class="o">=</span><span class="n">str_replace_all</span><span class="p">(</span><span class="n">base</span><span class="p">,</span><span class="w"> </span><span class="s2">"/P"</span><span class="p">,</span><span class="w"> </span><span class="s2">"다"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">select</span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="w"> </span><span class="n">text</span><span class="p">),</span><span class="w">
+  </span><span class="n">data_frame</span><span class="p">(</span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">example_words</span><span class="p">[</span><span class="m">21</span><span class="o">:</span><span class="m">40</span><span class="p">])</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">mutate</span><span class="p">(</span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_chr</span><span class="p">(</span><span class="n">base</span><span class="p">,</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">docs</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+                            </span><span class="n">filter</span><span class="p">(</span><span class="n">nchar</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">180</span><span class="p">,</span><span class="w">
+                                   </span><span class="n">str_detect</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="s2">"시진/N"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+                            </span><span class="n">filter</span><span class="p">(</span><span class="n">str_detect</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+                            </span><span class="n">sample_n</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+                            </span><span class="n">pull</span><span class="p">(</span><span class="n">text</span><span class="p">)))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">mutate</span><span class="p">(</span><span class="n">word</span><span class="o">=</span><span class="n">str_replace_all</span><span class="p">(</span><span class="n">base</span><span class="p">,</span><span class="w"> </span><span class="s2">"/P"</span><span class="p">,</span><span class="w"> </span><span class="s2">"다"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+    </span><span class="n">select</span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="w"> </span><span class="n">text</span><span class="p">))</span><span class="w">
+
+</span><span class="n">example_text</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## # A tibble: 40 x 2
+##        word                                                                                                                     text
+##       &lt;chr&gt;                                                                                                                    &lt;chr&gt;
+##  1   건네다                                                       고반장 다가와 모연에게 차 키 건네며 씁쓸한 표정으로 복도 걷는 시진
+##  2     떨다                식당 나가는 아구스 일행 따라 점점이 멀어지는 시진과 대영 보던 모연 떨고 있는 파티마 등 가 만가만 쓸어주고
+##  3 문지르다                                                         고개 푹 숙인 채 괜히 손에 묻은 피 문질러 지우고 서 있는 모연이다
+##  4   울리다                                                           복도 걸어가던 모연 쩌렁쩌렁 울리는 자신의 목소리에 굳어 서는데
+##  5     굴다                                                                                             그 위로 시작되는 모연의 군가
+##  6   꺼지다                                       나머지 텐트들 다 불 꺼져 있고 모연의 텐트에만 불빛 흐릿한데 그 순간 탁 꺼지는 불빛
+##  7     넓다                  그런 모연의 표정에서 화면 넓어지면 조금 떨어진 곳에서 역시 추도식 풍경을 바라보고 서 있는 남자 아구스다
+##  8   미치다                                                                                           미친 듯이 달려 나가는 모연이고
+##  9     믿다                                                 믿을 수 없어서 받을 생각도 못하고 그저 덜덜 떨며 바라만 보고 선 모연인데
+## 10   보내다 당신 그렇게 보내고 내 맘이 얼마나 불편했는지 짐작이 가나 혹시 화난 얼굴로 모연 보다가 멋지게 확 돌아서 저벅저벅 가버리는
+## # ... with 30 more rows
+</code></pre>
+</div>
+
+<p>텍스트 분석에서는 어떤 문장들이 선택되었는지 제시해 줄 필요가 있는 것 같습니다. 단어만으로는 의미 파악이 어려우니까요. <a href="/text/2017/08/15/complaint-LDA/">지난번</a> 보았던 LDA 등에서도, topic 구축을 단어 만으로 하지는 않고 결국 일치도가 가장 높은 텍스트를 보면서 topic 명을 정하곤 합니다.</p>
+
+<hr />
+
+<h3 id="마치며">마치며</h3>
+
+<p>어떠셨는지요? 간단하게 진행해본 예제라, 좀 밋밋합니다. 남주와 여주의 차이를 엿볼 수 있어서, 개인적으로는 흥미로웠습니다(“태양의 후예”에서 제시된 의사상에 관한 독해를 준비하고 있거든요). 다음 분석 자료에서는 더 많은 대본을 모아서 분석해볼 수 있으면 좋겠어요. 지금 deep learning 관련 포스트 준비 때문에 언제가 될진 모르겠네요. 다음 분석과 함께 다시 찾아뵙겠습니다.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      <link rel="icon" type="image/x-icon" href="/text/favicon.ico">
+
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

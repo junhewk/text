@@ -111,7 +111,7 @@
 
 <h2 id="lda">LDA?</h2>
 
-<p>Latent Dirichlet Allocation은 텍스트 분류를 위해 등장한 여러 방법론 중 하나입니다. 일전에도 간략하게 말씀드린 적이 있지만, Document-Term Matrix(각 문서 별로 출현한 단어의 빈도를 나타낸 행렬)로 텍스트를 표현하여 각 단어의 등장 빈도에 따라 텍스트를 분류하려는 시도가 계속 이루어졌습니다. 그것은 분야에 따라 사용되는 단어가 다르다는 관찰에 기반하는데요, 예컨대 ‘드리블’이라는 단어가 나오는 텍스트면 축구 또는 스포츠 관련 텍스트겠지요. ‘염좌’나 ‘폐렴’이 나오는 텍스트는 아마 의학 관련 텍스트일 겁니다. 하지만 이 단어들은 문학에서도 나타날 수 있겠지요.</p>
+<p>Latent Dirichlet Allocation은 텍스트 분류를 위해 등장한 여러 방법론 중 하나입니다. <a href="/text/2017/06/18/single-word-analysis-korean-poem/">일전에도</a> 간략하게 말씀드린 적이 있지만, Document-Term Matrix(각 문서 별로 출현한 단어의 빈도를 나타낸 행렬)로 텍스트를 표현하여 각 단어의 등장 빈도에 따라 텍스트를 분류하려는 시도가 계속 이루어졌습니다. 그것은 분야에 따라 사용되는 단어가 다르다는 관찰에 기반하는데요, 예컨대 ‘드리블’이라는 단어가 나오는 텍스트면 축구 또는 스포츠 관련 텍스트겠지요. ‘염좌’나 ‘폐렴’이 나오는 텍스트는 아마 의학 관련 텍스트일 겁니다. 하지만 이 단어들은 문학에서도 나타날 수 있겠지요.</p>
 
 <p>그렇다면 특정 단어의 출현 여부를 넘어, 단어의 빈도가 텍스트의 분류를 결정할 수도 있을 것 같습니다. 예컨대 ‘폐렴’은 의학 교과서와 철학자 손택의 에세이 ‘질병이라는 은유’ 모두에 나오지만, 의학 교과서에서 더 많이 사용되었을 것이며, ‘폐렴’과 ‘폐수종’이 나타나는 경우 의학 교과서일 가능성이 더 높을 것입니다. 반면 ‘폐수종’은 손택의 에세이에서는 나타나지 않습니다. 즉, 여러 단어의 출현 빈도를 바탕으로 텍스트의 원 분류를 추측해보는 것이 텍스트 분류의 비지도 학습(Unsupervised learning of text classification)입니다.</p>
 
@@ -152,7 +152,7 @@
 </span></code></pre>
 </div>
 
-<p>먼저 치과 관련 텍스트를 수집했습니다. 치과 관련 카테고리에 해당하는 텍스트를 모아, 자료의 분포를 확인해 보았습니다. 2014년에 급등했지만, 의료 관련 상담에서 15% 정도의</p>
+<p>먼저 치과 관련 텍스트를 수집했습니다. 치과 관련 카테고리에 해당하는 텍스트를 모아, 자료의 분포를 확인해 보았습니다. 2014년에 급등했지만, 의료 관련 상담에서 평균적으로 15% 정도를 차지하고 있네요. 시장 점유율(?)을 생각하면, 상당한 비율이라고 생각됩니다.</p>
 
 <div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">articles</span><span class="o">$</span><span class="n">rec</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ymd</span><span class="p">(</span><span class="n">articles</span><span class="o">$</span><span class="n">rec</span><span class="p">)</span><span class="w">
 </span><span class="n">articles</span><span class="o">$</span><span class="n">year</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">year</span><span class="p">(</span><span class="n">articles</span><span class="o">$</span><span class="n">rec</span><span class="p">)</span><span class="w">
