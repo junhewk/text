@@ -11,13 +11,16 @@
   
   <title>Monkeylearn in R 소개 - 쉽게 텍스트 분석하기</title>
   <meta name="description" content="Monkeylearn API를 통해 쉽게 텍스트 분석에 접근하는 방법을 설명해 보았습니다.">
-  <meta name="keywords" content="Rtext analysisMonkeylearnapi">
+  
+    
+    <meta name="keywords" content="R,text analysis,Monkeylearn,api">
+  
 
   <link rel="stylesheet" href="/text/assets/main.css">
-  <link rel="canonical" href="https://junhewk.github.io/text/2017/07/10/monkeylearn-in-R/">
+  <link rel="canonical" href="http://localhost:4000/text/2017/07/10/monkeylearn-in-R/">
   
   
-  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="https://junhewk.github.io/text/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="http://localhost:4000/text/feed.xml">
 
   
 
@@ -92,8 +95,22 @@
     
       <h1 class="post-title" itemprop="name headline">Monkeylearn in R 소개 - 쉽게 텍스트 분석하기</h1>
     
-    <p class="post-meta"><time datetime="2017-07-10T06:10:20-04:00" itemprop="datePublished">Jul 10, 2017</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Junhewk Kim</span></span> • 
+    <p class="post-meta"><time datetime="2017-07-10T10:10:20+00:00" itemprop="datePublished">Jul 10, 2017</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Junhewk Kim</span></span> • 
   
+  
+    
+  
+    
+      <a href="/text/categories/api/">API</a>
+    
+  
+    
+  
+    
+  
+    
+  
+    
   
 
 </p>
@@ -106,7 +123,7 @@
 
 <hr />
 
-<h2 id="설치">설치</h2>
+<h2>설치</h2>
 
 <p>아직 cran에 올라와 있지는 않습니다. 혹시 devtools package가 없으시면, 먼저 설치하셔야 합니다. <a href="https://github.com/hadley/devtools">devtools</a>는 R package 개발과 설치를 유용하게 만들어주는 도구입니다.</p>
 
@@ -115,7 +132,7 @@
 </span></code></pre>
 </div>
 
-<h2 id="package-불러오기">package 불러오기</h2>
+<h2>package 불러오기</h2>
 
 <p>설치하셨으면, monkeylearn 홈페이지를 방문하셔서 API key를 발급받아야 합니다. 홈페이지 가입 후 [My Account] -&gt; [API Keys]로 들어가면 40 자리의 키를 보실 수 있습니다. 하나, monkeylearn package 이용에서 중요한 점 하나는, 키를 환경 변수로 올려야 한다는 점입니다. 환경변수로 등록하기 위해서는, <code class="highlighter-rouge">Sys.setenv()</code> 함수를 사용합니다.</p>
 
@@ -131,7 +148,7 @@
 
 <hr />
 
-<h2 id="nernamed-entity-recognition-예제">NER(Named-Entity Recognition) 예제</h2>
+<h2>NER(Named-Entity Recognition) 예제</h2>
 
 <p>먼저 텍스트에서 고유명사를 추출하는 예제를 진행해볼 것입니다. NER이라고 부르는 이 과정은, 텍스트에 위치하는 고유명사를 뽑아내는 방식입니다. openNLP package로도 가능하지만, 다음 기회에 한번 따로 다뤄볼게요. monkeylearn으로는 상당히 쉽게 고유명사를 추출할 수 있습니다. 자료가 영어가 죄송해요. <code class="highlighter-rouge">extractor_id</code>가 뭔지는 다다음 절에서 설명하겠습니다. 출력값의 header로 홈페이지와 통신 상태도 확인할 수 있네요. 텍스트에서 지역명, 사람 이름을 추출해서 테이블로 돌려주는 것을 볼 수 있습니다. 참, 슬프게도 한국어는 지원하지 않아요.</p>
 
@@ -171,7 +188,7 @@
 
 <hr />
 
-<h2 id="keyword-추출-예제">Keyword 추출 예제</h2>
+<h2>Keyword 추출 예제</h2>
 
 <p>이번에는 텍스트에서 키워드를 추출하는 예제입니다. 마찬가지로 영어만 가능합니다. 키워드 갯수를 설정할 수 있으며, 결과에 관련도가 수치로 제시되고 있음을 볼 수 있습니다.</p>
 
@@ -226,7 +243,7 @@
 
 <hr />
 
-<h2 id="extractor">Extractor</h2>
+<h2>Extractor</h2>
 
 <p><code class="highlighter-rouge">extractor_id</code>에 어떤 값을 넣느냐에 따라, 다른 결과를 보여줍니다. 위에서 본 것처럼 <code class="highlighter-rouge">extractor_id="ex_isnnZRbS"</code>는 고유 명사 추출기입니다. 또, <code class="highlighter-rouge">extractor_id="ex_y7BPYzNG"</code>는 키워드 추출기입니다. 아쉽게 둘다 영어만 지원합니다.</p>
 
@@ -293,7 +310,7 @@ Their argument to the room of technologically inclined students was that Wall St
 
 <hr />
 
-<h2 id="분류-작업-classifier">분류 작업 (Classifier)</h2>
+<h2>분류 작업 (Classifier)</h2>
 
 <p>다음은 분류기입니다. 사실 이 부분을 다루고 싶어서 글을 올립니다. 한글로도 작업이 가능하거든요. 다음 글에서 더 자세히 소개할게요. 일단 영어로 어떻게 돌아가는지 보겠습니다. 일단, 기본 레이블링입니다. <code class="highlighter-rouge">category_id</code>로 각 텍스트를 구분하고 있다는 점을 확인하실 필요가 있습니다. 첫 번째 텍스트는 “Dogs”, 두 번째 텍스트는 “Accessories”가 가장 큰 점수를 받았네요. 그 아래는 사용할 수 있는 분류기의 목록입니다.</p>
 
@@ -347,7 +364,7 @@ Their argument to the room of technologically inclined students was that Wall St
 
 <hr />
 
-<h2 id="언어-감지">언어 감지</h2>
+<h2>언어 감지</h2>
 
 <p><code class="highlighter-rouge">classifier_id="cl_oJNMkt2V"</code>를 넣으면, 텍스트의 언어가 무엇인지 알려줍니다. 원 예시에, 한글도 하나 추가해볼게요.</p>
 
@@ -375,7 +392,7 @@ Their argument to the room of technologically inclined students was that Wall St
 
 <hr />
 
-<h2 id="신성-모독-언어-폭력-감지기">신성 모독, 언어 폭력 감지기</h2>
+<h2>신성 모독, 언어 폭력 감지기</h2>
 
 <p><code class="highlighter-rouge">classifier_id="cl_KFXhoTdt"</code>로 확인할 수 있습니다. 마찬가지로 한국어는 아직 지원하지 않네요.</p>
 
@@ -397,7 +414,7 @@ Their argument to the room of technologically inclined students was that Wall St
 
 <hr />
 
-<h2 id="토픽-분류기-general-topic-classifier">토픽 분류기 (General Topic Classifier)</h2>
+<h2>토픽 분류기 (General Topic Classifier)</h2>
 
 <p>마지막으로 관심 있으실 토픽 분류기입니다. <code class="highlighter-rouge">classifier_id="cl_5icAVzKR"</code>로 가능하고, 의견 분류랑 마찬가지로 한글이 지원됩니다. (사전을 사용해야 하는 작업은 아직 지원하지 않는 반면, n-gram token으로 하는 작업은 40개 언어를 지원하고 있어요.) 다음 글에서, 좀 더 자세히 다뤄볼게요. 일단 예제입니다. 5개 카테고리가 나왔고, 첫 텍스트가 길어서 그런지 주로 동물로 분류되었네요. 참, 한글 분석을 위해서는 직접 분류를 정해주어야 합니다.</p>
 
@@ -423,11 +440,39 @@ Their argument to the room of technologically inclined students was that Wall St
 
 <hr />
 
-<h2 id="맺으며">맺으며</h2>
+<h2>맺으며</h2>
 
 <p>텍스트 분석에서 활용할 수 있는 재미있는 API라서 소개해 보았습니다. 다음 글에서는 어떻게 인터넷의 글을 모아서 분석할 수 있는지를 소개해 보도록 하겠습니다. <code class="highlighter-rouge">rvest</code>랑 결합해서 소개할지, 크롤링은 <code class="highlighter-rouge">scrapy</code>로 받을지는 조금 고민이네요. 곧 뵙겠습니다.</p>
 
   </div>
+
+  
+    <div class="post-comments" itemprop="comment">
+      <hr />
+<h1>Comments</h1>
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://EXAMPLE.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </div>
+  
 
 </article>
 
@@ -439,7 +484,9 @@ Their argument to the room of technologically inclined students was that Wall St
   <div class="wrapper">
 
     <p>
-      <link rel="icon" type="image/x-icon" href="/text/favicon.ico">
+      
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="http://localhost:4000/text/feed.xml">RSS</a>
 
     </p>
 

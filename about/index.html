@@ -14,10 +14,10 @@
   
 
   <link rel="stylesheet" href="/text/assets/main.css">
-  <link rel="canonical" href="https://junhewk.github.io/text/about/">
+  <link rel="canonical" href="http://localhost:4000/text/about/">
   
   
-  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="https://junhewk.github.io/text/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="http://localhost:4000/text/feed.xml">
 
   
 
@@ -99,9 +99,9 @@
 
 <hr />
 
-<h2 id="todo">TODO</h2>
+<h2>TODO</h2>
 
-<h3 id="customization">Customization</h3>
+<h3>Customization</h3>
 
 <p>To override the default structure and style of whiteglass, simply create the
 concerned directory at the root of your site, copy the file you wish to
@@ -112,7 +112,7 @@ custom style path, create an <code class="highlighter-rouge">_includes</code> di
 <code class="highlighter-rouge">&lt;your-site&gt;/_includes</code> and start editing that file.</p>
 
 <p>The site’s default CSS is in the gem itself,
-<a href="/text/assets/main.css"><code class="highlighter-rouge">assets/main.scss</code></a>. To override the default CSS, the file
+<a href="assets/main.scss"><code class="highlighter-rouge">assets/main.scss</code></a>. To override the default CSS, the file
 has to exist at your site source. Do either of the following:</p>
 
 <ul>
@@ -127,7 +127,7 @@ has to exist at your site source. Do either of the following:</p>
   <li>Download the file from this repo
     <ul>
       <li>Create a new file <code class="highlighter-rouge">main.scss</code> at <code class="highlighter-rouge">&lt;your-site&gt;/assets/</code></li>
-      <li>Copy the contents at <a href="/text/assets/main.css"><code class="highlighter-rouge">assets/main.scss</code></a> onto the <code class="highlighter-rouge">main.scss</code> you just created, and edit away</li>
+      <li>Copy the contents at <a href="assets/main.scss"><code class="highlighter-rouge">assets/main.scss</code></a> onto the <code class="highlighter-rouge">main.scss</code> you just created, and edit away</li>
     </ul>
   </li>
   <li>Copy directly from jekyll-whiteglass gem
@@ -139,7 +139,7 @@ has to exist at your site source. Do either of the following:</p>
   </li>
 </ul>
 
-<h3 id="comments">Comments</h3>
+<h3>Comments</h3>
 
 <p>whiteglass provides the ability to include your favourite commenting service, like <a href="https://disqus.com">Disqus</a> or <a href="https://posativ.org/isso">Isso</a>.</p>
 
@@ -151,9 +151,9 @@ has to exist at your site source. Do either of the following:</p>
 
 <p>To disable comments on certain pages or posts specify <code class="highlighter-rouge">comments: false</code> in the front matter of the page or post.</p>
 
-<h3 id="metadata-for-seo">Metadata for SEO</h3>
+<h3>Metadata for SEO</h3>
 
-<h4 id="twitter">Twitter</h4>
+<h4>Twitter</h4>
 
 <ul>
   <li><code class="highlighter-rouge">site.twitter_username</code> sets <code class="highlighter-rouge">twitter:site</code> and <code class="highlighter-rouge">twitter:creator</code> meta tag</li>
@@ -168,7 +168,7 @@ has to exist at your site source. Do either of the following:</p>
   <li><code class="highlighter-rouge">page.twitter_card.image</code> sets <code class="highlighter-rouge">twitter:image:src</code> meta tag if <code class="highlighter-rouge">page.twitter_card.type</code> is not <code class="highlighter-rouge">gallery</code>. It overrides <code class="highlighter-rouge">site.twitter_image</code></li>
 </ul>
 
-<h4 id="facebook">Facebook</h4>
+<h4>Facebook</h4>
 
 <ul>
   <li><code class="highlighter-rouge">site.facebook_app_id</code> sets <code class="highlighter-rouge">fb:admins</code> meta tag</li>
@@ -178,6 +178,34 @@ has to exist at your site source. Do either of the following:</p>
 </ul>
 
   </div>
+
+  
+    <div class="post-comments">
+      <hr />
+<h1>Comments</h1>
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://EXAMPLE.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </div>
+  
 
 </article>
 
@@ -189,7 +217,9 @@ has to exist at your site source. Do either of the following:</p>
   <div class="wrapper">
 
     <p>
-      <link rel="icon" type="image/x-icon" href="/text/favicon.ico">
+      
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="http://localhost:4000/text/feed.xml">RSS</a>
 
     </p>
 

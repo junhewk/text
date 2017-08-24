@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
   <generator uri="http://jekyllrb.com" version="3.5.1">Jekyll</generator>
   
   
-  <link href="https://junhewk.github.io/text/feed.xml" rel="self" type="application/atom+xml" />
-  <link href="https://junhewk.github.io/text/" rel="alternate" type="text/html" />
-  <updated>2017-08-23T23:19:28-04:00</updated>
-  <id>https://junhewk.github.io/text//</id>
+  <link href="http://localhost:4000/text/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4000/text/" rel="alternate" type="text/html" hreflang="en" />
+  <updated>2017-08-24T15:44:13+00:00</updated>
+  <id>http://localhost:4000/text//</id>
 
   
     <title type="html">Study of Narrative Texts</title>
@@ -25,17 +25,17 @@
       
       <title type="html">시진은 뛰고, 모연은 건넨다 - “태양의 후예” 대본 텍스트 분석</title>
       
-      <link href="https://junhewk.github.io/text/2017/08/23/script-analysis.ds/" rel="alternate" type="text/html" title="시진은 뛰고, 모연은 건넨다 - &quot;태양의 후예&quot; 대본 텍스트 분석" />
-      <published>2017-08-23T19:08:00-04:00</published>
-      <updated>2017-08-23T19:08:00-04:00</updated>
-      <id>https://junhewk.github.io/text/2017/08/23/script-analysis.ds</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2017/08/23/script-analysis.ds/">&lt;p&gt;아래 분석은 &lt;a href=&quot;https://pudding.cool/2017/08/screen-direction/&quot;&gt;Silge J. She giggles, he gallops&lt;/a&gt;가 제시한 텍스트 분석 기법을 한글 텍스트에 적용해본 예제입니다. 원문은 &lt;a href=&quot;https://pudding.cool/2017/03/film-dialogue/&quot;&gt;Anderson H, Daniels M. Film dialogue&lt;/a&gt;의 작업에서 만든 2000개의 영화 대본을 바탕으로 연어(bigram)를 검토, 대명사인 “he”와 “she”에 붙어 있는 단어를 찾아 나갑니다. 영어 구조 상, 대명사 뒤에는 동사가 따라나올 것이며, 따라서 영화 대본이 남자와 여자에게 어떤 행동을 지시하는 지를 파악할 수 있게 되겠지요. 결과, “he”는 “straps(채찍질하다)”, “gallops(말 달리다)”, “shot(쏘다)” 등의 행동을, “she”는 “snuggles(껴안다)”, “giggles(낄낄거리다)”, “squeals(울고 비명지르다)” 등의 행동을 더 많이 수행합니다. 영화에서 남, 여 등장인물에 관한 고정관념을 수치로 확인할 수 있는 훌륭한 분석이라고 생각합니다. 시대, 작가 등에 따른 차이도 제시해 놓았으니 링크는 한번 꼭 보셔요.&lt;/p&gt;
+      <link href="http://localhost:4000/text/2017/08/23/script-analysis.ds/" rel="alternate" type="text/html" title="시진은 뛰고, 모연은 건넨다 - &quot;태양의 후예&quot; 대본 텍스트 분석" />
+      <published>2017-08-23T23:08:00+00:00</published>
+      <updated>2017-08-23T23:08:00+00:00</updated>
+      <id>http://localhost:4000/text/2017/08/23/script-analysis.ds</id>
+      <content type="html" xml:base="http://localhost:4000/text/2017/08/23/script-analysis.ds/">&lt;p&gt;아래 분석은 &lt;a href=&quot;https://pudding.cool/2017/08/screen-direction/&quot;&gt;Silge J. She giggles, he gallops&lt;/a&gt;가 제시한 텍스트 분석 기법을 한글 텍스트에 적용해본 예제입니다. 원문은 &lt;a href=&quot;https://pudding.cool/2017/03/film-dialogue/&quot;&gt;Anderson H, Daniels M. Film dialogue&lt;/a&gt;의 작업에서 만든 2000개의 영화 대본을 바탕으로 연어(bigram)를 검토, 대명사인 “he”와 “she”에 붙어 있는 단어를 찾아 나갑니다. 영어 구조 상, 대명사 뒤에는 동사가 따라나올 것이며, 따라서 영화 대본이 남자와 여자에게 어떤 행동을 지시하는 지를 파악할 수 있게 되겠지요. 결과, “he”는 “straps(채찍질하다)”, “gallops(말 달리다)”, “shot(쏘다)” 등의 행동을, “she”는 “snuggles(껴안다)”, “giggles(낄낄거리다)”, “squeals(울고 비명지르다)” 등의 행동을 더 많이 수행합니다. 영화에서 남, 여 등장인물에 관한 고정관념을 수치로 확인할 수 있는 훌륭한 분석이라고 생각합니다. 시대, 작가 등에 따른 차이도 제시해 놓았으니 링크는 한번 꼭 보셔요.&lt;/p&gt;
 
 &lt;p&gt;이런 작업을 보면 한글로 한번 해봐야 하지 않겠습니까. 영화 대본 수집은 다른 기회에 한번 도전해보도록 하고, 이번에는 검색하다가 인기 드라마였던 “태양의 후예” 1~16화 대본을 발견해서, 이 자료를 통해 분석해보기로 했습니다. 다음에는 김은숙 작가의 작품들을 모아서 해볼까 싶기도 해요. 오늘은 일단, 어떤 식으로 분석을 진행하는지만 간단히 확인해 보겠습니다.&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;사전-처리&quot;&gt;사전 처리&lt;/h3&gt;
+&lt;h3&gt;사전 처리&lt;/h3&gt;
 
 &lt;p&gt;이번에 사용한 라이브러라는 특별한 건 없습니다. 시각화를 위해 &lt;a href=&quot;https://github.com/eclarke/ggbeeswarm&quot;&gt;ggbeeswarm&lt;/a&gt;을 사용한 것 정도일까요. 대본은 pdf 형태여서, html로 변환하여 불러왔습니다. 표 형태처럼 되어 있는 부분이 많고 다단 편집이 된 경우도 있어서, &lt;code class=&quot;highlighter-rouge&quot;&gt;pdftools&lt;/code&gt; 등으로 바로 불러오면 문단 구조가 어긋나게 됩니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;rvest&lt;/code&gt;로 불러와서 필요한 문장을 선택합니다.&lt;/p&gt;
 
@@ -98,7 +98,7 @@
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;시각화-1-difference-of-log-ratio&quot;&gt;시각화 1. Difference of log ratio&lt;/h3&gt;
+&lt;h3&gt;시각화 1. Difference of log ratio&lt;/h3&gt;
 
 &lt;p&gt;이제 시각화입니다. 먼저 용언을 추출하고, 여기에 “다”를 붙여서 동사형으로 바꿔주었습니다. 다음, 전체 단어에서의 비율과 상대 로그비를 구해서 로그비 기준으로 정렬합니다. 시각화는 로그비 절대값 기준으로 높은 단어들을 모아 보았어요.&lt;/p&gt;
 
@@ -143,7 +143,7 @@
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;시각화-2-beeswarm-plot&quot;&gt;시각화 2. Beeswarm Plot&lt;/h3&gt;
+&lt;h3&gt;시각화 2. Beeswarm Plot&lt;/h3&gt;
 
 &lt;p&gt;다음은 beeswarm plot입니다. beeswarm plot은 산포도인데, 위아래로 늘어놓고 같은 값의 경우는 옆으로 퍼뜨린 그림이예요. 먼저 위 그림을 beeswarm plot으로 그려본 결과입니다.&lt;/p&gt;
 
@@ -184,7 +184,7 @@
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;예시-문장-검색&quot;&gt;예시 문장 검색&lt;/h3&gt;
+&lt;h3&gt;예시 문장 검색&lt;/h3&gt;
 
 &lt;p&gt;마지막으로, 해당 단어가 출현한 문장 예시를 추출해 보았습니다. 먼저 중요 단어를 모아서 data frame으로 만들고, 처음 구축한 자료에서 여주(모연)와 여주의 행동을 지시하는 단어가 들어간 문장의 sample을, 다음 남주(시진)와 남주의 행동을 지시하는 단어가 들어간 문장의 sample을 추출해 data frame을 구축합니다.&lt;/p&gt;
 
@@ -246,7 +246,7 @@
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;마치며&quot;&gt;마치며&lt;/h3&gt;
+&lt;h3&gt;마치며&lt;/h3&gt;
 
 &lt;p&gt;어떠셨는지요? 간단하게 진행해본 예제라, 좀 밋밋합니다. 남주와 여주의 차이를 엿볼 수 있어서, 개인적으로는 흥미로웠습니다(“태양의 후예”에서 제시된 의사상에 관한 독해를 준비하고 있거든요). 다음 분석 자료에서는 더 많은 대본을 모아서 분석해볼 수 있으면 좋겠어요. 지금 deep learning 관련 포스트 준비 때문에 언제가 될진 모르겠네요. 다음 분석과 함께 다시 찾아뵙겠습니다.&lt;/p&gt;</content>
 
@@ -265,7 +265,7 @@
       
 
       
-        <category term="morpheme analysis" />
+        <category term="syntactic" />
       
 
       
@@ -292,11 +292,11 @@
       
       <title type="html">환자 불편 상담에 관한 Latent Dirichlet Allocation 분석</title>
       
-      <link href="https://junhewk.github.io/text/2017/08/15/complaint-LDA/" rel="alternate" type="text/html" title="환자 불편 상담에 관한 Latent Dirichlet Allocation 분석" />
-      <published>2017-08-15T10:28:00-04:00</published>
-      <updated>2017-08-15T10:28:00-04:00</updated>
-      <id>https://junhewk.github.io/text/2017/08/15/complaint-LDA</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2017/08/15/complaint-LDA/">&lt;p&gt;이번에는 지난 번에 활용했던 &lt;a href=&quot;http://www.1372.go.kr&quot;&gt;1372 소비자보호원&lt;/a&gt; 상담 자료를 통해 &lt;a href=&quot;https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation&quot;&gt;LDA&lt;/a&gt; (Latent Dirichlet Allocation)을 통한 분석을 진행해 보려 합니다. 먼저 참고한 페이지는 다음과 같습니다.&lt;/p&gt;
+      <link href="http://localhost:4000/text/2017/08/15/complaint-LDA/" rel="alternate" type="text/html" title="환자 불편 상담에 관한 Latent Dirichlet Allocation 분석" />
+      <published>2017-08-15T14:28:00+00:00</published>
+      <updated>2017-08-15T14:28:00+00:00</updated>
+      <id>http://localhost:4000/text/2017/08/15/complaint-LDA</id>
+      <content type="html" xml:base="http://localhost:4000/text/2017/08/15/complaint-LDA/">&lt;p&gt;이번에는 지난 번에 활용했던 &lt;a href=&quot;http://www.1372.go.kr&quot;&gt;1372 소비자보호원&lt;/a&gt; 상담 자료를 통해 &lt;a href=&quot;https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation&quot;&gt;LDA&lt;/a&gt; (Latent Dirichlet Allocation)을 통한 분석을 진행해 보려 합니다. 먼저 참고한 페이지는 다음과 같습니다.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;http://tidytextmining.com/topicmodeling.html&lt;/li&gt;
@@ -305,7 +305,7 @@
   &lt;li&gt;https://ldavis.cpsievert.me/reviews/reviews.html&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;lda&quot;&gt;LDA?&lt;/h2&gt;
+&lt;h2&gt;LDA?&lt;/h2&gt;
 
 &lt;p&gt;Latent Dirichlet Allocation은 텍스트 분류를 위해 등장한 여러 방법론 중 하나입니다. &lt;a href=&quot;/text/2017/06/18/single-word-analysis-korean-poem/&quot;&gt;일전에도&lt;/a&gt; 간략하게 말씀드린 적이 있지만, Document-Term Matrix(각 문서 별로 출현한 단어의 빈도를 나타낸 행렬)로 텍스트를 표현하여 각 단어의 등장 빈도에 따라 텍스트를 분류하려는 시도가 계속 이루어졌습니다. 그것은 분야에 따라 사용되는 단어가 다르다는 관찰에 기반하는데요, 예컨대 ‘드리블’이라는 단어가 나오는 텍스트면 축구 또는 스포츠 관련 텍스트겠지요. ‘염좌’나 ‘폐렴’이 나오는 텍스트는 아마 의학 관련 텍스트일 겁니다. 하지만 이 단어들은 문학에서도 나타날 수 있겠지요.&lt;/p&gt;
 
@@ -317,7 +317,7 @@
 
 &lt;p&gt;이번에는, 치과 자료만 모아서 LDA를 통해 중요 단어를 추출, 상담 사례를 어떻게 분류할 수 있는지 확인해볼 것입니다.&lt;/p&gt;
 
-&lt;h2 id=&quot;사용-package&quot;&gt;사용 package&lt;/h2&gt;
+&lt;h2&gt;사용 package&lt;/h2&gt;
 
 &lt;p&gt;새로운 패키지가 몇 개 추가되었어요. &lt;a href=&quot;https://cran.r-project.org/web/packages/lubridate/lubridate.pdf&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;lubridate&lt;/code&gt;&lt;/a&gt;는 손쉽게 &lt;code class=&quot;highlighter-rouge&quot;&gt;character&lt;/code&gt; 형식을 &lt;code class=&quot;highlighter-rouge&quot;&gt;date&lt;/code&gt; 형식으로 바꿔주는 패키지입니다. &lt;a href=&quot;https://cran.r-project.org/web/packages/tm/index.html&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tm&lt;/code&gt;&lt;/a&gt;은 text mining을 위한 패키지로, 텍스트 분석을 위해서는 가장 먼저 소개했어야 할텐데 사용이 늦었네요. &lt;a href=&quot;https://cran.r-project.org/web/packages/topicmodels/topicmodels.pdf&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;topicmodels&lt;/code&gt;&lt;/a&gt;가 오늘의 핵심, LDA 분석 함수를 담고 있습니다. &lt;a href=&quot;https://cran.r-project.org/web/packages/lda/lda.pdf&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;LDA&lt;/code&gt;&lt;/a&gt;도 있지만, 차이가 좀 있고 사용성 면에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;topicmodels&lt;/code&gt;가, 알고리즘 면에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;LDA&lt;/code&gt;가 좀 더 나은 면이 있습니다. &lt;a href=&quot;https://cran.r-project.org/web/packages/LDAvis/LDAvis.pdf&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;LDAvis&lt;/code&gt;&lt;/a&gt;는 LDA의 결과를 시각화하는 도구이며, &lt;a href=&quot;https://cran.r-project.org/web/packages/Rmpfr/Rmpfr.pdf&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Rmpfr&lt;/code&gt;&lt;/a&gt;은 정교한 floating point number 연산을 지원합니다. 나중에 Topic 수 결정을 위해서 사용하게 됩니다.&lt;/p&gt;
 
@@ -337,7 +337,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;자료-불러오기&quot;&gt;자료 불러오기&lt;/h2&gt;
+&lt;h2&gt;자료 불러오기&lt;/h2&gt;
 
 &lt;p&gt;이번에도 &lt;code class=&quot;highlighter-rouge&quot;&gt;KoNLP&lt;/code&gt;를 사용하되, “보건 일반” 관련 사전을 사용하고, 사용자 사전을 추가하는 방식으로 접근합니다. 대상 자료는 지난번에 수집해놓은 상담 자료를 다시 활용하였습니다.&lt;/p&gt;
 
@@ -397,7 +397,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;텍스트-전처리&quot;&gt;텍스트 전처리&lt;/h2&gt;
+&lt;h2&gt;텍스트 전처리&lt;/h2&gt;
 
 &lt;p&gt;먼저 필요한 오타를 정리하고 몇 가지 단어는 통일한 뒤, 숫자와 인터넷 주소를 제외시켰습니다. 자모로만 표현한 경우(ㅋㅋ, ㅜㅜ 등) 이모티콘으로 변경하였습니다. 다음, &lt;code class=&quot;highlighter-rouge&quot;&gt;KoNLP&lt;/code&gt;의 &lt;code class=&quot;highlighter-rouge&quot;&gt;SimplePos22()&lt;/code&gt; 함수를 통해 형태소 분석을 한 뒤, [지난 번]처럼 체언과 용언 만을 추출합니다.&lt;/p&gt;
 
@@ -445,7 +445,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;기초-lda-분석&quot;&gt;기초 LDA 분석&lt;/h2&gt;
+&lt;h2&gt;기초 LDA 분석&lt;/h2&gt;
 
 &lt;p&gt;먼저 간단하게 LDA 분석 결과를 확인하기 위하여, &lt;code class=&quot;highlighter-rouge&quot;&gt;tidytext&lt;/code&gt; 패키지와 결합하여 어떤 방식으로 결과가 나오는지 살펴보겠습니다. 먼저, &lt;code class=&quot;highlighter-rouge&quot;&gt;topicmodels&lt;/code&gt;의 &lt;code class=&quot;highlighter-rouge&quot;&gt;LDA&lt;/code&gt; 함수로 텍스트를 분류합니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;k&lt;/code&gt;는 텍스트를 몇 개의 집단으로 나눌 것인지 정하는 사전변수입니다. 먼저, 두 집단으로 나눠서 결과를 볼게요.&lt;/p&gt;
 
@@ -569,7 +569,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;k값-정하기와-ldavis&quot;&gt;K값 정하기와 LDAvis&lt;/h2&gt;
+&lt;h2&gt;K값 정하기와 LDAvis&lt;/h2&gt;
 
 &lt;p&gt;여기까지 보셨으면 &lt;code class=&quot;highlighter-rouge&quot;&gt;LDA&lt;/code&gt;를 위해 K값, 즉 집단의 갯수를 정해주어야 한다는 것을 아셨을 겁니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;k-means clustering&lt;/code&gt;과 비슷하죠. 그리고 분류 갯수 결정의 최적화 방식은 아직 의견이 분분합니다. 보통은 2부터 4, 50개까지, 대규모 자료의 경우는 100~200개까지 분류해보고 log likelihood 값의 &lt;a href=&quot;https://en.wikipedia.org/wiki/Harmonic_mean&quot;&gt;harmonic mean&lt;/a&gt;이 최대가 되는 K값, 또는 &lt;a href=&quot;https://en.wikipedia.org/wiki/Perplexity&quot;&gt;perplexity&lt;/a&gt; 값의 변화가 최소가 되는 지점(RPC: Rate of perplexity change)의 K값을 사용합니다. 여기에서는 harmonic mean을 구해 K값을 결정합니다. 2~40개의 K 값으로 LDA를 구하며, 이때 &lt;a href=&quot;https://en.wikipedia.org/wiki/Gibbs_sampling&quot;&gt;Gibbs sampling&lt;/a&gt; 방식으로 모형을 구축해 볼 것입니다. Gibbs sampling은 간단히 말하면 변수를 하나씩 바꿔가면서 표본을 수집하여 모형을 근사하는 방식입니다. 이때, &lt;code class=&quot;highlighter-rouge&quot;&gt;burnin&lt;/code&gt;은 처음부터 burnin에 지정한 값까지는 제외시키고 나머지 값만을 모형 근사에 사용하겠다는 선언이며, &lt;code class=&quot;highlighter-rouge&quot;&gt;iter&lt;/code&gt;는 몇 개까지 표본을 수집할지를, &lt;code class=&quot;highlighter-rouge&quot;&gt;keep&lt;/code&gt;은 정한 값마다 log likelihood 값을 구해서 저장하도록 설정하는 변수입니다. 이 시도를 통해 구한 log likelihood 값의 최빈값을 통해 harmonic mean을 구하는 방식은 &lt;a href=&quot;http://epub.wu.ac.at/3558/1/main.pdf&quot;&gt;Ponweiser&lt;/a&gt;의 논문에 정리되어 있습니다.&lt;/p&gt;
 
@@ -663,7 +663,7 @@
 
 &lt;p&gt;나머지 14개의 topic은 상대적 거리가 근접해 있습니다. 워낙 topic 1, 2, 3이 두드러져서 그렇기도 할 것이고, 치료 관련 상담에서 주제가 편중되는 것은 어찌보면 당연할 것 같아요. 커서를 원 위에 올리면 해당 topic의 주제어들을 확인하실 수 있습니다.&lt;/p&gt;
 
-&lt;h2 id=&quot;마치며&quot;&gt;마치며&lt;/h2&gt;
+&lt;h2&gt;마치며&lt;/h2&gt;
 
 &lt;p&gt;이번에는 치과 불만 상담 관련하여 자료를 살펴보고, 비지도 학습 방법인 LDA로 분류하여 각 topic의 주제를 분석해 보았습니다. 치과가 전체 의료 불만 상담의 15%를 차지하며, 그 절반이 서비스(‘의사’가 ‘대하’는 방식, ‘비용’ 관련하여 ‘못하’거나/겠다는 표현–아마 치료가 잘못되었거나 치과와 분쟁 조정이 잘 이뤄지지 않은 것을 의미하는 것 같습니다–이 주로 등장하는) 관련 이라는 것에 관해 좀 더 곰곰히 생각해 볼 필요가 있을 것 같습니다. 다음 번에는, 의과와 치과가 어떻게 차이가 나는지 확인해 볼게요.&lt;/p&gt;</content>
 
@@ -709,15 +709,15 @@
       
       <title type="html">네이버 블로그로 동시출현단어 분석 (co-occurence network anlysis)</title>
       
-      <link href="https://junhewk.github.io/text/2017/08/08/cooccurence-matrix-with-Naver-blog/" rel="alternate" type="text/html" title="네이버 블로그로 동시출현단어 분석 (co-occurence network anlysis)" />
-      <published>2017-08-08T07:35:00-04:00</published>
-      <updated>2017-08-08T07:35:00-04:00</updated>
-      <id>https://junhewk.github.io/text/2017/08/08/cooccurence-matrix-with-Naver-blog</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2017/08/08/cooccurence-matrix-with-Naver-blog/">&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Co-occurrence&quot;&gt;동시출현(Co-occurrence)&lt;/a&gt;이란 한 문장, 문단 또는 텍스트 단위에서 같이 출현한 단어를 가리킵니다. 언어학적 의미에서 의미적 근접성을 가리키며, 단어의 연결(collocation)을 찾는 데 활용됩니다. 이 개념에서 출발한 &lt;a href=&quot;https://en.wikipedia.org/wiki/Co-occurrence_networks&quot;&gt;동시출현 네트워크(Co-occurrence networks)&lt;/a&gt;는 특정 텍스트 단위에서 공동으로 출현한 단어의 집합적 상호 연결을 표현하는 방식입니다. 나타나는 단어를 모두 표시한 뒤, 두 단어가 같은 문단에 들어가 있다면 둘 사이를 선으로 연결해 나가다 보면 단어의 네트워크를 만들 수 있게 되겠죠. 이번 포스트에서는 네이버 블로그를 검색하여, 동시출현 네트워크를 그려보는 것을 목표로 합니다. 시각화에는 두 개의 패키지, &lt;code class=&quot;highlighter-rouge&quot;&gt;qgraph&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;networkD3&lt;/code&gt;를 활용해볼 것입니다. 일반적으로 사용되는 &lt;code class=&quot;highlighter-rouge&quot;&gt;igraph&lt;/code&gt;가 군집 분석이 가능한 장점을 지니지만, 이번에는 단순히 시각화를 목적했습니다.&lt;/p&gt;
+      <link href="http://localhost:4000/text/2017/08/08/cooccurence-matrix-with-Naver-blog/" rel="alternate" type="text/html" title="네이버 블로그로 동시출현단어 분석 (co-occurence network anlysis)" />
+      <published>2017-08-08T11:35:00+00:00</published>
+      <updated>2017-08-08T11:35:00+00:00</updated>
+      <id>http://localhost:4000/text/2017/08/08/cooccurence-matrix-with-Naver-blog</id>
+      <content type="html" xml:base="http://localhost:4000/text/2017/08/08/cooccurence-matrix-with-Naver-blog/">&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Co-occurrence&quot;&gt;동시출현(Co-occurrence)&lt;/a&gt;이란 한 문장, 문단 또는 텍스트 단위에서 같이 출현한 단어를 가리킵니다. 언어학적 의미에서 의미적 근접성을 가리키며, 단어의 연결(collocation)을 찾는 데 활용됩니다. 이 개념에서 출발한 &lt;a href=&quot;https://en.wikipedia.org/wiki/Co-occurrence_networks&quot;&gt;동시출현 네트워크(Co-occurrence networks)&lt;/a&gt;는 특정 텍스트 단위에서 공동으로 출현한 단어의 집합적 상호 연결을 표현하는 방식입니다. 나타나는 단어를 모두 표시한 뒤, 두 단어가 같은 문단에 들어가 있다면 둘 사이를 선으로 연결해 나가다 보면 단어의 네트워크를 만들 수 있게 되겠죠. 이번 포스트에서는 네이버 블로그를 검색하여, 동시출현 네트워크를 그려보는 것을 목표로 합니다. 시각화에는 두 개의 패키지, &lt;code class=&quot;highlighter-rouge&quot;&gt;qgraph&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;networkD3&lt;/code&gt;를 활용해볼 것입니다. 일반적으로 사용되는 &lt;code class=&quot;highlighter-rouge&quot;&gt;igraph&lt;/code&gt;가 군집 분석이 가능한 장점을 지니지만, 이번에는 단순히 시각화를 목적했습니다.&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;들어가기-전에&quot;&gt;들어가기 전에&lt;/h2&gt;
+&lt;h2&gt;들어가기 전에&lt;/h2&gt;
 
 &lt;p&gt;본 포스트는 다음 블로그를 참조하여 작성하였습니다.&lt;/p&gt;
 
@@ -729,7 +729,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;사용-package&quot;&gt;사용 package&lt;/h2&gt;
+&lt;h2&gt;사용 package&lt;/h2&gt;
 
 &lt;p&gt;계속 말씀드린대로 이번에는 전희원 님의 &lt;a href=&quot;https://cran.r-project.org/web/packages/KoNLP/index.html&quot;&gt;KoNLP&lt;/a&gt;를 사용했습니다. &lt;a href=&quot;https://github.com/haven-jeon/NIADic&quot;&gt;NIA dictionary&lt;/a&gt;를 활용합니다.&lt;/p&gt;
 
@@ -745,7 +745,7 @@
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;h3 id=&quot;크로울러&quot;&gt;크로울러&lt;/h3&gt;
+&lt;h3&gt;크로울러&lt;/h3&gt;
 
 &lt;p&gt;이번에도 &lt;a href=&quot;https://github.com/hadley/rvest&quot;&gt;rvest&lt;/a&gt;로 진행합니다. 코드가 상당히 간단한데, 네이버 대문에서 블로그를 검색하면 블로그 포스트의 첫 세 줄 정도를 제목, 이미지와 함께 보여주는 페이지를 긁어오는 방식입니다. 중간의 &lt;code class=&quot;highlighter-rouge&quot;&gt;css='.sh_blog_passage'&lt;/code&gt;가 블로그 본문을 간단히 제시하는 부분을 추출하는 부분이 되겠습니다. 각 블로그를 다 들어가서 원문을 다 가져와야 하는 거 아니냐, 라고 물어보실 만도 한데, 동시출현 네트워크의 구성 상 각 텍스트가 긴 것 보다는 텍스트의 수가 많은 것이 좋습니다. 예컨대 트윗을 분석하거나, 논문의 제목 또는 초록을 분석하는 데에 쓸만합니다. 그 이유는, 텍스트가 길면 동시에 출현하는 단어도 너무 많아지기 때문에, 연관성을 확인하기 어려워지기 때문입니다. 이번에는 “텍스트 분석”을 검색어로 사용했어요.&lt;/p&gt;
 
@@ -767,7 +767,7 @@
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;h2 id=&quot;tokenizing&quot;&gt;Tokenizing&lt;/h2&gt;
+&lt;h2&gt;Tokenizing&lt;/h2&gt;
 
 &lt;p&gt;이어 텍스트에서 원하는 형태소를 추출합니다. 이번에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;KoNLP&lt;/code&gt;의 &lt;code class=&quot;highlighter-rouge&quot;&gt;SimplePos22&lt;/code&gt; 함수를 이용하여 tagging한 후, 그 중 형태소 분류가 N, P로 시작하는 것만을 수집하였습니다. 한 글자인 경우(대명사 등)는 단어 네트워크에서는 해석이 모호하기 때문에 한꺼번에 제외시킬 것입니다. 형태소를 골라내는 &lt;code class=&quot;highlighter-rouge&quot;&gt;ko_words&lt;/code&gt; 함수를 만들고, 수집한 텍스트에서 기호 등을 제거한 뒤 &lt;code class=&quot;highlighter-rouge&quot;&gt;Map&lt;/code&gt; 함수로 전체에 적용했습니다.&lt;/p&gt;
 
@@ -830,7 +830,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;동시출현-매트릭스-생성&quot;&gt;동시출현 매트릭스 생성&lt;/h2&gt;
+&lt;h2&gt;동시출현 매트릭스 생성&lt;/h2&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tm&lt;/code&gt; package를 통해 &lt;a href=&quot;https://en.wikipedia.org/wiki/Document-term_matrix&quot;&gt;Term-Document Matrix&lt;/a&gt;를 만듭니다. Term-Document Matrix는 각 단어가 행을, 각 텍스트가 열을 이루는 구조를 지닙니다(transpose하면 Document-Term Matrix가 되지요). 이를 만들기 위한 함수 &lt;code class=&quot;highlighter-rouge&quot;&gt;TermDocumentMatrix&lt;/code&gt;에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;wordLengths&lt;/code&gt;를 4 이상, 10 이하로 잡으면 한글은 하나에 두 글자로 취급하기 때문에 두 글자 이상 다섯 글자 이하의 단어만을 선정하게 됩니다. 동시출현 매트릭스를 생성하는 데에 있어서 또 중요한 parameter 중 하나가 &lt;code class=&quot;highlighter-rouge&quot;&gt;weighting=weightBin&lt;/code&gt;인데요, 이 경우 해당 단어가 텍스트에 출현하면 1, 아니면 0을 반환합니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;weightTf&lt;/code&gt;는 출현하는 갯수만큼 표시하기 때문에, 동시출현 매트릭스를 만들 때 값이 너무 커지게 됩니다.&lt;/p&gt;
 
@@ -855,7 +855,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;시각화-1-qgraph&quot;&gt;시각화 1. qgraph&lt;/h2&gt;
+&lt;h2&gt;시각화 1. qgraph&lt;/h2&gt;
 
 &lt;p&gt;먼저 &lt;code class=&quot;highlighter-rouge&quot;&gt;qgraph&lt;/code&gt;로 그려볼게요. qgraph는 별도로 폰트 설정 parameter가 없어서, &lt;code class=&quot;highlighter-rouge&quot;&gt;par&lt;/code&gt;에 먼저 넣어줍니다. 저도 아직 해당 package에 관한 이해가 부족해서, 좀 더 살펴보아야 할 것 같아요. &lt;code class=&quot;highlighter-rouge&quot;&gt;threshold&lt;/code&gt;로 작은 연결은 날려주고, 중요한 것만 놓아두었습니다.&lt;/p&gt;
 
@@ -872,7 +872,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;시각화-2-networkd3&quot;&gt;시각화 2. networkD3&lt;/h2&gt;
+&lt;h2&gt;시각화 2. networkD3&lt;/h2&gt;
 
 &lt;p&gt;좀 더 다양한 시각화를 위해 &lt;a href=&quot;https://christophergandrud.github.io/networkD3/&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;networkD3&lt;/code&gt; package&lt;/a&gt;를 살펴볼게요. 이건 &lt;code class=&quot;highlighter-rouge&quot;&gt;D3.js&lt;/code&gt;로 그래프를 만들어 줍니다. 인터넷에서 interactive visualization이 가능한 장점이 있고, 쉽게 (&lt;code class=&quot;highlighter-rouge&quot;&gt;igraph&lt;/code&gt;에 비해) 시각화를 할 수 있다는 장점이 있습니다.&lt;/p&gt;
 
@@ -922,7 +922,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;마치며&quot;&gt;마치며&lt;/h2&gt;
+&lt;h2&gt;마치며&lt;/h2&gt;
 
 &lt;p&gt;이번에는 동시출현 매트릭스 형성, 그리고 간단하게 시각화하는 방법을 확인해 보았습니다. 요새 신문기사 등에 자주 등장하는 방법이고 연구조사방법론에서도 어느 정도 자리를 잡고 있는 것 같아요. 연구에 활용하려면 군집 분석 등을 추가하면 여러 각도에서 분석이 가능합니다. 다음 번에 좀 더 자세히 살펴볼게요.&lt;/p&gt;</content>
 
@@ -960,13 +960,13 @@
       
       <title type="html">환자 불편 사항 상담 자료 Word Vector로 분석해보기 (Semantic Analysis)</title>
       
-      <link href="https://junhewk.github.io/text/2017/07/18/customer-complaint/" rel="alternate" type="text/html" title="환자 불편 사항 상담 자료 Word Vector로 분석해보기 (Semantic Analysis)" />
-      <published>2017-07-18T09:28:00-04:00</published>
-      <updated>2017-07-18T09:28:00-04:00</updated>
-      <id>https://junhewk.github.io/text/2017/07/18/customer-complaint</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2017/07/18/customer-complaint/">&lt;p&gt;이번에는 &lt;a href=&quot;http://www.1372.go.kr&quot;&gt;한국 소비자상담센터&lt;/a&gt;의 상담 자료를 Word Vector로 분석해 보려고 합니다. &lt;a href=&quot;/2017/06/18/single-word-analysis-korean-poem/&quot;&gt;지난 번 글&lt;/a&gt;에서 말씀드린 작업 중에서, 감정 사전 번역 후 하나씩 형태소 사전과 매칭하는 작업을 진행 중입니다만 생각보다 손이 많이 가네요. 일단 다른 작업부터 하나 해 보았습니다. &lt;a href=&quot;http://www.1372.go.kr/contents/include.ccn?gSiteCode=2&amp;amp;gMenuCode=4&amp;amp;nMenuCode=13&quot;&gt;소비자상담센터 - 상담조회 - 상담현황조회&lt;/a&gt;에는 서비스 불편 사항에 관한 여러 가지 상담 내용과 응답이 올라와 있습니다. 그 중에는 &lt;a href=&quot;http://www.1372.go.kr/contents/include.ccn?gSiteCode=2&amp;amp;gMenuCode=4&amp;amp;nMenuCode=13&amp;amp;mPart=&quot;&gt;의료서비스&lt;/a&gt;도 있고요. 2010년부터 지금까지 상담한 내용이 올라와 있고, 질의와 응답이 모두 올라와 있어요. &lt;a href=&quot;http://www.1372.go.kr/contents/include.ccn?gSiteCode=2&amp;amp;gMenuCode=4&amp;amp;nMenuCode=6&quot;&gt;모범 상담 조회&lt;/a&gt;에는 만족도도 표시되어 있으니 supervised learning도 해볼 수 있을 것 같고요. 오늘은 일단, 질문만 모두 모아서 word vector로 바꾸고, 어떤 작업들이 가능한지만 살펴볼 것입니다. 제가 이 자료에서 찾아보려는 것은 의과와는 구분되는 치과의 특성인데, 문제에 맞는 좋은 자료라고 생각합니다. 이 결과는 다음번에 소개드리겠습니다.&lt;/p&gt;
+      <link href="http://localhost:4000/text/2017/07/18/customer-complaint/" rel="alternate" type="text/html" title="환자 불편 사항 상담 자료 Word Vector로 분석해보기 (Semantic Analysis)" />
+      <published>2017-07-18T13:28:00+00:00</published>
+      <updated>2017-07-18T13:28:00+00:00</updated>
+      <id>http://localhost:4000/text/2017/07/18/customer-complaint</id>
+      <content type="html" xml:base="http://localhost:4000/text/2017/07/18/customer-complaint/">&lt;p&gt;이번에는 &lt;a href=&quot;http://www.1372.go.kr&quot;&gt;한국 소비자상담센터&lt;/a&gt;의 상담 자료를 Word Vector로 분석해 보려고 합니다. &lt;a href=&quot;/2017/06/18/single-word-analysis-korean-poem/&quot;&gt;지난 번 글&lt;/a&gt;에서 말씀드린 작업 중에서, 감정 사전 번역 후 하나씩 형태소 사전과 매칭하는 작업을 진행 중입니다만 생각보다 손이 많이 가네요. 일단 다른 작업부터 하나 해 보았습니다. &lt;a href=&quot;http://www.1372.go.kr/contents/include.ccn?gSiteCode=2&amp;amp;gMenuCode=4&amp;amp;nMenuCode=13&quot;&gt;소비자상담센터 - 상담조회 - 상담현황조회&lt;/a&gt;에는 서비스 불편 사항에 관한 여러 가지 상담 내용과 응답이 올라와 있습니다. 그 중에는 &lt;a href=&quot;http://www.1372.go.kr/contents/include.ccn?gSiteCode=2&amp;amp;gMenuCode=4&amp;amp;nMenuCode=13&amp;amp;mPart=&quot;&gt;의료서비스&lt;/a&gt;도 있고요. 2010년부터 지금까지 상담한 내용이 올라와 있고, 질의와 응답이 모두 올라와 있어요. &lt;a href=&quot;http://www.1372.go.kr/contents/include.ccn?gSiteCode=2&amp;amp;gMenuCode=4&amp;amp;nMenuCode=6&quot;&gt;모범 상담 조회&lt;/a&gt;에는 만족도도 표시되어 있으니 supervised learning도 해볼 수 있을 것 같고요. 오늘은 일단, 질문만 모두 모아서 word vector로 바꾸고, 어떤 작업들이 가능한지만 살펴볼 것입니다. 제가 이 자료에서 찾아보려는 것은 의과와는 구분되는 치과의 특성인데, 문제에 맞는 좋은 자료라고 생각합니다. 이 결과는 다음번에 소개드리겠습니다.&lt;/p&gt;
 
-&lt;h2 id=&quot;word-vector&quot;&gt;Word Vector&lt;/h2&gt;
+&lt;h2&gt;Word Vector&lt;/h2&gt;
 
 &lt;p&gt;단어의 의미란 무엇인가,라고 할 때 답하기가 막막하죠. 언어학에서도 촘스키 계열의 생성 의미론과 레이코프 계열의 인지 의미론이 계속 대립 중인 것으로 알고 있고(단견이니 정확한 내용 알려주시면 감사하겠습니다), 철학 쪽에도 영미 철학의 크립키의 고정 지시자, 프랑스 철학의 데리다의 차연 개념이 서로 양립하기 어려운 선을 긋고 있는 것 같습니다. 일단 어려운 이야기는 넘어가고, 컴퓨터에서 어떻게 언어의 의미를 표현할 것인가에 관해 고민해 볼까요.&lt;/p&gt;
 
@@ -991,7 +991,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;라이브러리&quot;&gt;라이브러리&lt;/h2&gt;
+&lt;h2&gt;라이브러리&lt;/h2&gt;
 
 &lt;p&gt;이번에는 &lt;a href=&quot;https://github.com/bmschmidt/wordVectors&quot;&gt;wordVectors&lt;/a&gt;, &lt;a href=&quot;https://cran.r-project.org/web/packages/tsne/tsne.pdf&quot;&gt;tsne&lt;/a&gt;, &lt;a href=&quot;https://cran.r-project.org/web/packages/ggdendro/index.html&quot;&gt;ggdendro&lt;/a&gt;가 추가되었습니다. wordVectors package가 이번 분석의 핵심이 될 것 같고, 나머지는 시각화를 위한 패키지입니다.&lt;/p&gt;
 
@@ -1009,7 +1009,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;크로울러&quot;&gt;크로울러&lt;/h2&gt;
+&lt;h2&gt;크로울러&lt;/h2&gt;
 
 &lt;p&gt;먼저 소비자상담센터의 텍스트를 긁어와야 합니다. &lt;a href=&quot;http://scrapy.org&quot;&gt;Scrapy&lt;/a&gt;로 하면 빠르겠지만, 고작 1800개 긁어오기에는 과한 감도 있는 것 같고, R로 해보자 하는 마음에 그냥 &lt;a href=&quot;https://github.com/hadley/rvest&quot;&gt;rvest&lt;/a&gt;로 진행했습니다.&lt;/p&gt;
 
@@ -1085,7 +1085,7 @@
 
 &lt;p&gt;(식별 가능성이 있는 단어는 삭제했습니다.)&lt;/p&gt;
 
-&lt;h2 id=&quot;자료-구축&quot;&gt;자료 구축&lt;/h2&gt;
+&lt;h2&gt;자료 구축&lt;/h2&gt;
 
 &lt;p&gt;모은 자료 중 상담 내용만 뽑아서, 전처리를 합니다. 치과 중심으로 분석할 예정이기 때문에, “인플란트, 임플런트, 임플랜트” 등을 “임플란트”로, “스켈링, 스캘링” 등을 “스케일링”으로 바꾸는 작업을 먼저 진행했습니다. 다음, 시간, 개수 등에 관해 토큰 처리를 하고 나머지 숫자와 “ㅋㅋ”, “ㅜㅜ” 등 한글 이용한 이모티콘은 삭제했습니다. 이것도 다음번엔 토큰 처리하면 더 좋겠네요.&lt;/p&gt;
 
@@ -1160,7 +1160,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;word-vector-1&quot;&gt;Word Vector&lt;/h2&gt;
+&lt;h2&gt;Word Vector&lt;/h2&gt;
 
 &lt;p&gt;Schmidt의 wordVectors package는 Jian Li의 word2vec code를 이용해서 VectorSpace model을 구축합니다. 모형 구축을 위해서는 텍스트 파일 저장 후, &lt;code class=&quot;highlighter-rouge&quot;&gt;train_word2vec&lt;/code&gt; 함수를 통해 모형을 구축하는 과정을 거칩니다. 몇 개의 벡터로 구성할지(&lt;code class=&quot;highlighter-rouge&quot;&gt;vectors&lt;/code&gt;), 앞 뒤 몇 개의 단어를 볼 건지(&lt;code class=&quot;highlighter-rouge&quot;&gt;window&lt;/code&gt;) 등이 중요한데요, 텍스트 자료의 model tuning은 지표가 없어서 정답이 있다고 보긴 어렵습니다.&lt;/p&gt;
 
@@ -1179,7 +1179,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;유사성-검색&quot;&gt;유사성 검색&lt;/h2&gt;
+&lt;h2&gt;유사성 검색&lt;/h2&gt;
 
 &lt;p&gt;유사 단어 검색부터 해보는 게 좋겠네요.&lt;/p&gt;
 
@@ -1243,7 +1243,7 @@
 
 &lt;p&gt;“스케일링”의 경우는 유사도가 좀 낮습니다만, “레진(레지)”과 “충치”가 눈에 띄네요. “시리(시리다)”가 가장 높을 거라고 생각했는데 의외입니다. 레진이 문제가 됐거나, 스케일링 받으러 갔다 충치치료까지 반자의적으로 받게 된 것이 문제 제기 사유가 아닐까 생각해봅니다.&lt;/p&gt;
 
-&lt;h2 id=&quot;여러-단어를-통한-유사성-검색&quot;&gt;여러 단어를 통한 유사성 검색&lt;/h2&gt;
+&lt;h2&gt;여러 단어를 통한 유사성 검색&lt;/h2&gt;
 
 &lt;p&gt;여러 단어를 묶어서 유사 단어 검색도 할 수 있습니다. 치과 관련하여 생각나는 단어를 모아서 검색해볼까요?&lt;/p&gt;
 
@@ -1283,7 +1283,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;정렬&quot;&gt;정렬&lt;/h2&gt;
+&lt;h2&gt;정렬&lt;/h2&gt;
 
 &lt;p&gt;이번엔 특정 단어군을 모아 시각화해보려고 합니다. 보존 관련 단어인 “아말감”, “레지(레진)”, “신경”, “코아”와 유사한 단어를 모아 펼쳐볼까요.&lt;/p&gt;
 
@@ -1299,7 +1299,7 @@
 
 &lt;p&gt;원래는 모델에서 추출해 바로 &lt;code class=&quot;highlighter-rouge&quot;&gt;plot&lt;/code&gt;을 적용하면 되는데, 한글이 출력되지 않는다는 문제가 있습니다. 따라서, 코드에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;plot(mode=&quot;pca&quot;)&lt;/code&gt; 부분을 추출해서 직접 그려보았습니다. PCA 도표니 축을 그리면 좋은데, 단어 벡터는 축이 너무 많기 때문에(화살표 때문에 정신 없어서 아무것도 안보입니다) 단어들의 수평, 수직 관계를 살펴보시면 도움이 됩니다. 예컨대, “떼운”, “뜯어내”, “부서지”, “뚫” 같은 단어가 같은 수평 축에, “때우”, “탈락, “수복”, “재질” “금” 등이 같은 수직 축에 위치해 있는 걸 보면 이들이 비슷한 의미 계열에 있음을 생각해 볼 수 있습니다. 또, 비슷한 의미를 가지는 단어가 군집을 형성하게 됩니다. 예를 들면 좌측 하단에 “도자기”, “코니아”, “레지”, “크라운”, “금니”, “아말감”, “재료”의 군집이 보이네요.&lt;/p&gt;
 
-&lt;h2 id=&quot;군집-분석&quot;&gt;군집 분석&lt;/h2&gt;
+&lt;h2&gt;군집 분석&lt;/h2&gt;
 
 &lt;p&gt;그래서, 군집 분석입니다. 벡터를 200개로 설정했으니 축을 200개로 잡고, K-means algorithm으로 군집을 만들어보았습니다. 비슷한 중심점으로 모인 단어들을 보면 꽤 흥미롭습니다.&lt;/p&gt;
 
@@ -1368,7 +1368,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;중심-단어를-통한-시각화&quot;&gt;중심 단어를 통한 시각화&lt;/h2&gt;
+&lt;h2&gt;중심 단어를 통한 시각화&lt;/h2&gt;
 
 &lt;p&gt;중심 단어를 뽑아, 그 단어를 축으로 해 인접 단어를 시각화할 수 있습니다. 먼저 한 번 볼께요.&lt;/p&gt;
 
@@ -1393,7 +1393,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;유사도-통한-시각화&quot;&gt;유사도 통한 시각화&lt;/h2&gt;
+&lt;h2&gt;유사도 통한 시각화&lt;/h2&gt;
 
 &lt;p&gt;다음은 유사도를 기반으로 해 중요 단어를 추출하여, “치과” 의미 공간을 만들어 보겠습니다.&lt;/p&gt;
 
@@ -1435,7 +1435,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;마지막-t-sne&quot;&gt;마지막, t-SNE&lt;/h2&gt;
+&lt;h2&gt;마지막, t-SNE&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://lvdmaaten.github.io/tsne/&quot;&gt;t-SNE&lt;/a&gt;는 고차원 벡터를 시각화할 때 유용하게 사용할 수 있는 방법입니다. PCA보다도 훨씬 군집을 잘 보여주지요.&lt;/p&gt;
 
@@ -1459,7 +1459,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;마치며&quot;&gt;마치며&lt;/h2&gt;
+&lt;h2&gt;마치며&lt;/h2&gt;
 
 &lt;p&gt;일단 이번에는 Word Vector의 소개와, 어떤 결과를 만들 수 있는지만 확인해 보았습니다. 개인적으로 의과와는 구분되는 치과의 특징을 확인해보고 싶었는데 이 내용을 적으려면 너무 길어질 것 같네요. 다음번에 좀 더 세부적인 내용을 소개하도록 할게요!&lt;/p&gt;</content>
 
@@ -1497,17 +1497,17 @@
       
       <title type="html">Monkeylearn in R 소개 - 쉽게 텍스트 분석하기</title>
       
-      <link href="https://junhewk.github.io/text/2017/07/10/monkeylearn-in-R/" rel="alternate" type="text/html" title="Monkeylearn in R 소개 - 쉽게 텍스트 분석하기" />
-      <published>2017-07-10T06:10:20-04:00</published>
-      <updated>2017-07-10T06:10:20-04:00</updated>
-      <id>https://junhewk.github.io/text/2017/07/10/monkeylearn-in-R</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2017/07/10/monkeylearn-in-R/">&lt;p&gt;&lt;a href=&quot;http://monkeylearn.com&quot;&gt;Monkeylearn&lt;/a&gt;은 머신 러닝을 통한 텍스트 분석 결과를 제시하고, 만든 모델을 API로 제공하여 이후 자료에 계속적으로 적용할 수 있도록 하는 서비스를 제공합니다. 복잡한 분석은 할 수 없는 대신, 대량의 자료를 쉬운 인터페이스로 처리할 수 있다는 것과, 한 번 모델을 구축하면 이후에 계속 자료를 분석할 수 있는 시스템을 쉽게 만들 수 있다는 장점이 있습니다. 한국어도 지원하고, 간단히 돌려보니 unigram &amp;amp; bigram으로 나름 괜찮은 분석 모형을 만들 수 있어서 다음에 Python &lt;a href=&quot;https://scrapy.org&quot;&gt;Scrapy&lt;/a&gt;로 한글 사이트 크롤링 및 분석 모형 제작 포스트를 올려보도록 하겠습니다. 오늘은 먼저, R에서 Monkeylearn API를 사용할 수 있도록 만들어 놓은 &lt;a href=&quot;https://github.com/ropensci/monkeylearn&quot;&gt;ropensci/monkeylearn package&lt;/a&gt;를 소개하도록 하겠습니다.&lt;/p&gt;
+      <link href="http://localhost:4000/text/2017/07/10/monkeylearn-in-R/" rel="alternate" type="text/html" title="Monkeylearn in R 소개 - 쉽게 텍스트 분석하기" />
+      <published>2017-07-10T10:10:20+00:00</published>
+      <updated>2017-07-10T10:10:20+00:00</updated>
+      <id>http://localhost:4000/text/2017/07/10/monkeylearn-in-R</id>
+      <content type="html" xml:base="http://localhost:4000/text/2017/07/10/monkeylearn-in-R/">&lt;p&gt;&lt;a href=&quot;http://monkeylearn.com&quot;&gt;Monkeylearn&lt;/a&gt;은 머신 러닝을 통한 텍스트 분석 결과를 제시하고, 만든 모델을 API로 제공하여 이후 자료에 계속적으로 적용할 수 있도록 하는 서비스를 제공합니다. 복잡한 분석은 할 수 없는 대신, 대량의 자료를 쉬운 인터페이스로 처리할 수 있다는 것과, 한 번 모델을 구축하면 이후에 계속 자료를 분석할 수 있는 시스템을 쉽게 만들 수 있다는 장점이 있습니다. 한국어도 지원하고, 간단히 돌려보니 unigram &amp;amp; bigram으로 나름 괜찮은 분석 모형을 만들 수 있어서 다음에 Python &lt;a href=&quot;https://scrapy.org&quot;&gt;Scrapy&lt;/a&gt;로 한글 사이트 크롤링 및 분석 모형 제작 포스트를 올려보도록 하겠습니다. 오늘은 먼저, R에서 Monkeylearn API를 사용할 수 있도록 만들어 놓은 &lt;a href=&quot;https://github.com/ropensci/monkeylearn&quot;&gt;ropensci/monkeylearn package&lt;/a&gt;를 소개하도록 하겠습니다.&lt;/p&gt;
 
 &lt;p&gt;아래 코드는 package github에 올라와 있는 것을 그대로 따라한 것입니다.&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;설치&quot;&gt;설치&lt;/h2&gt;
+&lt;h2&gt;설치&lt;/h2&gt;
 
 &lt;p&gt;아직 cran에 올라와 있지는 않습니다. 혹시 devtools package가 없으시면, 먼저 설치하셔야 합니다. &lt;a href=&quot;https://github.com/hadley/devtools&quot;&gt;devtools&lt;/a&gt;는 R package 개발과 설치를 유용하게 만들어주는 도구입니다.&lt;/p&gt;
 
@@ -1516,7 +1516,7 @@
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;h2 id=&quot;package-불러오기&quot;&gt;package 불러오기&lt;/h2&gt;
+&lt;h2&gt;package 불러오기&lt;/h2&gt;
 
 &lt;p&gt;설치하셨으면, monkeylearn 홈페이지를 방문하셔서 API key를 발급받아야 합니다. 홈페이지 가입 후 [My Account] -&amp;gt; [API Keys]로 들어가면 40 자리의 키를 보실 수 있습니다. 하나, monkeylearn package 이용에서 중요한 점 하나는, 키를 환경 변수로 올려야 한다는 점입니다. 환경변수로 등록하기 위해서는, &lt;code class=&quot;highlighter-rouge&quot;&gt;Sys.setenv()&lt;/code&gt; 함수를 사용합니다.&lt;/p&gt;
 
@@ -1532,7 +1532,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;nernamed-entity-recognition-예제&quot;&gt;NER(Named-Entity Recognition) 예제&lt;/h2&gt;
+&lt;h2&gt;NER(Named-Entity Recognition) 예제&lt;/h2&gt;
 
 &lt;p&gt;먼저 텍스트에서 고유명사를 추출하는 예제를 진행해볼 것입니다. NER이라고 부르는 이 과정은, 텍스트에 위치하는 고유명사를 뽑아내는 방식입니다. openNLP package로도 가능하지만, 다음 기회에 한번 따로 다뤄볼게요. monkeylearn으로는 상당히 쉽게 고유명사를 추출할 수 있습니다. 자료가 영어가 죄송해요. &lt;code class=&quot;highlighter-rouge&quot;&gt;extractor_id&lt;/code&gt;가 뭔지는 다다음 절에서 설명하겠습니다. 출력값의 header로 홈페이지와 통신 상태도 확인할 수 있네요. 텍스트에서 지역명, 사람 이름을 추출해서 테이블로 돌려주는 것을 볼 수 있습니다. 참, 슬프게도 한국어는 지원하지 않아요.&lt;/p&gt;
 
@@ -1572,7 +1572,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;keyword-추출-예제&quot;&gt;Keyword 추출 예제&lt;/h2&gt;
+&lt;h2&gt;Keyword 추출 예제&lt;/h2&gt;
 
 &lt;p&gt;이번에는 텍스트에서 키워드를 추출하는 예제입니다. 마찬가지로 영어만 가능합니다. 키워드 갯수를 설정할 수 있으며, 결과에 관련도가 수치로 제시되고 있음을 볼 수 있습니다.&lt;/p&gt;
 
@@ -1627,7 +1627,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;extractor&quot;&gt;Extractor&lt;/h2&gt;
+&lt;h2&gt;Extractor&lt;/h2&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;extractor_id&lt;/code&gt;에 어떤 값을 넣느냐에 따라, 다른 결과를 보여줍니다. 위에서 본 것처럼 &lt;code class=&quot;highlighter-rouge&quot;&gt;extractor_id=&quot;ex_isnnZRbS&quot;&lt;/code&gt;는 고유 명사 추출기입니다. 또, &lt;code class=&quot;highlighter-rouge&quot;&gt;extractor_id=&quot;ex_y7BPYzNG&quot;&lt;/code&gt;는 키워드 추출기입니다. 아쉽게 둘다 영어만 지원합니다.&lt;/p&gt;
 
@@ -1694,7 +1694,7 @@ Their argument to the room of technologically inclined students was that Wall St
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;분류-작업-classifier&quot;&gt;분류 작업 (Classifier)&lt;/h2&gt;
+&lt;h2&gt;분류 작업 (Classifier)&lt;/h2&gt;
 
 &lt;p&gt;다음은 분류기입니다. 사실 이 부분을 다루고 싶어서 글을 올립니다. 한글로도 작업이 가능하거든요. 다음 글에서 더 자세히 소개할게요. 일단 영어로 어떻게 돌아가는지 보겠습니다. 일단, 기본 레이블링입니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;category_id&lt;/code&gt;로 각 텍스트를 구분하고 있다는 점을 확인하실 필요가 있습니다. 첫 번째 텍스트는 “Dogs”, 두 번째 텍스트는 “Accessories”가 가장 큰 점수를 받았네요. 그 아래는 사용할 수 있는 분류기의 목록입니다.&lt;/p&gt;
 
@@ -1748,7 +1748,7 @@ Their argument to the room of technologically inclined students was that Wall St
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;언어-감지&quot;&gt;언어 감지&lt;/h2&gt;
+&lt;h2&gt;언어 감지&lt;/h2&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;classifier_id=&quot;cl_oJNMkt2V&quot;&lt;/code&gt;를 넣으면, 텍스트의 언어가 무엇인지 알려줍니다. 원 예시에, 한글도 하나 추가해볼게요.&lt;/p&gt;
 
@@ -1776,7 +1776,7 @@ Their argument to the room of technologically inclined students was that Wall St
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;신성-모독-언어-폭력-감지기&quot;&gt;신성 모독, 언어 폭력 감지기&lt;/h2&gt;
+&lt;h2&gt;신성 모독, 언어 폭력 감지기&lt;/h2&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;classifier_id=&quot;cl_KFXhoTdt&quot;&lt;/code&gt;로 확인할 수 있습니다. 마찬가지로 한국어는 아직 지원하지 않네요.&lt;/p&gt;
 
@@ -1798,7 +1798,7 @@ Their argument to the room of technologically inclined students was that Wall St
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;토픽-분류기-general-topic-classifier&quot;&gt;토픽 분류기 (General Topic Classifier)&lt;/h2&gt;
+&lt;h2&gt;토픽 분류기 (General Topic Classifier)&lt;/h2&gt;
 
 &lt;p&gt;마지막으로 관심 있으실 토픽 분류기입니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;classifier_id=&quot;cl_5icAVzKR&quot;&lt;/code&gt;로 가능하고, 의견 분류랑 마찬가지로 한글이 지원됩니다. (사전을 사용해야 하는 작업은 아직 지원하지 않는 반면, n-gram token으로 하는 작업은 40개 언어를 지원하고 있어요.) 다음 글에서, 좀 더 자세히 다뤄볼게요. 일단 예제입니다. 5개 카테고리가 나왔고, 첫 텍스트가 길어서 그런지 주로 동물로 분류되었네요. 참, 한글 분석을 위해서는 직접 분류를 정해주어야 합니다.&lt;/p&gt;
 
@@ -1824,7 +1824,7 @@ Their argument to the room of technologically inclined students was that Wall St
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;맺으며&quot;&gt;맺으며&lt;/h2&gt;
+&lt;h2&gt;맺으며&lt;/h2&gt;
 
 &lt;p&gt;텍스트 분석에서 활용할 수 있는 재미있는 API라서 소개해 보았습니다. 다음 글에서는 어떻게 인터넷의 글을 모아서 분석할 수 있는지를 소개해 보도록 하겠습니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;rvest&lt;/code&gt;랑 결합해서 소개할지, 크롤링은 &lt;code class=&quot;highlighter-rouge&quot;&gt;scrapy&lt;/code&gt;로 받을지는 조금 고민이네요. 곧 뵙겠습니다.&lt;/p&gt;</content>
 
@@ -1862,18 +1862,18 @@ Their argument to the room of technologically inclined students was that Wall St
       
       <title type="html">R에서 해보는 한국 일제강점기 시의 단어 분석</title>
       
-      <link href="https://junhewk.github.io/text/2017/06/18/single-word-analysis-korean-poem/" rel="alternate" type="text/html" title="R에서 해보는 한국 일제강점기 시의 단어 분석" />
-      <published>2017-06-18T09:47:00-04:00</published>
-      <updated>2017-06-18T09:47:00-04:00</updated>
-      <id>https://junhewk.github.io/text/2017/06/18/single-word-analysis-korean-poem</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2017/06/18/single-word-analysis-korean-poem/">&lt;ul&gt;
+      <link href="http://localhost:4000/text/2017/06/18/single-word-analysis-korean-poem/" rel="alternate" type="text/html" title="R에서 해보는 한국 일제강점기 시의 단어 분석" />
+      <published>2017-06-18T13:47:00+00:00</published>
+      <updated>2017-06-18T13:47:00+00:00</updated>
+      <id>http://localhost:4000/text/2017/06/18/single-word-analysis-korean-poem</id>
+      <content type="html" xml:base="http://localhost:4000/text/2017/06/18/single-word-analysis-korean-poem/">&lt;ul&gt;
   &lt;li&gt;본 포스트는 &lt;a href=&quot;http://blog.eighty20.co.za//package%20exploration/2017/06/12/sentiment-blog-post/&quot;&gt;Single World Analysis of Early 19th Century Poetry Using tidytext&lt;/a&gt;의 내용을 수정, 발전시킨 것입니다. 분석 방법은 기본적으로 모두 원 블로그에서 따온 것임을 밝힙니다.&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://freesearch.pe.kr&quot;&gt;전희원&lt;/a&gt;님의 &lt;a href=&quot;https://github.com/haven-jeon/KoNLP&quot;&gt;KoNLP&lt;/a&gt;는 정말 멋진 패키지이지만, 본문에서는 적용하지 않았습니다. 다음번 포스팅에는 독자분들이 좀 더 쉽게 접근하실 수 있도록 KoNLP를 통한 분석도 싣도록 하겠습니다.&lt;/li&gt;
   &lt;li&gt;여기에서는 &lt;a href=&quot;http://www.shineware.co.kr/products/komoran/&quot;&gt;코모란 3.0&lt;/a&gt;을 적용했습니다. 아쉽게도 R 포팅은 없기 때문에, &lt;a href=&quot;https://cran.r-project.org/web/packages/rJava/index.html&quot;&gt;rJava&lt;/a&gt; interface를 통해 Komoran 3.0 Java Archive를 직접 불러와 태깅했습니다.&lt;/li&gt;
   &lt;li&gt;본문에서 사용한 감정사전은 두 종류입니다. 하나는 &lt;a href=&quot;http://saifmohammad.com/WebPages/lexicons.html&quot;&gt;NRC Emoticon Lexicon&lt;/a&gt;이며, 다른 하나는 &lt;a href=&quot;https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html&quot;&gt;Bing Opinion Lexicon&lt;/a&gt;입니다. 전자는 Saif Mohammad에게 이메일을 통해 사용 허가를 받았으며, 후자는 자료가 공개 형태로 올라와 있어 특별히 허가를 받지는 않았습니다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;tidy-text-낱개-단어-분석이란&quot;&gt;Tidy text? 낱개 단어 분석이란?&lt;/h3&gt;
+&lt;h3&gt;Tidy text? 낱개 단어 분석이란?&lt;/h3&gt;
 
 &lt;p&gt;최근 자연어 처리(NLP, &lt;em&gt;Natural Language Process&lt;/em&gt;)에서 가장 주목받는 기술은 &lt;em&gt;Word Embedding&lt;/em&gt;일 것 같습니다. 단어를 벡터 공간에 배치하여 딥러닝에 적합한 자료 형태로 텍스트를 변형시키는 방법으로 주목받은 &lt;em&gt;Word Embedding&lt;/em&gt;은 뛰어난 기법임에는 틀림없지만, 아직 개별 단어 또는 글뭉치의 분석에 적용할 방법은 잘 모르겠습니다. 예컨대 글뭉치의 주제 분석에 활용하는 LDA(&lt;em&gt;Latent Dirichlet Analysis&lt;/em&gt;)에 &lt;em&gt;Word Embedding&lt;/em&gt;을 적용하는 LDA2Vec 등이 제시었지만 성공적이라고 보기는 어려운 것 같습니다.&lt;/p&gt;
 
@@ -1951,7 +1951,7 @@ Their argument to the room of technologically inclined students was that Wall St
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;진행-순서-한국-근대시-감정분석&quot;&gt;진행 순서: 한국 근대시 감정분석&lt;/h3&gt;
+&lt;h3&gt;진행 순서: 한국 근대시 감정분석&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://biblio.endy.pe.kr/&quot;&gt;http://biblio.endy.pe.kr/&lt;/a&gt; scraping module 제작&lt;/li&gt;
@@ -1962,7 +1962,7 @@ Their argument to the room of technologically inclined students was that Wall St
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;한국-근대시-도서관-scraping-module&quot;&gt;한국 근대시 도서관 scraping module&lt;/h3&gt;
+&lt;h3&gt;한국 근대시 도서관 scraping module&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://biblio.endy.pe.kr/&quot;&gt;한국 근대시 도서관&lt;/a&gt;에는 저작권이 만료된 시집 김억 &lt;시선&gt;, 윤동주 &lt;하늘과 바람과=&quot;&quot; 별과=&quot;&quot; 시=&quot;&quot;&gt;, 한용운 &lt;님의 침묵=&quot;&quot;&gt;과 시 최남선 &lt;해에게서 소년에게=&quot;&quot;&gt;가 게제되어 있습니다. 저작권 만료로 인터넷에 공개되어 있는 시선이므로, 분석하는 데에 문제는 없습니다. 단, 총 31편으로 자료가 부족하다는 단점이 있으며, 다음번에는 [위키문헌](https://ko.wikisource.org/wiki/위키문헌:대문) scraping module을 통해 더 많은 텍스트를 분석해 보도록 하겠습니다.&lt;/해에게서&gt;&lt;/님의&gt;&lt;/하늘과&gt;&lt;/시선&gt;&lt;/p&gt;
 
@@ -2100,7 +2100,7 @@ Their argument to the room of technologically inclined students was that Wall St
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;emotion-lexicon과-komoran-30&quot;&gt;Emotion lexicon과 Komoran 3.0&lt;/h3&gt;
+&lt;h3&gt;Emotion lexicon과 Komoran 3.0&lt;/h3&gt;
 
 &lt;p&gt;서두에 말씀드린대로, NRC emotion lexicon과 Bing opinion lexicon을 사용하여 감정 분석에 들어갑니다. 제작년에는 &lt;a href=&quot;http://openhangul.com&quot;&gt;오픈한글&lt;/a&gt;에서 한글 감정 어휘를 확인할 수 있었는데, 지금은 서비스가 중단되어 사용할 수 없습니다. 추후에 기회가 있으면 다른 방식으로 감정어 사전을 만들어볼 수 있었으면 좋겠습니다.&lt;/p&gt;
 
@@ -2129,7 +2129,7 @@ Their argument to the room of technologically inclined students was that Wall St
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;시-원문-분석&quot;&gt;시 원문 분석&lt;/h3&gt;
+&lt;h3&gt;시 원문 분석&lt;/h3&gt;
 
 &lt;p&gt;일단 시를 불러와야 겠죠? 먼저 Bing과 NRC lexicon을 사용하여 점수를 구하는 함수부터 살펴보겠습니다.&lt;/p&gt;
 
@@ -2320,7 +2320,7 @@ Their argument to the room of technologically inclined students was that Wall St
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;display&quot;&gt;Display&lt;/h3&gt;
+&lt;h3&gt;Display&lt;/h3&gt;
 
 &lt;p&gt;먼저 시가 쓰인 일자별로 보겠습니다.&lt;/p&gt;
 
@@ -2506,7 +2506,7 @@ Their argument to the room of technologically inclined students was that Wall St
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;정리하며&quot;&gt;정리하며&lt;/h3&gt;
+&lt;h3&gt;정리하며&lt;/h3&gt;
 
 &lt;p&gt;분석에서 아쉬운 점이 많습니다.&lt;/p&gt;
 

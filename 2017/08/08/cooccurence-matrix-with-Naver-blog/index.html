@@ -11,13 +11,16 @@
   
   <title>네이버 블로그로 동시출현단어 분석 (co-occurence network anlysis)</title>
   <meta name="description" content="네이버 블로그 crawling 및 동시출현단어 행렬 구축을 통한 네트워크 분석을 다룹니다.">
-  <meta name="keywords" content="textRcooccurence matrixnetwork analysisnetworkD3naver blog">
+  
+    
+    <meta name="keywords" content="text,R,cooccurence matrix,network analysis,networkD3,naver blog">
+  
 
   <link rel="stylesheet" href="/text/assets/main.css">
-  <link rel="canonical" href="https://junhewk.github.io/text/2017/08/08/cooccurence-matrix-with-Naver-blog/">
+  <link rel="canonical" href="http://localhost:4000/text/2017/08/08/cooccurence-matrix-with-Naver-blog/">
   
   
-  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="https://junhewk.github.io/text/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="http://localhost:4000/text/feed.xml">
 
   
 
@@ -92,8 +95,22 @@
     
       <h1 class="post-title" itemprop="name headline">네이버 블로그로 동시출현단어 분석 (co-occurence network anlysis)</h1>
     
-    <p class="post-meta"><time datetime="2017-08-08T07:35:00-04:00" itemprop="datePublished">Aug 8, 2017</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Junhewk Kim</span></span> • 
+    <p class="post-meta"><time datetime="2017-08-08T11:35:00+00:00" itemprop="datePublished">Aug 8, 2017</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Junhewk Kim</span></span> • 
   
+  
+    
+  
+    
+  
+    
+  
+    
+      <a href="/text/categories/cooccurence/">cooccurence</a>
+    
+  
+    
+  
+    
   
 
 </p>
@@ -104,7 +121,7 @@
 
 <hr />
 
-<h2 id="들어가기-전에">들어가기 전에</h2>
+<h2>들어가기 전에</h2>
 
 <p>본 포스트는 다음 블로그를 참조하여 작성하였습니다.</p>
 
@@ -116,7 +133,7 @@
 
 <hr />
 
-<h2 id="사용-package">사용 package</h2>
+<h2>사용 package</h2>
 
 <p>계속 말씀드린대로 이번에는 전희원 님의 <a href="https://cran.r-project.org/web/packages/KoNLP/index.html">KoNLP</a>를 사용했습니다. <a href="https://github.com/haven-jeon/NIADic">NIA dictionary</a>를 활용합니다.</p>
 
@@ -132,7 +149,7 @@
 </span></code></pre>
 </div>
 
-<h3 id="크로울러">크로울러</h3>
+<h3>크로울러</h3>
 
 <p>이번에도 <a href="https://github.com/hadley/rvest">rvest</a>로 진행합니다. 코드가 상당히 간단한데, 네이버 대문에서 블로그를 검색하면 블로그 포스트의 첫 세 줄 정도를 제목, 이미지와 함께 보여주는 페이지를 긁어오는 방식입니다. 중간의 <code class="highlighter-rouge">css='.sh_blog_passage'</code>가 블로그 본문을 간단히 제시하는 부분을 추출하는 부분이 되겠습니다. 각 블로그를 다 들어가서 원문을 다 가져와야 하는 거 아니냐, 라고 물어보실 만도 한데, 동시출현 네트워크의 구성 상 각 텍스트가 긴 것 보다는 텍스트의 수가 많은 것이 좋습니다. 예컨대 트윗을 분석하거나, 논문의 제목 또는 초록을 분석하는 데에 쓸만합니다. 그 이유는, 텍스트가 길면 동시에 출현하는 단어도 너무 많아지기 때문에, 연관성을 확인하기 어려워지기 때문입니다. 이번에는 “텍스트 분석”을 검색어로 사용했어요.</p>
 
@@ -154,7 +171,7 @@
 </span></code></pre>
 </div>
 
-<h2 id="tokenizing">Tokenizing</h2>
+<h2>Tokenizing</h2>
 
 <p>이어 텍스트에서 원하는 형태소를 추출합니다. 이번에는 <code class="highlighter-rouge">KoNLP</code>의 <code class="highlighter-rouge">SimplePos22</code> 함수를 이용하여 tagging한 후, 그 중 형태소 분류가 N, P로 시작하는 것만을 수집하였습니다. 한 글자인 경우(대명사 등)는 단어 네트워크에서는 해석이 모호하기 때문에 한꺼번에 제외시킬 것입니다. 형태소를 골라내는 <code class="highlighter-rouge">ko_words</code> 함수를 만들고, 수집한 텍스트에서 기호 등을 제거한 뒤 <code class="highlighter-rouge">Map</code> 함수로 전체에 적용했습니다.</p>
 
@@ -217,7 +234,7 @@
 
 <hr />
 
-<h2 id="동시출현-매트릭스-생성">동시출현 매트릭스 생성</h2>
+<h2>동시출현 매트릭스 생성</h2>
 
 <p><code class="highlighter-rouge">tm</code> package를 통해 <a href="https://en.wikipedia.org/wiki/Document-term_matrix">Term-Document Matrix</a>를 만듭니다. Term-Document Matrix는 각 단어가 행을, 각 텍스트가 열을 이루는 구조를 지닙니다(transpose하면 Document-Term Matrix가 되지요). 이를 만들기 위한 함수 <code class="highlighter-rouge">TermDocumentMatrix</code>에서 <code class="highlighter-rouge">wordLengths</code>를 4 이상, 10 이하로 잡으면 한글은 하나에 두 글자로 취급하기 때문에 두 글자 이상 다섯 글자 이하의 단어만을 선정하게 됩니다. 동시출현 매트릭스를 생성하는 데에 있어서 또 중요한 parameter 중 하나가 <code class="highlighter-rouge">weighting=weightBin</code>인데요, 이 경우 해당 단어가 텍스트에 출현하면 1, 아니면 0을 반환합니다. <code class="highlighter-rouge">weightTf</code>는 출현하는 갯수만큼 표시하기 때문에, 동시출현 매트릭스를 만들 때 값이 너무 커지게 됩니다.</p>
 
@@ -242,7 +259,7 @@
 
 <hr />
 
-<h2 id="시각화-1-qgraph">시각화 1. qgraph</h2>
+<h2>시각화 1. qgraph</h2>
 
 <p>먼저 <code class="highlighter-rouge">qgraph</code>로 그려볼게요. qgraph는 별도로 폰트 설정 parameter가 없어서, <code class="highlighter-rouge">par</code>에 먼저 넣어줍니다. 저도 아직 해당 package에 관한 이해가 부족해서, 좀 더 살펴보아야 할 것 같아요. <code class="highlighter-rouge">threshold</code>로 작은 연결은 날려주고, 중요한 것만 놓아두었습니다.</p>
 
@@ -259,7 +276,7 @@
 
 <hr />
 
-<h2 id="시각화-2-networkd3">시각화 2. networkD3</h2>
+<h2>시각화 2. networkD3</h2>
 
 <p>좀 더 다양한 시각화를 위해 <a href="https://christophergandrud.github.io/networkD3/"><code class="highlighter-rouge">networkD3</code> package</a>를 살펴볼게요. 이건 <code class="highlighter-rouge">D3.js</code>로 그래프를 만들어 줍니다. 인터넷에서 interactive visualization이 가능한 장점이 있고, 쉽게 (<code class="highlighter-rouge">igraph</code>에 비해) 시각화를 할 수 있다는 장점이 있습니다.</p>
 
@@ -309,11 +326,39 @@
 
 <hr />
 
-<h2 id="마치며">마치며</h2>
+<h2>마치며</h2>
 
 <p>이번에는 동시출현 매트릭스 형성, 그리고 간단하게 시각화하는 방법을 확인해 보았습니다. 요새 신문기사 등에 자주 등장하는 방법이고 연구조사방법론에서도 어느 정도 자리를 잡고 있는 것 같아요. 연구에 활용하려면 군집 분석 등을 추가하면 여러 각도에서 분석이 가능합니다. 다음 번에 좀 더 자세히 살펴볼게요.</p>
 
   </div>
+
+  
+    <div class="post-comments" itemprop="comment">
+      <hr />
+<h1>Comments</h1>
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://EXAMPLE.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    </div>
+  
 
 </article>
 
@@ -325,7 +370,9 @@
   <div class="wrapper">
 
     <p>
-      <link rel="icon" type="image/x-icon" href="/text/favicon.ico">
+      
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="http://localhost:4000/text/feed.xml">RSS</a>
 
     </p>
 
