@@ -5,7 +5,7 @@
   
   <link href="https://junhewk.github.io/text/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://junhewk.github.io/text/" rel="alternate" type="text/html" hreflang="en" />
-  <updated>2017-08-24T16:34:44+00:00</updated>
+  <updated>2017-09-25T14:29:41+00:00</updated>
   <id>https://junhewk.github.io/text//</id>
 
   
@@ -19,6 +19,74 @@
 
   
 
+  
+  
+    <entry>
+      
+      <title type="html">RmecabKo package version 0.1</title>
+      
+      <link href="https://junhewk.github.io/text/2017/09/25/RmecabKo-package-version-01/" rel="alternate" type="text/html" title="RmecabKo package version 0.1" />
+      <published>2017-09-25T10:20:00+00:00</published>
+      <updated>2017-09-25T10:20:00+00:00</updated>
+      <id>https://junhewk.github.io/text/2017/09/25/RmecabKo-package-version-01</id>
+      <content type="html" xml:base="https://junhewk.github.io/text/2017/09/25/RmecabKo-package-version-01/">&lt;p&gt;한글 형태소 분석기인 은전한닢 프로젝트 &lt;a href=&quot;http://eunjeon.blogspot.kr/&quot;&gt;mecab-ko&lt;/a&gt;의 R wrapper를 만들었습니다. 한달동안 틈틈히 C++ 프로그래밍 기본부터 익히기 시작해서 패키지 완성까지 진행하면서 어려움이 많았지만, 올려놓고 나니 시원섭섭하네요. 천천히 수정, 보완해 나갈 예정입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/junhewk/RmecabKo&quot;&gt;RmecabKo&lt;/a&gt; 에서 확인하실 수 있어요.&lt;/p&gt;
+
+&lt;p&gt;장점은,&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;빠르다. (C++에서 바로 구동하므로 Java 기반의 다른 형태소 분석기보다 빠릅니다.)&lt;/li&gt;
+  &lt;li&gt;띄어쓰기를 크게 타지 않는다. (&lt;code class=&quot;highlighter-rouge&quot;&gt;mecab&lt;/code&gt;은 일본어 형태소 분석기입니다. 일본어는 띄어쓰기가 없기 때문에, 형태소 분석기의 분석 방식도 차이가 있습니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;mecab-ko&lt;/code&gt;는 이것을 한국어에 맞도록 수정한 것으로, 띄어쓰기가 틀려도 잘 분석해냅니다. 인터넷에서 수집한 텍스트는 띄어쓰기에 문제가 있는 경우가 많은데, 이런 자료로 잘 분석할 수 있다는 장점이 있습니다.)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;단점은,&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;이제 시작입니다. 고칠게 너무 많아요.&lt;/li&gt;
+  &lt;li&gt;제가 맥 밖에 없어서, 다른 운영체계에서 실행해보지 못했습니다. 도와주실 분들이 필요해요.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;의견 주시면 바로바로 반영해서 판올림할게요. 어찌됐건 작동하니 일단 0.1이라고 판 번호를 붙여 보았습니다.&lt;/p&gt;
+
+&lt;p&gt;즐거운 한글 분석 되시길 기원하며!&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Junhewk Kim</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="pos tagger" />
+      
+
+      
+        <category term="text analysis" />
+      
+        <category term="R" />
+      
+        <category term="pos tagger" />
+      
+        <category term="NLP" />
+      
+
+      
+        <summary type="html">한글 형태소 분석기인 은전한닢 프로젝트 mecab-ko의 R wrapper를 만들었습니다. 한달동안 틈틈히 C++ 프로그래밍 기본부터 익히기 시작해서 패키지 완성까지 진행하면서 어려움이 많았지만, 올려놓고 나니 시원섭섭하네요. 천천히 수정, 보완해 나갈 예정입니다.</summary>
+      
+
+      
+      
+    </entry>
+  
   
   
     <entry>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>RmecabKo package version 0.1</title>
+  <meta name="description" content="First upload of RmecabKo package, R wrapper for eunjeon project">
+  
+    
+    <meta name="keywords" content="text analysis,R,package,pos tagger,MLP,Korean">
+  
+
+  <link rel="stylesheet" href="/text/assets/main.css">
+  <link rel="canonical" href="https://junhewk.github.io/text/2017/09/25/RmecabKo-package-version-01/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="https://junhewk.github.io/text/feed.xml">
+
+  
+
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="RmecabKo package version 0.1">
+  <meta name="twitter:description" content="First upload of RmecabKo package, R wrapper for eunjeon project">
+  
+  
+
+  <script type="text/javascript">
+  WebFontConfig = {
+    google: { families: [ 'Bitter:400,700,400italic:latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })();
+</script>
+
+  
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-102102649-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/text/">Study of Narrative Texts</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/text/about/">About</a>
+      
+        
+        <a class="page-link" href="/text/archives/">Archives</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">RmecabKo package version 0.1</h1>
+    
+    <p class="post-meta"><time datetime="2017-09-25T10:20:00+00:00" itemprop="datePublished">Sep 25, 2017</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Junhewk Kim</span></span> • 
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <a href="/text/categories/pos-tagger/">pos tagger</a>
+    
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>한글 형태소 분석기인 은전한닢 프로젝트 <a href="http://eunjeon.blogspot.kr/">mecab-ko</a>의 R wrapper를 만들었습니다. 한달동안 틈틈히 C++ 프로그래밍 기본부터 익히기 시작해서 패키지 완성까지 진행하면서 어려움이 많았지만, 올려놓고 나니 시원섭섭하네요. 천천히 수정, 보완해 나갈 예정입니다.</p>
+
+<p><a href="https://github.com/junhewk/RmecabKo">RmecabKo</a> 에서 확인하실 수 있어요.</p>
+
+<p>장점은,</p>
+
+<ol>
+  <li>빠르다. (C++에서 바로 구동하므로 Java 기반의 다른 형태소 분석기보다 빠릅니다.)</li>
+  <li>띄어쓰기를 크게 타지 않는다. (<code class="highlighter-rouge">mecab</code>은 일본어 형태소 분석기입니다. 일본어는 띄어쓰기가 없기 때문에, 형태소 분석기의 분석 방식도 차이가 있습니다. <code class="highlighter-rouge">mecab-ko</code>는 이것을 한국어에 맞도록 수정한 것으로, 띄어쓰기가 틀려도 잘 분석해냅니다. 인터넷에서 수집한 텍스트는 띄어쓰기에 문제가 있는 경우가 많은데, 이런 자료로 잘 분석할 수 있다는 장점이 있습니다.)</li>
+</ol>
+
+<p>단점은,</p>
+
+<ol>
+  <li>이제 시작입니다. 고칠게 너무 많아요.</li>
+  <li>제가 맥 밖에 없어서, 다른 운영체계에서 실행해보지 못했습니다. 도와주실 분들이 필요해요.</li>
+</ol>
+
+<p>의견 주시면 바로바로 반영해서 판올림할게요. 어찌됐건 작동하니 일단 0.1이라고 판 번호를 붙여 보았습니다.</p>
+
+<p>즐거운 한글 분석 되시길 기원하며!</p>
+
+  </div>
+
+  
+    <div class="post-comments" itemprop="comment">
+      <hr />
+<h1>Comments</h1>
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'junhewk';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+    </div>
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://junhewk.github.io/text/feed.xml">RSS</a>
+
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
