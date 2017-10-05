@@ -5,7 +5,7 @@
   
   <link href="http://localhost:4000/text/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/text/" rel="alternate" type="text/html" hreflang="en" />
-  <updated>2017-10-02T14:53:12+00:00</updated>
+  <updated>2017-10-05T19:49:47+00:00</updated>
   <id>http://localhost:4000/text//</id>
 
   
@@ -19,6 +19,327 @@
 
   
 
+  
+  
+    <entry>
+      
+      <title type="html">소설 분석, googleLanguageR 소개</title>
+      
+      <link href="http://localhost:4000/text/2017/10/05/googlelanguageR-and-novel-analysis/" rel="alternate" type="text/html" title="소설 분석, googleLanguageR 소개" />
+      <published>2017-10-05T15:20:00+00:00</published>
+      <updated>2017-10-05T15:20:00+00:00</updated>
+      <id>http://localhost:4000/text/2017/10/05/googlelanguageR-and-novel-analysis</id>
+      <content type="html" xml:base="http://localhost:4000/text/2017/10/05/googlelanguageR-and-novel-analysis/">&lt;p&gt;&lt;a href=&quot;https://ropensci.org&quot;&gt;ropensci&lt;/a&gt;에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;googleLanguageR&lt;/code&gt; 패키지를 공개했습니다. 패키지에 관한 자세한 설명은 &lt;a href=&quot;http://code.markedmondson.me/googleLanguageR/&quot;&gt;페이지&lt;/a&gt;에서 확인하실 수 있습니다. 간단히 말씀드리면, &lt;code class=&quot;highlighter-rouge&quot;&gt;googleLanguageR&lt;/code&gt; 패키지는 &lt;a href=&quot;https://cloud.google.com/products/machine-learning/&quot;&gt;google Cloud API&lt;/a&gt;의 언어 관련 API인 &lt;a href=&quot;https://cloud.google.com/natural-language/&quot;&gt;Google Natural Language API&lt;/a&gt;, &lt;a href=&quot;https://cloud.google.com/translate/&quot;&gt;Google Cloud Translation API&lt;/a&gt;, &lt;a href=&quot;https://cloud.google.com/speech/&quot;&gt;Google Cloud Speech API&lt;/a&gt;의 R interface입니다. 패키지로 할 수 있는 것을 살펴볼까요?&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;자연어 분석: 문장의 객체 인식(Named Entity Recognition), 감정 분석(Sentiment Analysis), 문법 분석(Syntax Analysis), 분류(Classification)을 지원합니다. 한국어 분류는 아직 지원하지 않습니다.&lt;/li&gt;
+  &lt;li&gt;기계 번역: 이미 구글 번역은 유명하죠. R에서 바로바로 문장을 번역할 수 있습니다.&lt;/li&gt;
+  &lt;li&gt;음성 인식: 녹음한 음성을 API를 통해 텍스트로 바꿔줍니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;일단 열심히 개발하고 있던 &lt;code class=&quot;highlighter-rouge&quot;&gt;RmecabKo&lt;/code&gt;가 별로 쓸모 없어질 것 같다는 위기감에 슬픔의 눈물을 뿌립니다. 이제는 그냥 구글에 소정의 사용료를 지불하고 한글 문서 올려서 분석하는 게 낫겠네요. 슬픔은 잠깐 뒤로하고, 오늘은 이 패키지를 &lt;code class=&quot;highlighter-rouge&quot;&gt;syuzhet&lt;/code&gt; 패키지와 결합하여 소설의 기복을 분석하는 방법을 살펴볼 겁니다. 소설을 어떻게 분석하냐고요? 자세한 설명을 드리기 전에, &lt;code class=&quot;highlighter-rouge&quot;&gt;googleLanguageR&lt;/code&gt; 패키지 설치와 활용을 먼저 살펴보고 나서, 소설 분석으로 들어가죠.&lt;/p&gt;
+
+&lt;p&gt;이번 포스트의 순서는 다음과 같습니다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;googleLanguageR&lt;/code&gt; 패키지 설치와 사용&lt;/li&gt;
+  &lt;li&gt;소설 분석의 이론&lt;/li&gt;
+  &lt;li&gt;소설 분석의 실제&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h2&gt;googleLanguageR 설치&lt;/h2&gt;
+
+&lt;p&gt;패키지 사용을 위해서는 먼저 &lt;a href=&quot;https://cloud.google.com/products/machine-learning/&quot;&gt;Google Cloud&lt;/a&gt; 사용 신청을 해야 합니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://console.cloud.google.com&quot;&gt;Google Cloud Platform&lt;/a&gt;에 들어가셔서 상단의 [무료 평가판 신청]을 클릭합니다. 12개월 동안 크레디트 $300을 지급하고 있고, 기본 quota도 있으니 간단한 분석에는 충분히 활용하실 수 있을 겁니다.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cloud.google.com/resource-manager/docs/creating-managing-projects&quot;&gt;Google API Consle Project&lt;/a&gt; 중간의 [프로젝트 만들기]의 설명을 따라갑니다. [자원 관리] - 프로젝트 생성 - 새 프로젝트 - 지불 수단 - 위치 - 생성의 단계로 입력하면 됩니다. (제가 영문으로 접속해서 한글로 뭐라고 나오는지를 모르겠네요. 죄송합니다.)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/text/assets/2017-10-05-googlelanguageR/1.png&quot; alt=&quot;Go to the management recources page&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;여기에서 찾으시면 되어요.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://support.google.com/cloud/answer/6293589&quot;&gt;Payment method of the project&lt;/a&gt;를 업데이트합니다. 아직 무료니 걱정 마셔요.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://console.cloud.google.com/apis/api/language.googleapis.com/overview&quot;&gt;Google Natual Language API&lt;/a&gt;를 활성화시킵니다. [Enable]을 클릭하면 활성화됩니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/text/assets/2017-10-05-googlelanguageR/7.png&quot; alt=&quot;Enabling API&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;활성!&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cloud.google.com/storage/docs/authentication#generating-a-private-key&quot;&gt;Account credential&lt;/a&gt;을 저장합니다. [Open the list of credentials] - [Create credentials] - [Service account key] - [Service account: New service account], [JSON] - [Create] 순입니다. Account name과 Role은 임의로 정하셔도 괜찮습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/text/assets/2017-10-05-googlelanguageR/10.png&quot; alt=&quot;Create&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;생성하면 .json 파일이 저장됩니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;저장된 .json 파일을 원하는 디렉터리로 옮긴 뒤, R Studio를 실행시킵니다. (사용하지 않으시는 경우 텍스트 에디터)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;$HOME&lt;/code&gt;에 &lt;code class=&quot;highlighter-rouge&quot;&gt;.Renviron&lt;/code&gt; 파일을 만들고, 다음 내용을 입력합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#.Renviron
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GL_AUTH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;location_of_json_file.json&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;R로 돌아오셔서 &lt;code class=&quot;highlighter-rouge&quot;&gt;googleLanguageR&lt;/code&gt;을 설치하시면 이제 사용 가능합니다!&lt;/p&gt;
+
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#install.packages(&quot;devtools&quot;)
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;devtools&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;install_github&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ropensci/googleLanguageR&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h2&gt;googleLanguageR 실행&lt;/h2&gt;
+
+&lt;p&gt;지금까지 잘 따라오셨으면 별다른 문제없이 API call이 가능할 겁니다. 다른 기능, Speech API와 Translate API 사용도 동일한 방식으로 진행합니다. Google Cloud API Management에서 해당 API Enable만 해주시면 돼요.&lt;/p&gt;
+
+&lt;p&gt;본격적으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;gl_nlp()&lt;/code&gt;를 알아볼까요?&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gl_nlp()&lt;/code&gt; 함수는 텍스트를 넣으면 &lt;code class=&quot;highlighter-rouge&quot;&gt;sentences&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;tokens&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;entities&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;language&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;text&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;documentSentiment&lt;/code&gt;의 list를 돌려줍니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;language&lt;/code&gt;는 언어 detection 기능인데 아직 완벽하지 않으므로 함수에 직접 parameter로 건네줄 겁니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;text&lt;/code&gt;는 전달한 원본 텍스트이고요, 나머지 네 개가 분석 결과입니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;texts&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;안녕하세요. 구글 언어 분석 데모입니다.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+           &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;한글 분석은 아직 모든 기능을 지원하지는 않습니다.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nlp_result&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gl_nlp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;texts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;language&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ko&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# 언어를 한국어로 설정하는 것을 잊지 마세요.
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nlp_result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;## List of 6
+##  $ sentences        :List of 2
+##   ..$ :'data.frame': 2 obs. of  4 variables:
+##   .. ..$ content    : chr [1:2] &quot;안녕하세요.&quot; &quot;구글 언어 분석 데모입니다.&quot;
+##   .. ..$ beginOffset: int [1:2] 0 17
+##   .. ..$ magnitude  : num [1:2] 0.4 0.4
+##   .. ..$ score      : num [1:2] 0.4 0.4
+##   ..$ :'data.frame': 1 obs. of  4 variables:
+##   .. ..$ content    : chr &quot;한글 분석은 아직 모든 기능을 지원하지는 않습니다.&quot;
+##   .. ..$ beginOffset: int 0
+##   .. ..$ magnitude  : num 0.1
+##   .. ..$ score      : num -0.1
+##  $ tokens           :List of 2
+##   ..$ :'data.frame': 9 obs. of  17 variables:
+##   .. ..$ content       : chr [1:9] &quot;안녕&quot; &quot;하세요&quot; &quot;.&quot; &quot;구글&quot; ...
+##   .. ..$ beginOffset   : int [1:9] 0 6 15 17 24 31 38 44 53
+##   .. ..$ tag           : chr [1:9] &quot;NOUN&quot; &quot;UNKNOWN&quot; &quot;PUNCT&quot; &quot;NOUN&quot; ...
+##      ...
+##   ..$ :'data.frame': 12 obs. of  17 variables:
+##   .. ..$ content       : chr [1:12] &quot;한글&quot; &quot;분석&quot; &quot;은&quot; &quot;아직&quot; ...
+##   .. ..$ beginOffset   : int [1:12] 0 7 13 17 24 31 37 41 47 53 ...
+##   .. ..$ tag           : chr [1:12] &quot;NOUN&quot; &quot;NOUN&quot; &quot;PRT&quot; &quot;ADV&quot; ...
+##      ...
+##   .. ..$ headTokenIndex: int [1:12] 1 10 1 7 5 7 5 10 7 7 ...
+##   .. ..$ label         : chr [1:12] &quot;NN&quot; &quot;NSUBJ&quot; &quot;PRT&quot; &quot;ADVMOD&quot; ...
+##   .. ..$ value         : chr [1:12] &quot;한글&quot; &quot;분석&quot; &quot;은&quot; &quot;아직&quot; ...
+##  $ entities         :List of 2
+##   ..$ :Classes 'tbl_df', 'tbl' and 'data.frame': 2 obs. of  9 variables:
+##   .. ..$ name         : chr [1:2] &quot;구글&quot; &quot;언어 분석 데모&quot;
+##   .. ..$ type         : chr [1:2] &quot;ORGANIZATION&quot; &quot;OTHER&quot;
+##   .. ..$ salience     : num [1:2] 0.576 0.424
+##      ...
+##   ..$ :Classes 'tbl_df', 'tbl' and 'data.frame': 3 obs. of  9 variables:
+##   .. ..$ name         : chr [1:3] &quot;기능&quot; &quot;분석&quot; &quot;한글&quot;
+##   .. ..$ type         : chr [1:3] &quot;OTHER&quot; &quot;OTHER&quot; &quot;OTHER&quot;
+##   .. ..$ salience     : num [1:3] 0.324 0.269 0.407
+##      ...
+##  $ language         : chr [1:2] &quot;ko&quot; &quot;ko&quot;
+##  $ text             : chr [1:2] &quot;안녕하세요. 구글 언어 분석 데모입니다.&quot; &quot;한글 분석은 아직 모든 기능을 지원하지는 않습니다.&quot;
+##  $ documentSentiment:Classes 'tbl_df', 'tbl' and 'data.frame':   2 obs. of  2 variables:
+##   ..$ magnitude: num [1:2] 0.9 0.1
+##   ..$ score    : num [1:2] 0.4 -0.1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;이 중에서 제가 살펴보려고 하는 것은 &lt;code class=&quot;highlighter-rouge&quot;&gt;documentSentiment&lt;/code&gt;입니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;magnitude&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;score&lt;/code&gt;로 결괏값을 반환하네요. 각각 문장의 감정 강도와 긍정/부정 점수를 의미합니다.&lt;/p&gt;
+
+&lt;p&gt;이 기능을 통해, &lt;strong&gt;소설 분석&lt;/strong&gt;을 시행해 볼 겁니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2&gt;소설 분석의 이론&lt;/h2&gt;
+
+&lt;p&gt;소설 분석이라고 하면 왠지 거창해 보이네요. 정확히는 ‘텍스트의 감정 변화 분석’이라고 불러야 정확할 것 같습니다. 우리가 흔히 기승전결이라고 부르는 구조는 소설의 내용 진행에 따른 사건의 변화 양태를 가리키지만, 그에 따른 감정의 변화 양상을 가리키기도 합니다. 보통 결말은 &lt;strong&gt;행복&lt;/strong&gt;하게 끝나기 때문에, 대비를 강하게 주기 위해 절정은 부정적인 감정을 고조시키는 경우가 많습니다. 도입부와 전개에서는 소설마다 양상이 다를 테고요. 이런 생각을 시대의 달필이었던 커트 보네거트가 대중 강연에서 설명한 적이 있습니다. 영어 비디오 클립이지만, 관심 있으시면 한 번 보시면 좋을 것 같습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=oP3c1h8v2ZQ&quot;&gt;Kurt Vonnegut on the Shapes of Stories&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;보네거트는 Good fortune과 Ill fortune이라는 표현을 쓰지만, 등장인물의 상황이 좋을 때 부정적 표현으로 이를 설명하기는 어렵겠죠. 반대도 마찬가지일 겁니다. 따라서 약간 proxy 이긴 하지만, 소설 전체 문장의 감정 점수를 구한 다음 이를 통해 텍스트의 진행, 소위 “&lt;em&gt;narrative arc&lt;/em&gt;“를 그리는 것이 가능할 겁니다.&lt;/p&gt;
+
+&lt;p&gt;이 아이디어를 패키지로 구현한 것이 &lt;a href=&quot;https://github.com/mjockers/syuzhet&quot;&gt;Jockers M.의 &lt;code class=&quot;highlighter-rouge&quot;&gt;syuzhet&lt;/code&gt;&lt;/a&gt; 패키지입니다. 러시아 형식주의자들은 문학을 분석하면서 ‘파불라 fabula’와 ‘수제 syuzhet’을 구분했습니다. 파불라가 사건의 시간적 순서라면, 수제는 서사적 장치를 의미합니다.&lt;/p&gt;
+
+&lt;p&gt;참고로, 서사학(narratology)에서는 스토리, 담화, 플롯, 파불라, 수제를 구분합니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;스토리: 서사 외적의 시간 논리(chrono-logic)에 따른 운동. 소설, 영화, 희곡이 재현되고 있는 시간에서 이야기의 진행. 카페에 앉아 누군가의 이야기를 한 시간 동안 들었다면, 스토리는 한 시간 동안 진행된 것이다.&lt;/li&gt;
+  &lt;li&gt;담화 또는 서사담화(narrative discourse): 서사 내적의 시간 논리에 따른 운동. 카페에서 들은 이야기가 이야기하는 사람의 십 년을 요약한 서사시적 담화였다면, 서사담화는 십 년 동안 진행된 것이다.&lt;/li&gt;
+  &lt;li&gt;파불라: 이야기 내적인 순서. “비를 맞았어. 아침에 우산을 두고 나왔거든.”에서 파불라는 [우산을 두고 나옴] -&amp;gt; [비를 맞음] 이다.&lt;/li&gt;
+  &lt;li&gt;수제: 사건이 열거되는 순서. 서사를 제시하는 기법 또는 장치를 의미하기도 한다. “비를 맞았어. 아침에 우산을 두고 나왔거든.”에서 수제는 [비를 맞음] -&amp;gt; [우산을 두고 나옴] 이며, 화자는 비를 맞았다는 사실을 강조하기 위해 시간적 순서를 도치한 것이다.&lt;/li&gt;
+  &lt;li&gt;플롯: 수제와 유사하나 여러 방식으로 사용됨. 일반적 대화에서는 스토리를, ‘서사적 전개’ 이론에서는 스토리를 묶는 원칙이나 역학을, ‘마스터플롯’이나 ‘복수 플롯’ 개념에서는 스토리의 유형을 의미한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;(애벗, &lt;서사학 강의=&quot;&quot;&gt; 46~47쪽)&lt;/서사학&gt;&lt;/p&gt;
+
+&lt;p&gt;Jockers는 문장의 감정 분석을 통해 서사의 잠재적 구조를 분석할 수 있다고 생각합니다. 앞서 살핀 아이디어의 선을 따르고 있는 것이죠. 그는 &lt;code class=&quot;highlighter-rouge&quot;&gt;afinn&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;bing&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;nrc&lt;/code&gt; 감정 사전을 통한 사전적 감정 분석(감정 단어의 숫자를 통한 감정 점수 계산)과 &lt;code class=&quot;highlighter-rouge&quot;&gt;stanford coreNLP&lt;/code&gt;의 모형 기반 계산 방식을 통한 감정 분석을 통해 소설 문장의 감정을 분석한 뒤, 그 결과를 &lt;a href=&quot;https://ko.wikipedia.org/wiki/푸리에_변환&quot;&gt;푸리에 변환&lt;/a&gt;하여 곡선으로 제시합니다.&lt;/p&gt;
+
+&lt;p&gt;패키지가 2015년 2월에 발표된 이후, 디지털 인문학 내에서도 논쟁이 좀 있었습니다. 주요 논점은 1. 감정 분석의 정확도가 떨어진다 2. 감정 분석이 정확하다고 해도, 그 결괏값(특히 푸리에 변환 이후)의 의미가 모호하다는 점이었습니다. Swafford A.는 &lt;a href=&quot;https://annieswafford.wordpress.com/2015/03/02/syuzhet/&quot;&gt;Problems with the Syuzhet Package&lt;/a&gt;라는 포스트에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;syuzhet&lt;/code&gt; 패키지의 문제 세 가지를 지적합니다. 먼저 문장 구분(&lt;code class=&quot;highlighter-rouge&quot;&gt;get_sentences&lt;/code&gt;)을 “.” 기호로 진행하기 때문에 오류가 발생한다는 것, 다음 단어에 감정값을 배정하는 방식은 한계가 있다는 것, 마지막으로 low-pass filter가 존재하지 않던 굴곡을 추가하기 때문에 오류가 발생한다는 것입니다.&lt;/p&gt;
+
+&lt;p&gt;첫 번째 문제는 사실 중요하지 않습니다. 개별 문장이 감정 분석의 주체가 아니라는 점, 그리고 감정 분석의 결과는 결국 평균이나 푸리에 변환을 거치기 때문입니다. 두 번째 단어 기반 분석에 관해 Jockers는 모호한 단어들로 인한 감정값의 혼동은 주변 단어들로 인해 보정된다는 답을 내놓습니다. 평균적으로 볼 때 문장 전체의 감정값은 꽤 정확하게 계산된다는 것이죠. (&lt;code class=&quot;highlighter-rouge&quot;&gt;sentimentr&lt;/code&gt; 패키지의 &lt;a href=&quot;https://github.com/trinker/sentimentr&quot;&gt;감정 분석 기법 비교&lt;/a&gt;를 참조하시면 좋겠습니다.)&lt;/p&gt;
+
+&lt;p&gt;마지막으로 푸리에 변환에 관해 Jockers는 처음 비판을 받아들이지 않는 것처럼 보이다가, 2015년 4월 &lt;a href=&quot;http://www.matthewjockers.net/2015/04/06/epilogue/&quot;&gt;Requiem for a low pass filter&lt;/a&gt;라는 포스트에서 푸리에 변환을 쓰기는 어려울 것 같다는 의견을 내놓습니다. 그대로 쓰기에는 값의 왜곡이 크다는 점을 그도 인정하는 듯 보였습니다. 그러다 올해 초의 &lt;a href=&quot;http://www.matthewjockers.net/2017/01/12/resurrecting/&quot;&gt;Resurrecting a low pass filter (well, kind of)&lt;/a&gt;에서 Jockers는 &lt;code class=&quot;highlighter-rouge&quot;&gt;get_dct_transform&lt;/code&gt; 함수로 &lt;a href=&quot;https://ko.wikipedia.org/wiki/이산_코사인_변환&quot;&gt;이산 코사인 변환&lt;/a&gt;을 추가하면서 좀 더 적절한 분석 기법을 제시하였다고 주장합니다. 아직 함수가 제작되지는 않았지만 Gao J. 등의 &lt;a href=&quot;http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=7804470&amp;amp;tag=1&quot;&gt;A multiscale thoery for the dynamical evolution sentiment in novels&lt;/a&gt; 논문에서는 adaptive smoother를 제시하고 있습니다. 관련 논쟁과 기법은 더 지켜봐야 할 것 같아요.&lt;/p&gt;
+
+&lt;p&gt;서론이 길었습니다. 요는&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;소설(또는 극본, 대본 등) 문장의 감정 분석을 통해 소설의 서사적 장치를 엿볼 수 있는 곡선을 그려볼 수 있다.&lt;/li&gt;
+  &lt;li&gt;감정 분석은 단어 기반으로 진행되는 기법이 흔하게 사용되고 있지만 기계 학습을 통한 계산 방식도 등장하고 있다.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;syuzhet&lt;/code&gt; 패키지를 통해 이를 계산할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;가 되겠네요.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2&gt;소설 분석의 실제&lt;/h2&gt;
+
+&lt;p&gt;그러면 직접 해봐야겠죠? 지난번 글, &lt;a href=&quot;/text/2017/06/18/single-word-analysis-korean-poem/&quot;&gt;시 감정 분석&lt;/a&gt;에서도 문제가 되었지만 현재 믿을만한 한국어 감정 사전이 존재하지 않습니다. 저도 NRC sentiment dictionary 기반으로 번역 작업을 하다 다른 일로 바빠 잠시 중단하고 있었고요. stanford coreNLP는 한국어를 지원하지 않습니다. 그러던 와중에, 구글이 API로 이를 지원하고, &lt;code class=&quot;highlighter-rouge&quot;&gt;googleLanguageR&lt;/code&gt; 패키지가 발표되어 한번 분석을 해볼만하겠다는 생각에 이르게 되었습니다.&lt;/p&gt;
+
+&lt;p&gt;이번 분석에 사용할 소설은 이인직의 &lt;혈의 누=&quot;&quot;&gt;입니다. 한국문학 최초의 신소설이자, 청일전쟁을 배경으로 한 개화기의 시대상을 그리고 있는 작품이죠. 하지만 이완용의 비서였던 그의 소설은 일본을 모형으로 하여 조선이 개화해야 한다는 주장을 그대로 드러내고 있다는 점에서, 그 이후의 역사를 알고 있는 사람이 고운 시선으로 바라보기는 어려운 작품이기도 합니다. 이 작품을 택한 이유는 일단 저작권이 없는 소설 중 길이가 어느 정도 이상이라는 점, 인터넷 본이 한글 전용 표기를 해 놓았다는 점이 컸습니다만, 분석 결과로 쓴소리를 할 수 있을까 하는 점도 선정 요소로 작용했습니다.&lt;/혈의&gt;&lt;/p&gt;
+
+&lt;p&gt;소설 줄거리는 다음과 같습니다. 주인공 옥련은 평양에서 부모를 잃고 헤매다가 일본인 군의관 이노우에에게 도움을 받고 일본으로 가서 학교를 다니게 됩니다. 이후 개인적 시련을 거치지만 구완서를 만나 함께 미국으로 유학을 떠나게 되죠. 죽은 줄 알았던 아버지를 다시 만난 옥련은 구완서와 약혼하고, 어머니는 옥련의 편지를 받게 됩니다.&lt;/p&gt;
+
+&lt;p&gt;먼저, 코드를 볼까요. 소설 원문은 &lt;a href=&quot;www.jikji.org&quot;&gt;직지위키&lt;/a&gt;에서 구했습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tidyverse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rvest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;magrittr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stringr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;googleLanguageR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;syuzhet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggplot2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;중간에 scraping 한 원문을 줄 번호로 선택하기 위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;magrittr&lt;/code&gt; 패키지를 추가했습니다. 나머지는 그동안 써왔던 패키지인 것 같고, &lt;code class=&quot;highlighter-rouge&quot;&gt;googleLanguageR&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;syuzhet&lt;/code&gt; 패키지가 오늘 분석의 주인공입니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;tearsofbloodUrl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://www.jikji.org/혈의%20누?highlight=%28%5CbCategory소설%5Cb%29&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tobText&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tearsofbloodUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; 
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;html_nodes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;xpath&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;//div[@id='content']/*&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; 
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;extract2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;25&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;401&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# magrittr::extract2 or `[[`
+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;as.character&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; 
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str_replace_all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;sup&amp;gt;.*&amp;lt;/sup&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# 각주 제거
+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str_replace_all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;.*?&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# html tag 제거
+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;as_tibble&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tobText&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;## Classes 'tbl_df', 'tbl' and 'data.frame':    377 obs. of  4 variables:
+##  $ value    : chr  &quot;청일전쟁의 총소리는 평양 일경이 떠나가는 듯하더니, 그 총소리가 그치매 사람의 자취는 끊어지고 산과 들에 비린 티끌뿐이라. \n&quot; &quot;평양성의 모란봉에 떨어지는 저녁 볕은 뉘엿뉘엿 넘어가는데, 저 햇빛을 붙들어매고 싶은 마음에 붙들어매지는 못하고 &quot;| __truncated__ &quot;남이 그 모양을 볼 지경이면 저렇게 어여쁜 젊은 여편네가 술 먹고 한길에 나와서 주정한다 할 터이나, 그 부인은 술 &quot;| __truncated__ &quot;무슨 소회가 그리 대단한지 그 부인더러 물을 지경이면 대답할 여가도 없이 옥련이를 부르면서 돌아다니더라. \n&quot; ...
+##  $ magnitude: num  0.4 0.8 0.9 0.5 2.5 0.7 0.5 1.3 0.2 0.7 ...
+##  $ score    : num  0.4 -0.8 -0.9 -0.5 0 0.7 -0.5 -0.1 -0.2 0.3 ...
+##  $ id       : int  1 2 3 4 5 6 7 8 9 10 ...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;본문 중간에 각주 처리가 되어 있어서, &lt;code class=&quot;highlighter-rouge&quot;&gt;html_nodes&lt;/code&gt;로 완전히 작업을 끝내지 못하고 텍스트로 바꾼 뒤 regular expression으로 태그를 정리했습니다. 결괏값으로 벡터 하나에 문단 하나씩 들어가게 되는데, 굳이 문장으로 더 쪼개지는 않았습니다. 이유는 1. 개별 문장의 감정값을 정확히 구하는 게 중요하지 않고, 2. google API를 사용하기 때문에 query 수를 최대한으로 줄이기 위함입니다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;## # A tibble: 377 x 4
+##                                                                                                                                                                                                                                                                    value
+##                                                                                                                                                                                                                                                                    &amp;lt;chr&amp;gt;
+##  1                                                                                                                                          &quot;청일전쟁의 총소리는 평양 일경이 떠나가는 듯하더니, 그 총소리가 그치매 사람의 자취는 끊어지고 산과 들에 비린 티끌뿐이라. \n&quot;
+##  2 &quot;평양성의 모란봉에 떨어지는 저녁 볕은 뉘엿뉘엿 넘어가는데, 저 햇빛을 붙들어매고 싶은 마음에 붙들어매지는 못하고 숨이 턱에 닿은 듯이 갈팡질팡하는 한 부인이 나이 삼십이 될락말락하고, 얼굴은 분을 따고 넣은 듯이 흰 얼굴이나 인정 없이 뜨겁게 내리쪼이는 가을볕에 얼굴
+##  3                                                     &quot;남이 그 모양을 볼 지경이면 저렇게 어여쁜 젊은 여편네가 술 먹고 한길에 나와서 주정한다 할 터이나, 그 부인은 술 먹었다 하는 말은 고사하고 미쳤다, 지랄한다 하더라도 그따위 소리는 귀에 들리지 아니할 만하더라. \n&quot;
+##  4                                                                                                                                                           &quot;무슨 소회가 그리 대단한지 그 부인더러 물을 지경이면 대답할 여가도 없이 옥련이를 부르면서 돌아다니더라. \n&quot;
+##  5            &quot;“옥련아, 옥련아 옥련아 옥련아, 죽었느냐 살았느냐.  죽었거든 죽은 얼굴이라도 한번 다시 만나 보자.  옥련아 옥련아, 살았거든 어미 애를 그만 쓰이고 어서 바삐 내 눈에 보이게 하여라.  옥련아, 총에 맞아 죽었느냐, 창에 찔려 죽었느냐, 사람에게 밟혀 죽었느냐.
+##  6 &quot;하면서 옥련이를 찾으려고 골몰한 정신에, 옥련이보다 열 갑절 스무 갑절 더 소중하게 생각하는 사람을 잃고도 모르고 옥련이만 부르며 다니다가 목이 쉬고 기운이 탈진하여 산비탈 잔디풀 위에 털썩 주저앉았다가 혼자말로 옥련 아버지는 옥련이 찾으려고 저 건너 산 밑으로 가더
+##  7       &quot;기다리는 사람은 아니 오고, 인간 사정은 조금도 모르는 석양은 제 빛 다 가지고 저 갈 데로 가니 산빛은 점점 먹장을 갈아붓는 듯이 검어지고 대동강 물소리는 그윽한데, 전쟁에 죽은 더운 송장 새 귀신들이 어두운 빛을 타서 낱낱이 일어나는 듯 내 앞에 모여드는 듯하니,
+##  8         &quot;“에그, 깜깜하여라.  이리 가도 길이 없고 저리 가도 길이 없으니 어디로 가면 길을 찾을까.  나는 사나이라 다리 힘도 좋고 겁도 없는 사람이언마는 이러한 산비탈에서 이 밤을 새고 사람을 찾아다니려 하면 이 고생이 이렇게 대단하거든, 겁도 많고 다녀 보지 못하던 여
+##  9                                                                               &quot;하는 소리를 듣고 부인의 마음에 난리중에 피란 가다가 부부가 서로 잃고 서로 종적을 모르니 살아 생이별을 한 듯하더니 하늘이 도와서 다시 만나 본다 하여 반가운 마음에 소리를 질렀더라. \n&quot;
+## 10                                                                                                                                                                                                  &quot;“여보, 나 여기 있소.  날 찾아 다니느라고 얼마나 애를 쓰셨소.” \n\n&quot;
+## # ... with 367 more rows, and 3 more variables: magnitude &amp;lt;dbl&amp;gt;, score &amp;lt;dbl&amp;gt;,
+## #   id &amp;lt;int&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;다음, &lt;code class=&quot;highlighter-rouge&quot;&gt;gl_nlp&lt;/code&gt; 함수를 적용해 감정값을 구했습니다. 결괏값을 텍스트에 붙이고 줄번호를 매겨 분석 대상 자료틀을 완성합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/text/assets/figure/2017-10-05-novel-sentiment-basic%20plot%201-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;문단마다 값이 크게 차이를 보이기 때문에, 경향성을 파악하기가 어렵습니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;syuzhet&lt;/code&gt; 패키지를 통해 결괏값을 smoothing 해 볼까요.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/text/assets/figure/2017-10-05-novel-sentiment-syuzhet%20percentage-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;대충 얼개는 볼 수 있을 것 같습니다. 초반의 불행(1-2)에서 이노우에의 도움과 일본 이주(3-5), 이노우에의 죽음과 옥련의 고난(6-10), 미국 유학(11-14), 옥련 어머니의 고난(15), 옥련의 편지와 가족의 재회(16-20)라고 보면 대충 맞을 것 같네요. 하지만 곡선이 예쁘지는 않으니, 앞서 언급한 푸리에 변환과 이산 코사인 변환을 적용해 봅시다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/text/assets/figure/2017-10-05-novel-sentiment-syuzhet%20FFT-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;좀 더 매끈한 곡선이 되었네요. 중반을 기점으로 서사의 분위기가 반전된다는 점, 오히려 극의 갈등이 극에 달하는 점이 전개 부분이라는 점에서 소설의 전개가 그렇게 매끄럽지는 않다고 볼 수도 있겠습니다. 물론, 이 그래프를 가지고 소설을 비판하는 것에는 한계가 있겠습니다만. 그래도 도식적인 소설이라는 생각이 듭니다. 조선의 비극적 상황과 외국에서의 창창한 앞날을 대비시키는 것이라는 점 말입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/text/assets/figure/2017-10-05-novel-sentiment-syuzhet%20DCT-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;푸리에 변환과 비슷하지만 좀 더 그럴듯한 결과물이 나왔습니다. 그렇다고 해도 해석 자체에 큰 차이가 있지는 않을 것 같네요. 조선과 외국의 극명한 대비, 더 정확히는 미국 생활에 대한 동경을 엿볼 수 있다고 해야 할지요. 그나마 소설 초반에서 긍정적으로 그려지는 것은 일본인 군의관 이노우에라는 점 또한, 일본의 조력을 통한 조선의 개화 또는 개선이라는 소설의 문제 인식을 잘 보여주고 있다는 생각도 들고요.&lt;/p&gt;
+
+&lt;p&gt;마지막으로, 세 변환을 겹쳐서 확인해볼까요?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/text/assets/figure/2017-10-05-novel-sentiment-syuzhet%20three%20transformation-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이 소설 하나로 어느 변환 방법이 더 좋다고 말하기는 어려울 것 같습니다만, 구간 평균(비교를 위해 일단 100단계로 줄였습니다)은 원래 값과 가독성이 비슷한 것 같고, 푸리에 변환과 이산 코사인 변환은 다른 소설 분석을 더 해봐야겠어요.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2&gt;마치며&lt;/h2&gt;
+
+&lt;p&gt;한글 문서 감정 분석에서 개인적으로 돌파구를 찾지 못하고 있던 상황에서, 이번 &lt;code class=&quot;highlighter-rouge&quot;&gt;googleLanguageR&lt;/code&gt;의 발견은 하나의 전기를 주는 건 확실합니다. 반면, 분석 툴의 개발이 과연 무슨 소용이 있는가라는 생각도 드네요. 한글 감정 분석 사전 프로젝트는 잠정적으로 중단해야겠다는 생각도 들고요.&lt;/p&gt;
+
+&lt;p&gt;아무쪼록, 다른 분석에도 많이 활용해보셨으면 하는 마음입니다. 영화나 드라마 대본도 동일한 방법론으로 분석 가능하니, 저도 다음번에는 영화 분석 결과를 한 번 올려볼게요. 긴 명절, 행복하게 누리시길!&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Junhewk Kim</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="sentiment" />
+      
+
+      
+        <category term="text analysis" />
+      
+        <category term="R" />
+      
+        <category term="sentiment analysis" />
+      
+        <category term="novel analysis" />
+      
+
+      
+        <summary type="html">ropensci에서 googleLanguageR 패키지를 공개했습니다. 패키지에 관한 자세한 설명은 페이지에서 확인하실 수 있습니다. 간단히 말씀드리면, googleLanguageR 패키지는 google Cloud API의 언어 관련 API인 Google Natural Language API, Google Cloud Translation API, Google Cloud Speech API의 R interface입니다. 패키지로 할 수 있는 것을 살펴볼까요?</summary>
+      
+
+      
+      
+    </entry>
+  
   
   
     <entry>
