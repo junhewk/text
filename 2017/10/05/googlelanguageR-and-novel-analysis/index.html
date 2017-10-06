@@ -344,6 +344,18 @@
 
 <p>본문 중간에 각주 처리가 되어 있어서, <code class="highlighter-rouge">html_nodes</code>로 완전히 작업을 끝내지 못하고 텍스트로 바꾼 뒤 regular expression으로 태그를 정리했습니다. 결괏값으로 벡터 하나에 문단 하나씩 들어가게 되는데, 굳이 문장으로 더 쪼개지는 않았습니다. 이유는 1. 개별 문장의 감정값을 정확히 구하는 게 중요하지 않고, 2. google API를 사용하기 때문에 query 수를 최대한으로 줄이기 위함입니다.</p>
 
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">tobSentiment</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="n">tobText</span><span class="p">,</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">gl_nlp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">$</span><span class="n">documentSentiment</span><span class="p">,</span><span class="w"> </span><span class="n">language</span><span class="o">=</span><span class="s2">"ko"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">tobText</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tobText</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row_number</span><span class="p">())</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">add_column</span><span class="p">(</span><span class="n">tobText</span><span class="p">,</span><span class="w"> </span><span class="n">magnitude</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tobSentiment</span><span class="o">$</span><span class="n">value</span><span class="o">$</span><span class="n">magnitude</span><span class="p">,</span><span class="w"> </span><span class="n">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tobSentiment</span><span class="o">$</span><span class="n">value</span><span class="o">$</span><span class="n">score</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">tobText</span><span class="w">
+</span></code></pre>
+</div>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>## # A tibble: 377 x 4
 ##                                                                                                                                                                                                                                                                    value
 ##                                                                                                                                                                                                                                                                    &lt;chr&gt;
