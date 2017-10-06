@@ -17,10 +17,10 @@
   
 
   <link rel="stylesheet" href="/text/assets/main.css">
-  <link rel="canonical" href="https://junhewk.github.io/text/2017/10/05/googlelanguageR-and-novel-analysis/">
+  <link rel="canonical" href="http://localhost:4000/text/2017/10/05/googlelanguageR-and-novel-analysis/">
   
   
-  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="https://junhewk.github.io/text/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="http://localhost:4000/text/feed.xml">
 
   
 
@@ -248,7 +248,7 @@
 </code></pre>
 </div>
 
-<p>이 중에서 제가 살펴보려고 하는 것은 <code class="highlighter-rouge">documentSentiment</code>입니다. <code class="highlighter-rouge">magnitude</code>와 <code class="highlighter-rouge">score</code>로 결괏값을 반환하네요. 각각 문장의 감정 강도와 긍정/부정 점수를 의미합니다.</p>
+<p>이 중에서 제가 살펴보려고 하는 것은 <code class="highlighter-rouge">documentSentiment</code>입니다. <code class="highlighter-rouge">magnitude</code>와 <code class="highlighter-rouge">score</code>로 결괏값을 반환하네요. 각각 문장의 감정 강도와 긍정/부정 점수를 의미합니다. (<code class="highlighter-rouge">entities</code>는 객체 인식, <code class="highlighter-rouge">tokens</code>는 문장 성분 분석입니다. 객체 인식은 다른 포스트에서 다뤄보겠습니다. 문장 성분 분석은 결괏값에 관해 좀 더 세부적으로 살펴봐야 할 것 같아요.)</p>
 
 <p>이 기능을 통해, <strong>소설 분석</strong>을 시행해 볼 겁니다.</p>
 
@@ -386,7 +386,7 @@
 
 <p><img src="/text/assets/figure/2017-10-05-novel-sentiment-syuzhet%20FFT-1.png" alt="" /></p>
 
-<p>좀 더 매끈한 곡선이 되었네요. 중반을 기점으로 서사의 분위기가 반전된다는 점, 오히려 극의 갈등이 극에 달하는 점이 전개 부분이라는 점에서 소설의 전개가 그렇게 매끄럽지는 않다고 볼 수도 있겠습니다. 물론, 이 그래프를 가지고 소설을 비판하는 것에는 한계가 있겠습니다만. 그래도 도식적인 소설이라는 생각이 듭니다. 조선의 비극적 상황과 외국에서의 창창한 앞날을 대비시키는 것이라는 점 말입니다.</p>
+<p>좀 더 매끈한 곡선이 되었네요. 중반을 기점으로 서사의 분위기가 반전된다는 점, 오히려 극의 갈등이 극에 달하는 점이 전개 부분이라는 점에서 소설의 전개가 그렇게 매끄럽지는 않다고 볼 수도 있겠습니다. 물론, 이 그래프를 가지고 소설을 비판하는 것에는 한계가 있습니다. 그래도 도식적인 소설이라는 생각을 지지해주는 자료로는 사용 가능할 것 같아요. 조선의 비극적 상황과 외국에서의 창창한 앞날을 대비시키는 것이라는 점 말입니다.</p>
 
 <p><img src="/text/assets/figure/2017-10-05-novel-sentiment-syuzhet%20DCT-1.png" alt="" /></p>
 
@@ -395,7 +395,7 @@
 <p>마지막으로, 세 변환을 겹쳐서 확인해볼까요? 중복인 것 같아 시각화 코드는 여기만 올립니다.</p>
 
 <div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">data_frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">100</span><span class="p">,</span><span class="w">
-           </span><span class="n">FCT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_transformed_values</span><span class="p">(</span><span class="n">tobText</span><span class="o">$</span><span class="n">score</span><span class="p">,</span><span class="w"> </span><span class="n">low_pass_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">x_reverse_len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">scale_vals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)[,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span><span class="w">
+           </span><span class="n">FFT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_transformed_values</span><span class="p">(</span><span class="n">tobText</span><span class="o">$</span><span class="n">score</span><span class="p">,</span><span class="w"> </span><span class="n">low_pass_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">x_reverse_len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">scale_vals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)[,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span><span class="w">
            </span><span class="n">DCT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_dct_transform</span><span class="p">(</span><span class="n">tobText</span><span class="o">$</span><span class="n">score</span><span class="p">,</span><span class="w"> </span><span class="n">low_pass_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">x_reverse_len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w"> </span><span class="n">scale_vals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)[,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span><span class="w">
            </span><span class="n">PER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_percentage_values</span><span class="p">(</span><span class="n">tobText</span><span class="o">$</span><span class="n">score</span><span class="p">,</span><span class="w"> </span><span class="n">bins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
   </span><span class="n">gather</span><span class="p">(</span><span class="n">smoothing</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
@@ -410,7 +410,7 @@
 
 <p><img src="/text/assets/figure/2017-10-05-novel-sentiment-syuzhet%20three%20transformation-1.png" alt="" /></p>
 
-<p>이 소설 하나로 어느 변환 방법이 더 좋다고 말하기는 어려울 것 같습니다만, 구간 평균(비교를 위해 일단 100단계로 줄였습니다)은 원래 값과 가독성이 비슷한 것 같고, 푸리에 변환과 이산 코사인 변환은 다른 소설 분석을 더 해봐야겠어요.</p>
+<p>이 소설 하나로 어느 변환 방법이 더 좋다고 말하기는 어려울 것 같습니다. 구간 평균(비교를 위해 일단 100단계로 줄였습니다)은 원래 값과 가독성이 비슷한 것 같고, 푸리에 변환과 이산 코사인 변환은 이 소설에서는 큰 차이가 나지 않네요. 다른 소설 분석을 더 해봐야 할 것 같습니다.</p>
 
 <hr />
 
@@ -457,7 +457,7 @@
     <p>
       
 
-&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://junhewk.github.io/text/feed.xml">RSS</a>
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="http://localhost:4000/text/feed.xml">RSS</a>
 
     </p>
 
