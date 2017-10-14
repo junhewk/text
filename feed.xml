@@ -5,7 +5,7 @@
   
   <link href="https://junhewk.github.io/text/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://junhewk.github.io/text/" rel="alternate" type="text/html" hreflang="en" />
-  <updated>2017-10-14T16:02:42+00:00</updated>
+  <updated>2017-10-14T21:53:55+00:00</updated>
   <id>https://junhewk.github.io/text//</id>
 
   
@@ -23,9 +23,9 @@
   
     <entry>
       
-      <title type="html">팟캐스트 분석, XML parsing</title>
+      <title type="html">지대넓얕 팟캐스트 분석, XML parsing</title>
       
-      <link href="https://junhewk.github.io/text/2017/10/14/podcast-analysis/" rel="alternate" type="text/html" title="팟캐스트 분석, XML parsing" />
+      <link href="https://junhewk.github.io/text/2017/10/14/podcast-analysis/" rel="alternate" type="text/html" title="지대넓얕 팟캐스트 분석, XML parsing" />
       <published>2017-10-14T11:48:00+00:00</published>
       <updated>2017-10-14T11:48:00+00:00</updated>
       <id>https://junhewk.github.io/text/2017/10/14/podcast-analysis</id>
@@ -56,7 +56,7 @@
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;사용한 패키지부터 살펴보겠습니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;tidyverse&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;tidytext&lt;/code&gt;는 기존에도 다루었으니 넘어가고, &lt;code class=&quot;highlighter-rouge&quot;&gt;rvest&lt;/code&gt;를 통해 &lt;code class=&quot;highlighter-rouge&quot;&gt;xml&lt;/code&gt; 불러오기와 parsing을 처리합니다. [&lt;code class=&quot;highlighter-rouge&quot;&gt;lubridate&lt;/code&gt;](&lt;a href=&quot;https://cran.r-project.org/web/packages/lubridate/vignettes/lubridate.html는&quot;&gt;https://cran.r-project.org/web/packages/lubridate/vignettes/lubridate.html는&lt;/a&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;character&lt;/code&gt; 형식으로 되어 있는 시간 자료를 &lt;code class=&quot;highlighter-rouge&quot;&gt;strptime&lt;/code&gt;의 복잡한 형식 입력 없이 아주 간편하게 변환해줍니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;knitr&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;ggplot2&lt;/code&gt;는 기본인 것 같고, 오늘 시각화의 핵심은 &lt;a href=&quot;https://cran.r-project.org/web/packages/ggridges/vignettes/introduction.html&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ggridges&lt;/code&gt;&lt;/a&gt; 일 텐데요, 뒤에서 결과를 직접 보시는 게 빠를 것 같습니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;wordcloud&lt;/code&gt;는 어쩌다 보니 다룬 적이 없네요. 많이들 쓰실 텐데, 사용 팁을 다뤄볼 수 있을 것 같아요. &lt;a href=&quot;https://github.com/karthik/wesanderson&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;wesanderson&lt;/code&gt;&lt;/a&gt; 패키지는 웨스 앤더슨 감독의 영화에서 색채를 뽑아온 color palette입니다.&lt;/p&gt;
+&lt;p&gt;사용한 패키지부터 살펴보겠습니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;tidyverse&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;tidytext&lt;/code&gt;는 기존에도 다루었으니 넘어가고, &lt;code class=&quot;highlighter-rouge&quot;&gt;rvest&lt;/code&gt;를 통해 &lt;code class=&quot;highlighter-rouge&quot;&gt;xml&lt;/code&gt; 불러오기와 parsing을 처리합니다. &lt;a href=&quot;https://cran.r-project.org/web/packages/lubridate/vignettes/lubridate.html&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;lubridate&lt;/code&gt;&lt;/a&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;character&lt;/code&gt; 형식으로 되어 있는 시간 자료를 &lt;code class=&quot;highlighter-rouge&quot;&gt;strptime&lt;/code&gt;의 복잡한 형식 입력 없이 아주 간편하게 변환해줍니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;knitr&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;ggplot2&lt;/code&gt;는 기본인 것 같고, 오늘 시각화의 핵심은 &lt;a href=&quot;https://cran.r-project.org/web/packages/ggridges/vignettes/introduction.html&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ggridges&lt;/code&gt;&lt;/a&gt; 일 텐데요, 뒤에서 결과를 직접 보시는 게 빠를 것 같습니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;wordcloud&lt;/code&gt;는 어쩌다 보니 다룬 적이 없네요. 많이들 쓰실 텐데, 사용 팁을 다뤄볼 수 있을 것 같아요. &lt;a href=&quot;https://github.com/karthik/wesanderson&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;wesanderson&lt;/code&gt;&lt;/a&gt; 패키지는 웨스 앤더슨 감독의 영화에서 색채를 뽑아온 color palette입니다.&lt;/p&gt;
 
 &lt;h2&gt;XML parsing&lt;/h2&gt;
 
@@ -221,7 +221,7 @@
 
 &lt;p&gt;density ridgeline plot은 일련의 histogram을 겹쳐놓은 것입니다. 수평축(X축)은 동일하게 맞추고, 약간씩 겹쳐서 자료를 제시합니다. 마치 산등성이를 보는 것 같은 느낌을 줘서 ridgeline이라는 이름이 붙었고, 최근 동일 계열의 자료들을 비교 시각화하는 데에 있어서 인기를 끌고 있는 시각화 방법입니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;geom_density_ridges&lt;/code&gt;를 통해 시각화하며, &lt;code class=&quot;highlighter-rouge&quot;&gt;ggplot(aes)&lt;/code&gt;에서 x에 자료값을, y에 grouping variable을 입력하여 그릴 수 있어요. 방송이 진행되면서 방송시간이 점차 50분에 맞춰져가는 모습이 잘 보이네요.&lt;/p&gt;
 
-&lt;p&gt;중간에 나오는 &lt;code class=&quot;highlighter-rouge&quot;&gt;theme_jk_ridge()&lt;/code&gt;는 미리 정의해둔 &lt;code class=&quot;highlighter-rouge&quot;&gt;theme_ridges()&lt;/code&gt;의 수정본입니다. 보통은 &lt;code class=&quot;highlighter-rouge&quot;&gt;theme_ridges(fond_family = &quot;Nanum Gothic&quot;)&lt;/code&gt; 정도면 충분하리라 생각합니다.&lt;/p&gt;
+&lt;p&gt;중간에 나오는 &lt;code class=&quot;highlighter-rouge&quot;&gt;theme_jk_ridge()&lt;/code&gt;는 미리 정의해둔 &lt;code class=&quot;highlighter-rouge&quot;&gt;theme_ridges()&lt;/code&gt;의 수정본입니다. 보통은 &lt;code class=&quot;highlighter-rouge&quot;&gt;theme_ridges(fond_family = &quot;Nanum Gothic&quot;)&lt;/code&gt; 정도면 충분할 것 같습니다.&lt;/p&gt;
 
 &lt;p&gt;다른 방송과 비교해 볼까요?&lt;/p&gt;
 
@@ -271,7 +271,7 @@
 
 &lt;p&gt;&lt;img src=&quot;/text/assets/figure/2017-10-14-podcast-analysis-ridge%20compare%202-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;시각화를 위해 180분 이상은 그리지 않았습니다(&lt;code class=&quot;highlighter-rouge&quot;&gt;scale_x_continuous(limits = c(0, 180)))&lt;/code&gt;). 결과는 위 그래프와 동일하고요. 어느 쪽을 사용할지는 자료에 따라 다른 것 같아요. 이 경우엔 앞의 그래프가 더 보기 좋다는 생각이 듭니다. 한 화면에서 두 개의 그래프로 나눌 때에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;facet_wrap()&lt;/code&gt; 함수를 추가한다는 점을 기억해주세요.&lt;/p&gt;
+&lt;p&gt;시각화를 위해 180분 이상은 그리지 않았습니다(&lt;code class=&quot;highlighter-rouge&quot;&gt;scale_x_continuous(limits = c(0, 180))&lt;/code&gt;). 결과는 위 그래프와 동일하고요. 어느 쪽을 사용할지는 자료에 따라 다른 것 같아요. 이 경우엔 앞의 그래프가 더 보기 좋다는 생각이 듭니다. 한 화면에서 두 개의 그래프로 나눌 때에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;facet_wrap()&lt;/code&gt; 함수를 추가한다는 점을 기억해주세요.&lt;/p&gt;
 
 &lt;p&gt;마지막으로, 세 팟캐스트를 비교해보려고 합니다.&lt;/p&gt;
 
@@ -321,7 +321,7 @@
 
 &lt;p&gt;너무 많이 언급된 단어들을 &lt;code class=&quot;highlighter-rouge&quot;&gt;filter&lt;/code&gt;를 통해 제외한 후, &lt;code class=&quot;highlighter-rouge&quot;&gt;wordcloud&lt;/code&gt;를 그립니다. 워드 클라우드 시각화의 핵심은 &lt;code class=&quot;highlighter-rouge&quot;&gt;scale&lt;/code&gt; 값과 색깔 선택에 있다고 해도 과언이 아니에요. &lt;code class=&quot;highlighter-rouge&quot;&gt;min.freq&lt;/code&gt; 값을 잘 정해서 잘 안 나타나는 단어들을 제외하는 것도 중요하지만, &lt;code class=&quot;highlighter-rouge&quot;&gt;scale&lt;/code&gt;의 두 값을 잘 정해서 단어 크기의 범위를 잘 정해주는 것이 중요합니다. &lt;code class=&quot;highlighter-rouge&quot;&gt;random.order = TRUE&lt;/code&gt;를 설정하면 최빈 단어가 중심에, 빈도가 적을수록 외곽에 위치하면서 원형으로 시각화가 되는 반면, &lt;code class=&quot;highlighter-rouge&quot;&gt;random.order = FALSE&lt;/code&gt;로 잡으면 빈도와 상관없이 위치가 결정되면서 사각형에 가깝게 시각화가 되니 자료에 따라 적절히 활용하시면 좋아요.&lt;/p&gt;
 
-&lt;p&gt;의외로 제일 많이 다룬 것은 “역사”군요. “과학”과 “철학”이 그 뒤를 잇고 있고요. “영화”가 많이 다뤄졌다는 것도 생각지 못했던 부분인 것 같아요. “종교”, “영혼”, 여러 국가의 이름 등 어떤 주제들이 다뤄졌는지를 잘 보여주고 있다고 생각합니다. 이렇게 놓고 보니, 지대넓얕이 상당히 공평하게 분야를 다루고 있다고 생각했던 제 생각이 정확한 것은 아니었다는 생각이 드네요. 4년 동안 방송을 진행해온 지대넓얕 패널 여러분께 이 자리를 빌려 감사를 표합니다.&lt;/p&gt;
+&lt;p&gt;의외로 제일 많이 다룬 것은 “역사”군요. “과학”과 “철학”이 그 뒤를 잇고 있고요. “영화”가 많이 다뤄졌다는 것도 생각지 못했던 부분인 것 같아요. “종교”, “영혼”, 여러 국가의 이름 등 어떤 주제들이 다뤄졌는지를 잘 보여주고 있다고 생각합니다. 이렇게 놓고 보니, 지대넓얕이 상당히 공평하게 분야를 다루고 있다는 인상이 정확한 것은 아니었네요. 덧불여, 4년 동안 방송을 진행해온 지대넓얕 패널 여러분께 이 자리를 빌려 감사를 표합니다.&lt;/p&gt;
 
 &lt;hr /&gt;
 

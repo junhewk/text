@@ -9,7 +9,7 @@
   
   
   
-  <title>팟캐스트 분석, XML parsing</title>
+  <title>지대넓얕 팟캐스트 분석, XML parsing</title>
   <meta name="description" content="XML parsing practice with Podcast RSS file, ggridges introduction">
   
     
@@ -27,7 +27,7 @@
   
   <meta name="twitter:card" content="summary">
   
-  <meta name="twitter:title" content="팟캐스트 분석, XML parsing">
+  <meta name="twitter:title" content="지대넓얕 팟캐스트 분석, XML parsing">
   <meta name="twitter:description" content="XML parsing practice with Podcast RSS file, ggridges introduction">
   
   
@@ -93,7 +93,7 @@
 
   <header class="post-header">
     
-      <h1 class="post-title" itemprop="name headline">팟캐스트 분석, XML parsing</h1>
+      <h1 class="post-title" itemprop="name headline">지대넓얕 팟캐스트 분석, XML parsing</h1>
     
     <p class="post-meta"><time datetime="2017-10-14T11:48:00+00:00" itemprop="datePublished">Oct 14, 2017</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Junhewk Kim</span></span> • 
   
@@ -148,7 +148,7 @@
 </span></code></pre>
 </div>
 
-<p>사용한 패키지부터 살펴보겠습니다. <code class="highlighter-rouge">tidyverse</code>와 <code class="highlighter-rouge">tidytext</code>는 기존에도 다루었으니 넘어가고, <code class="highlighter-rouge">rvest</code>를 통해 <code class="highlighter-rouge">xml</code> 불러오기와 parsing을 처리합니다. [<code class="highlighter-rouge">lubridate</code>](<a href="https://cran.r-project.org/web/packages/lubridate/vignettes/lubridate.html는">https://cran.r-project.org/web/packages/lubridate/vignettes/lubridate.html는</a> <code class="highlighter-rouge">character</code> 형식으로 되어 있는 시간 자료를 <code class="highlighter-rouge">strptime</code>의 복잡한 형식 입력 없이 아주 간편하게 변환해줍니다. <code class="highlighter-rouge">knitr</code>과 <code class="highlighter-rouge">ggplot2</code>는 기본인 것 같고, 오늘 시각화의 핵심은 <a href="https://cran.r-project.org/web/packages/ggridges/vignettes/introduction.html"><code class="highlighter-rouge">ggridges</code></a> 일 텐데요, 뒤에서 결과를 직접 보시는 게 빠를 것 같습니다. <code class="highlighter-rouge">wordcloud</code>는 어쩌다 보니 다룬 적이 없네요. 많이들 쓰실 텐데, 사용 팁을 다뤄볼 수 있을 것 같아요. <a href="https://github.com/karthik/wesanderson"><code class="highlighter-rouge">wesanderson</code></a> 패키지는 웨스 앤더슨 감독의 영화에서 색채를 뽑아온 color palette입니다.</p>
+<p>사용한 패키지부터 살펴보겠습니다. <code class="highlighter-rouge">tidyverse</code>와 <code class="highlighter-rouge">tidytext</code>는 기존에도 다루었으니 넘어가고, <code class="highlighter-rouge">rvest</code>를 통해 <code class="highlighter-rouge">xml</code> 불러오기와 parsing을 처리합니다. <a href="https://cran.r-project.org/web/packages/lubridate/vignettes/lubridate.html"><code class="highlighter-rouge">lubridate</code></a>는 <code class="highlighter-rouge">character</code> 형식으로 되어 있는 시간 자료를 <code class="highlighter-rouge">strptime</code>의 복잡한 형식 입력 없이 아주 간편하게 변환해줍니다. <code class="highlighter-rouge">knitr</code>과 <code class="highlighter-rouge">ggplot2</code>는 기본인 것 같고, 오늘 시각화의 핵심은 <a href="https://cran.r-project.org/web/packages/ggridges/vignettes/introduction.html"><code class="highlighter-rouge">ggridges</code></a> 일 텐데요, 뒤에서 결과를 직접 보시는 게 빠를 것 같습니다. <code class="highlighter-rouge">wordcloud</code>는 어쩌다 보니 다룬 적이 없네요. 많이들 쓰실 텐데, 사용 팁을 다뤄볼 수 있을 것 같아요. <a href="https://github.com/karthik/wesanderson"><code class="highlighter-rouge">wesanderson</code></a> 패키지는 웨스 앤더슨 감독의 영화에서 색채를 뽑아온 color palette입니다.</p>
 
 <h2>XML parsing</h2>
 
@@ -313,7 +313,7 @@
 
 <p>density ridgeline plot은 일련의 histogram을 겹쳐놓은 것입니다. 수평축(X축)은 동일하게 맞추고, 약간씩 겹쳐서 자료를 제시합니다. 마치 산등성이를 보는 것 같은 느낌을 줘서 ridgeline이라는 이름이 붙었고, 최근 동일 계열의 자료들을 비교 시각화하는 데에 있어서 인기를 끌고 있는 시각화 방법입니다. <code class="highlighter-rouge">geom_density_ridges</code>를 통해 시각화하며, <code class="highlighter-rouge">ggplot(aes)</code>에서 x에 자료값을, y에 grouping variable을 입력하여 그릴 수 있어요. 방송이 진행되면서 방송시간이 점차 50분에 맞춰져가는 모습이 잘 보이네요.</p>
 
-<p>중간에 나오는 <code class="highlighter-rouge">theme_jk_ridge()</code>는 미리 정의해둔 <code class="highlighter-rouge">theme_ridges()</code>의 수정본입니다. 보통은 <code class="highlighter-rouge">theme_ridges(fond_family = "Nanum Gothic")</code> 정도면 충분하리라 생각합니다.</p>
+<p>중간에 나오는 <code class="highlighter-rouge">theme_jk_ridge()</code>는 미리 정의해둔 <code class="highlighter-rouge">theme_ridges()</code>의 수정본입니다. 보통은 <code class="highlighter-rouge">theme_ridges(fond_family = "Nanum Gothic")</code> 정도면 충분할 것 같습니다.</p>
 
 <p>다른 방송과 비교해 볼까요?</p>
 
@@ -363,7 +363,7 @@
 
 <p><img src="/text/assets/figure/2017-10-14-podcast-analysis-ridge%20compare%202-1.png" alt="" /></p>
 
-<p>시각화를 위해 180분 이상은 그리지 않았습니다(<code class="highlighter-rouge">scale_x_continuous(limits = c(0, 180)))</code>). 결과는 위 그래프와 동일하고요. 어느 쪽을 사용할지는 자료에 따라 다른 것 같아요. 이 경우엔 앞의 그래프가 더 보기 좋다는 생각이 듭니다. 한 화면에서 두 개의 그래프로 나눌 때에는 <code class="highlighter-rouge">facet_wrap()</code> 함수를 추가한다는 점을 기억해주세요.</p>
+<p>시각화를 위해 180분 이상은 그리지 않았습니다(<code class="highlighter-rouge">scale_x_continuous(limits = c(0, 180))</code>). 결과는 위 그래프와 동일하고요. 어느 쪽을 사용할지는 자료에 따라 다른 것 같아요. 이 경우엔 앞의 그래프가 더 보기 좋다는 생각이 듭니다. 한 화면에서 두 개의 그래프로 나눌 때에는 <code class="highlighter-rouge">facet_wrap()</code> 함수를 추가한다는 점을 기억해주세요.</p>
 
 <p>마지막으로, 세 팟캐스트를 비교해보려고 합니다.</p>
 
@@ -413,7 +413,7 @@
 
 <p>너무 많이 언급된 단어들을 <code class="highlighter-rouge">filter</code>를 통해 제외한 후, <code class="highlighter-rouge">wordcloud</code>를 그립니다. 워드 클라우드 시각화의 핵심은 <code class="highlighter-rouge">scale</code> 값과 색깔 선택에 있다고 해도 과언이 아니에요. <code class="highlighter-rouge">min.freq</code> 값을 잘 정해서 잘 안 나타나는 단어들을 제외하는 것도 중요하지만, <code class="highlighter-rouge">scale</code>의 두 값을 잘 정해서 단어 크기의 범위를 잘 정해주는 것이 중요합니다. <code class="highlighter-rouge">random.order = TRUE</code>를 설정하면 최빈 단어가 중심에, 빈도가 적을수록 외곽에 위치하면서 원형으로 시각화가 되는 반면, <code class="highlighter-rouge">random.order = FALSE</code>로 잡으면 빈도와 상관없이 위치가 결정되면서 사각형에 가깝게 시각화가 되니 자료에 따라 적절히 활용하시면 좋아요.</p>
 
-<p>의외로 제일 많이 다룬 것은 “역사”군요. “과학”과 “철학”이 그 뒤를 잇고 있고요. “영화”가 많이 다뤄졌다는 것도 생각지 못했던 부분인 것 같아요. “종교”, “영혼”, 여러 국가의 이름 등 어떤 주제들이 다뤄졌는지를 잘 보여주고 있다고 생각합니다. 이렇게 놓고 보니, 지대넓얕이 상당히 공평하게 분야를 다루고 있다고 생각했던 제 생각이 정확한 것은 아니었다는 생각이 드네요. 4년 동안 방송을 진행해온 지대넓얕 패널 여러분께 이 자리를 빌려 감사를 표합니다.</p>
+<p>의외로 제일 많이 다룬 것은 “역사”군요. “과학”과 “철학”이 그 뒤를 잇고 있고요. “영화”가 많이 다뤄졌다는 것도 생각지 못했던 부분인 것 같아요. “종교”, “영혼”, 여러 국가의 이름 등 어떤 주제들이 다뤄졌는지를 잘 보여주고 있다고 생각합니다. 이렇게 놓고 보니, 지대넓얕이 상당히 공평하게 분야를 다루고 있다는 인상이 정확한 것은 아니었네요. 덧불여, 4년 동안 방송을 진행해온 지대넓얕 패널 여러분께 이 자리를 빌려 감사를 표합니다.</p>
 
 <hr />
 
