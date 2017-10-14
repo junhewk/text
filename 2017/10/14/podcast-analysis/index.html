@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>팟캐스트 분석, XML parsing</title>
+  <meta name="description" content="XML parsing practice with Podcast RSS file, ggridges introduction">
+  
+    
+    <meta name="keywords" content="media analysis,text analysis,R,density ridge plot,ggridges package,Korean">
+  
+
+  <link rel="stylesheet" href="/text/assets/main.css">
+  <link rel="canonical" href="https://junhewk.github.io/text/2017/10/14/podcast-analysis/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="https://junhewk.github.io/text/feed.xml">
+
+  
+
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="팟캐스트 분석, XML parsing">
+  <meta name="twitter:description" content="XML parsing practice with Podcast RSS file, ggridges introduction">
+  
+  
+
+  <script type="text/javascript">
+  WebFontConfig = {
+    google: { families: [ 'Bitter:400,700,400italic:latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })();
+</script>
+
+  
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-102102649-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/text/">Study of Narrative Texts</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/text/about/">About</a>
+      
+        
+        <a class="page-link" href="/text/archives/">Archives</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">팟캐스트 분석, XML parsing</h1>
+    
+    <p class="post-meta"><time datetime="2017-10-14T11:48:00+00:00" itemprop="datePublished">Oct 14, 2017</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Junhewk Kim</span></span> • 
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <a href="/text/categories/media/">media</a>
+    
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p><a href="https://ko.wikipedia.org/wiki/팟캐스트">팟캐스트</a>의 대중화에 기여한 것은 2011년 <a href="https://www.ddanzi.com/">딴지일보</a>에서 제작한 <a href="https://ko.wikipedia.org/wiki/팟캐스트">나는 꼼수다</a>였던 것으로 기억합니다. 인기였던 TV 프로그램 <a href="https://ko.wikipedia.org/wiki/나는_가수다">나는 가수다</a>에서 제목을 빌린 이 팟캐스트는 당시 대통령에 대한 비난 여론을 집중시키는 창구 역할을 하면서, 이후 한국 정치 지형 변화의 기폭제가 되었다고 말해도 좋을 것 같습니다.</p>
+
+<p>제가 처음 팟캐스트를 들었던 것은 2008년 정도부터 였던 것 같습니다. 영어 공부를 하겠다는 핑계로 당시 막 생겨나고 있던 영어 팟캐스트를 어줍잖게 듣다가 포기했었던 기억과, 2010년에 당시 미국으로 건너간 <a href="https://ko.wikipedia.org/wiki/김영하_(소설가)">김영하</a> 작가가 막 시작했던 <a href="https://itunes.apple.com/us/podcast/김영하의-책-읽는-시간/id356061083?mt=2">김영하의 책 읽는 시간</a>을 들으면서 신기해 했던 기억이 나네요. 해당 팟캐스트는 지금까지도 듣고 있지만, 요새 전방위로 활동하고 있는 작가의 일정 때문인지 업데이트가 뜸해서 아쉽습니다.</p>
+
+<p>최근 <a href="http://www.podbbang.com">팟빵</a>이 유료화 정책을 시작하면서 호스팅하던 팟캐스트의 외부 접근을 차단했다는 <a href="http://www.nocutnews.co.kr/news/4810733">소식</a>을 뒤늦게야 알았습니다. 사실, 이 포스트를 준비하면서 국내 팟캐스트 자료를 분석하려다 보니 접근이 되지 않는다는 것을 알게 된 것입니다. 그 문제는 다른 각도로 생각해볼만한 부분들이 있을 것이나, 오늘은 국내에서 인기 있는 일부 팟캐스트의 RSS를 분석해 볼 것입니다.</p>
+
+<p><a href="https://ko.wikipedia.org/wiki/RSS">RSS</a>는 뉴스, 블로그 등에서 기사의 목록을 나열하고 있는 컨텐츠 표현 방식으로, <a href="https://ko.wikipedia.org/wiki/XML">XML</a> 마크업 기반으로 구축되어 해당 사이트에 접속하지 않아도 기사 목록 등을 확인할 수 있는 서비스를 제공합니다. 팟캐스트도 마찬가지로 RSS 형식으로 에피소드 목록을 제공합니다. R의 XML 구문 분석을 통해, 팟캐스트의 변화를 확인해보는 것도 의미있는 작업이 되겠다는 생각이 들었습니다.</p>
+
+<p>오늘 분석에 활용할 팟캐스트는 최근 성공리에 종영(?)한 <a href="www.podbbang.com/ch/7418">지대넓얕</a> 또는 지적 대화를 위한 넓고 얕은 지식입니다. 2014년에 시작한 이 팟캐스트는 다양한 분야의 지식을 쉽게 설명하면서 인기를 끌고, 진행자 네 명을 유명하게 만들었죠. 이 팟캐스트와 <a href="http://xsfm.co.kr/wp/?tag=그알싫">그알싫</a> 또는 그것은 알기 싫다, 그리고 <a href="https://itunes.apple.com/us/podcast/망치부인의-시사수다/id956545522?mt=2">망치부인의 시사수다</a>를 비교해보려 합니다. 이 팟캐스트를 선정한 이유는 앞서 말씀드린 것처럼 최근 팟빵이 유료화를 선언하면서, 외부에서 RSS 접근을 막았기 때문입니다. 반면 이 팟캐스트들은 RSS 접근이 가능하거든요. 곧 마무리한다는 <a href="http://www.podbbang.com/ch/7339">김어준의 파파이스</a>를 다뤄보고 싶었는데 아쉬워요. <a href="https://www.youtube.com/playlist?list=PLxrXSNAnHXeIQcwTL2vxVxeIuIuFsx9nW">유투브 플레이리스트</a>가 있으니, 다음번에 <a href="https://developers.google.com/youtube/v3/">YouTube Data API</a> 다룰때 분석해볼게요.</p>
+
+<p>분석 코드는 <a href="https://nsaunders.wordpress.com/2017/10/12/xml-parsing-made-easy-is-that-podcast-getting-longer/">XML parsing made easy: is that podcast getting longer?</a> 포스트를 그대로 따르되, 일부만 수정한 것입니다. 원본 코드는 <a href="https://github.com/neilfws/media/tree/master/podcasts/twiv/code">github</a>에서 확인할 수 있으며, 제작자는 <a href="https://github.com/neilfws">Neil Saunders</a> 임을 미리 언급해둡니다.</p>
+
+<hr />
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">tidytext</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">rvest</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">lubridate</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">knitr</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">stringr</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">ggridges</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">wordcloud</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">wesanderson</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>사용한 패키지부터 살펴보겠습니다. <code class="highlighter-rouge">tidyverse</code>와 <code class="highlighter-rouge">tidytext</code>는 기존에도 다루었으니 넘어가고, <code class="highlighter-rouge">rvest</code>를 통해 <code class="highlighter-rouge">xml</code> 불러오기와 parsing을 처리합니다. [<code class="highlighter-rouge">lubridate</code>](<a href="https://cran.r-project.org/web/packages/lubridate/vignettes/lubridate.html는">https://cran.r-project.org/web/packages/lubridate/vignettes/lubridate.html는</a> <code class="highlighter-rouge">character</code> 형식으로 되어 있는 시간 자료를 <code class="highlighter-rouge">strptime</code>의 복잡한 형식 입력 없이 아주 간편하게 변환해줍니다. <code class="highlighter-rouge">knitr</code>과 <code class="highlighter-rouge">ggplot2</code>는 기본인 것 같고, 오늘 시각화의 핵심은 <a href="https://cran.r-project.org/web/packages/ggridges/vignettes/introduction.html"><code class="highlighter-rouge">ggridges</code></a> 일텐데요, 뒤에서 결과를 직접 보시는 게 빠를 것 같습니다. <code class="highlighter-rouge">wordcloud</code>는 어쩌다보니 다룬 적이 없네요. 많이들 쓰실텐데, 사용 팁을 다뤄볼 수 있을 것 같아요. <a href="https://github.com/karthik/wesanderson"><code class="highlighter-rouge">wesanderson</code></a> 패키지는 웨스 앤더슨 감독의 영화에서 색채를 뽑아온 color palette입니다.</p>
+
+<h2>XML parsing</h2>
+
+<p>말씀드린대로 오늘은 팟캐스트의 RSS 파일을 불러와서 분석해볼 것입니다. 예를 들어, 2008년부터 방송을 진행해오고 있는 (그리고 원 포스트의 분석 대상인) <a href="http://www.microbe.tv/twiv/">This Week in Virology</a> 팟캐스트 RSS를 불러오는 과정을 한번 볼까요?</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">feed_items</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_xml</span><span class="p">(</span><span class="s2">"http://twiv.microbeworld.libsynpro.com/twiv"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">xml_nodes</span><span class="p">(</span><span class="s2">"item"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">feed_items</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">xml_nodes</span><span class="p">(</span><span class="s2">"pubDate"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">xml_text</span><span class="p">()</span><span class="w">
+
+</span><span class="n">feed_items</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">xml_nodes</span><span class="p">(</span><span class="s2">"itunes\\:duration"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">xml_text</span><span class="p">()</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>먼저 <code class="highlighter-rouge">read_xml</code> 함수로 해당 팟캐스트의 RSS 파일을 불러옵니다. RSS 파일은 전체 에피소드의 제목, 회차 ID, 음성 파일의 주소, 방송 길이, 키워드 등을 담고 있어요. 각 에피소드는 <code class="highlighter-rouge">&lt;item&gt;</code> 태그로 구분되고, 그 밑에 <code class="highlighter-rouge">&lt;title&gt;</code> (제목), <code class="highlighter-rouge">&lt;pubDate&gt;</code> (방송 일자) 등의 형식으로 내용을 담고 있습니다. 따라서, <code class="highlighter-rouge">xml_nodes("item")</code>은 팟캐스트 RSS 파일에서 각 회차의 자료를 담은 내용만을 남깁니다. 다음 <code class="highlighter-rouge">xml_nodes("pubDate")</code>를 적용하면 모든 회차의 방송 일자를, <code class="highlighter-rouge">xml_nodes("itunes\\:duration")</code>를 적용하면 모든 회차의 방송 길이를 불러오는 식입니다.</p>
+
+<p>팟캐스트 RSS의 XML 양식은 모두 동일해요(물론 귀찮아서 그런건지는 모르나 <code class="highlighter-rouge">keyword</code>는 없는 경우도 꽤 있긴 합니다). 필요한 내용을 추출하는 함수를 만들어볼게요.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">feed_to_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">rss</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">feed_items</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_xml</span><span class="p">(</span><span class="n">rss</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+    </span><span class="n">xml_nodes</span><span class="p">(</span><span class="s2">"item"</span><span class="p">)</span><span class="w">
+  
+  </span><span class="n">feed_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data_frame</span><span class="p">(</span><span class="n">pubDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">feed_items</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">xml_nodes</span><span class="p">(</span><span class="s2">"pubDate"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">xml_text</span><span class="p">(),</span><span class="w">
+                        </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">feed_items</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">xml_nodes</span><span class="p">(</span><span class="s2">"title"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">xml_text</span><span class="p">(),</span><span class="w">
+                        </span><span class="n">encLength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">feed_items</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">xml_nodes</span><span class="p">(</span><span class="s2">"enclosure"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">xml_attr</span><span class="p">(</span><span class="s2">"length"</span><span class="p">),</span><span class="w">
+                        </span><span class="n">duration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">feed_items</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">xml_nodes</span><span class="p">(</span><span class="s2">"itunes\\:duration"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">xml_text</span><span class="p">())</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+    </span><span class="n">mutate</span><span class="p">(</span><span class="n">pubDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dmy_hms</span><span class="p">(</span><span class="n">pubDate</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+    </span><span class="n">mutate</span><span class="p">(</span><span class="n">encLength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">encLength</span><span class="p">),</span><span class="w">
+           </span><span class="n">duration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ifelse</span><span class="p">(</span><span class="n">grepl</span><span class="p">(</span><span class="s2">":\\d+:"</span><span class="p">,</span><span class="w"> </span><span class="n">duration</span><span class="p">),</span><span class="w"> </span><span class="n">duration</span><span class="p">,</span><span class="w"> </span><span class="n">paste0</span><span class="p">(</span><span class="s2">"00:"</span><span class="p">,</span><span class="w"> </span><span class="n">duration</span><span class="p">)),</span><span class="w">
+           </span><span class="n">duration_seconds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">hms</span><span class="p">(</span><span class="n">duration</span><span class="p">)))</span><span class="w">
+  
+  </span><span class="n">feed_df</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><code class="highlighter-rouge">rss</code>를 넣어주면 RSS에서 <code class="highlighter-rouge">pubDate</code>, <code class="highlighter-rouge">title</code>, <code class="highlighter-rouge">enclosure</code> (파일 크기), <code class="highlighter-rouge">itunes\\:duration</code>을 추출하여 <code class="highlighter-rouge">data_frame</code>을 통해 <code class="highlighter-rouge">tibble</code> 형식의 데이터 프레임을 만듭니다. 다음 <code class="highlighter-rouge">pubDate</code>에 적용한 <code class="highlighter-rouge">dmy_hms()</code> 함수는 “일 월 년 시:분:초”(예, 14 Oct 2017 12:40:36)를 R의 시간 자료형으로 변경해주는 함수입니다. 팟캐스트 RSS는 시간을 “Sat, 14 Oct 2017 12:40:36 +0000” 형식으로 담고 있는데, <code class="highlighter-rouge">lubridate</code>의 <code class="highlighter-rouge">dmy_hms</code>는 필요없는 요일과 마지막의 표준 시간대 지정자를 제외한 시간값을 추출해줍니다.</p>
+
+<p><code class="highlighter-rouge">duration</code>의 경우, 한시간 안쪽으로 끝난 방승은 “30:00”, 한시간이 넘어간 방송은 “1:10:00”의 형식으로 표현되어 있기 때문에 <code class="highlighter-rouge">grepl(":\\d+:")</code>로 한시간 안쪽 방송시간 앞에 <code class="highlighter-rouge">"00:"</code>을 불여주었어요. 다음 초 형식으로 바꾸는데는 다시 <code class="highlighter-rouge">lubridate</code>의 <code class="highlighter-rouge">hms()</code> 함수가 수고해 주었습니다.</p>
+
+<p>정리된 RSS가 어떤 모습인지 한번 볼까요?</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="c1"># 지대넓얕 RSS 주소입니다.
+</span><span class="n">jdny_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">feed_to_df</span><span class="p">(</span><span class="s2">"http://api.podty.me/api/v1/share/cast/390937d3e5c758aa6f4005b63542cc83695b4d5e6925fe6a2d4d488d1d05d748/146364"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">jdny_df</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">top_n</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="n">wt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pubDate</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">kable</span><span class="p">()</span><span class="w">
+</span></code></pre>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">pubDate</th>
+      <th style="text-align: left">title</th>
+      <th style="text-align: right">encLength</th>
+      <th style="text-align: left">duration</th>
+      <th style="text-align: right">duration_seconds</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">2017-08-19 22:23:05</td>
+      <td style="text-align: left">155회 - [결산] 안녕, 지대넓얕</td>
+      <td style="text-align: right">43755908</td>
+      <td style="text-align: left">01:11:12</td>
+      <td style="text-align: right">4272</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">2017-07-29 22:27:49</td>
+      <td style="text-align: left">[공지] 지대넓얕 시즌 종료 안내</td>
+      <td style="text-align: right">732390</td>
+      <td style="text-align: left">00:01:12</td>
+      <td style="text-align: right">72</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">2017-07-29 22:23:32</td>
+      <td style="text-align: left">154회 - [예술] 십우도 (2부)</td>
+      <td style="text-align: right">24992675</td>
+      <td style="text-align: left">00:39:55</td>
+      <td style="text-align: right">2395</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">2017-07-29 22:22:14</td>
+      <td style="text-align: left">154회 - [예술] 십우도 (1부)</td>
+      <td style="text-align: right">27987091</td>
+      <td style="text-align: left">00:44:55</td>
+      <td style="text-align: right">2695</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">2017-07-22 22:36:47</td>
+      <td style="text-align: left">153회 - [예술] LIFE 그리고 사진 (2부)</td>
+      <td style="text-align: right">35932761</td>
+      <td style="text-align: left">00:58:09</td>
+      <td style="text-align: right">3489</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p>먼저 방송의 scatter plot을 그린 뒤, <a href="https://en.wikipedia.org/wiki/Local_regression">LOESS</a>로 회귀선을 그려볼 겁니다.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">jdny_df</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">duration_minutes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duration_seconds</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">60</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">pubDate</span><span class="p">,</span><span class="w"> </span><span class="n">duration_minutes</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_smooth</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"날짜"</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"방송시간 (분)"</span><span class="p">,</span><span class="w">
+       </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"지적 대화를 위한 넓고 얕은 지식"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_x_datetime</span><span class="p">(</span><span class="n">date_breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1 year"</span><span class="p">,</span><span class="w"> </span><span class="n">date_labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"%Y"</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><img src="/text/assets/figure/2017-10-14-podcast-analysis-jdny%20scatter-1.png" alt="" /></p>
+
+<p>방송 시간은 평균 한 시간 안쪽으로 떨어지는 것 같습니다. 초반에는 한시간 반에 가까운 outlier가 보이지만, 대부분 시간을 맞춰 편집하고 있는 것으로 보입니다. <code class="highlighter-rouge">geom_smooth</code>는 회귀 곡선을 추가해주는 함수, <code class="highlighter-rouge">scale_x_datetime</code>은 X 축 값이 시간 형식일 때, 표현 방식을 결정해주는 함수예요. <code class="highlighter-rouge">date_breaks = "1 year"</code>로 1년마다 구분선을 그리도록 설정했습니다.</p>
+
+<p>다음은 box plot입니다.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">jdny_df</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">duration_minutes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duration_seconds</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">60</span><span class="p">,</span><span class="w">
+         </span><span class="n">Year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">year</span><span class="p">(</span><span class="n">pubDate</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">group_by</span><span class="p">(</span><span class="n">Year</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">summarise</span><span class="p">(</span><span class="n">mean_duration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">duration_minutes</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">Year</span><span class="p">,</span><span class="w"> </span><span class="n">mean_duration</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_col</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wes_palette</span><span class="p">(</span><span class="s2">"Royal1"</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"연도"</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"평균 방송시간 (분)"</span><span class="p">,</span><span class="w">
+       </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"지적 대화를 위한 넓고 얕은 지식"</span><span class="p">,</span><span class="w">
+       </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"평균 방송시간"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_x_continuous</span><span class="p">(</span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2014</span><span class="o">:</span><span class="m">2017</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><img src="/text/assets/figure/2017-10-14-podcast-analysis-jdny%20box-1.png" alt="" /></p>
+
+<p><code class="highlighter-rouge">summarise</code>로 연도별 평균을 내었어요. <code class="highlighter-rouge">geom_col</code>의 <code class="highlighter-rouge">wes_palette("Royal1")</code>은 영화 <a href="http://www.royaltenenbaums.com/">The Royal Tenenbaums</a>의 주 색조를 전달해줍니다. 방송 시간을 꾸준하게 유지하고 있는 것을 볼 수 있어요. 원 포스트의 출발점이 This Week in Virulogy 팟캐스트가 점점 길어지고 있는 것 갈다는 생각을 검증해보려고 했던 것이었고 저도 여러 팟캐스트를 들으면서 비슷한 생각을 했었던 것 같아 다른 팟캐스트들에 적용해본 것입니다만, 지대넓얕은 방송 시간 편집을 잘 하고 있는 것 같아요.</p>
+
+<p>다음은 오늘의 핵심, <a href="http://blog.revolutionanalytics.com/2017/07/joyplots.html">density ridgeline plot</a>입니다.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">jdny_df</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">duration_minutes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duration_seconds</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">60</span><span class="p">,</span><span class="w">
+         </span><span class="n">Year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">year</span><span class="p">(</span><span class="n">pubDate</span><span class="p">),</span><span class="w"> </span><span class="n">levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2017</span><span class="o">:</span><span class="m">2014</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">duration_minutes</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duration_minutes</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Year</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Year</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_density_ridges</span><span class="p">(</span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_cyclical</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wes_palette</span><span class="p">(</span><span class="s2">"Moonrise1"</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_jk_ridge</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"방송시간 (분)"</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"연도"</span><span class="p">,</span><span class="w">
+       </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"지적 대화를 위한 넓고 얕은 지식"</span><span class="p">,</span><span class="w">
+       </span><span class="n">subtitle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"연도별 방송시간 분포"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_x_continuous</span><span class="p">(</span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">120</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">),</span><span class="w"> </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">120</span><span class="p">))</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><img src="/text/assets/figure/2017-10-14-podcast-analysis-jdny%20ridge-1.png" alt="" /></p>
+
+<p>density ridgeline plot은 일련의 histogram을 겹쳐놓은 것입니다. 수평축(X축)은 동일하게 맞추고, 약간씩 겹쳐서 자료를 제시합니다. 마치 산등성이를 보는 것 같은 느낌을 줘서 ridgeline이라는 이름이 붙었고, 최근 동일 계열의 자료들을 비교 시각화하는 데에 있어서 인기를 끌고 있는 시각화 방법입니다. <code class="highlighter-rouge">geom_density_ridges</code>를 통해 시각화하며, <code class="highlighter-rouge">ggplot(aes)</code>에서 x에 자료값을, y에 grouping variable을 입력하여 그릴 수 있어요. 방송이 진행되면서 방송시간이 점차 50분에 맞춰져가는 모습이 잘 보이네요.</p>
+
+<p>중간에 나오는 <code class="highlighter-rouge">theme_jk_ridge()</code>는 미리 정의해둔 <code class="highlighter-rouge">theme_ridges()</code>의 수정본입니다. 보통은 <code class="highlighter-rouge">theme_ridges(fond_family = "Nanum Gothic")</code> 정도면 충분하리라 생각합니다.</p>
+
+<p>다른 방송과 비교해 볼까요?</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">grs_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">feed_to_df</span><span class="p">(</span><span class="s2">"http://www.xsfm.co.kr/xml/idwk.xml"</span><span class="p">)</span><span class="w"> </span><span class="c1"># 그알싫 RSS
+</span><span class="n">ms_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">feed_to_df</span><span class="p">(</span><span class="s2">"http://www.phnara.com/gtv7/feed.xml"</span><span class="p">)</span><span class="w"> </span><span class="c1"># 망치부인 RSS
+</span><span class="w">
+</span><span class="n">jdny_df</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">show</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"지대넓얕"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">bind_rows</span><span class="p">(</span><span class="n">mutate</span><span class="p">(</span><span class="n">grs_df</span><span class="p">,</span><span class="w"> </span><span class="n">show</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"그알싫"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">duration_minutes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duration_seconds</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">60</span><span class="p">,</span><span class="w">
+         </span><span class="n">Year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">year</span><span class="p">(</span><span class="n">pubDate</span><span class="p">),</span><span class="w"> </span><span class="n">levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2017</span><span class="o">:</span><span class="m">2014</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">duration_minutes</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duration_minutes</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Year</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_density_ridges</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">show</span><span class="p">),</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_jk_ridge</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">legend.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"방송시간 (분)"</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"연도"</span><span class="p">,</span><span class="w">
+       </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"연도별 방송시간 분포"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_x_continuous</span><span class="p">(</span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w"> </span><span class="m">30</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_manual</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="s2">"red"</span><span class="p">))</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><img src="/text/assets/figure/2017-10-14-podcast-analysis-ridge%20compare-1.png" alt="" /></p>
+
+<p>두 팟캐스트를 비교해 보았습니다. 그알싫의 특정회차는 네시간을 넘는 경우도 있네요. 전체적으로 봤을 때 그알싫은 90~120분을 유제하다가 2017년 들어 한시간에 가까워지고 있는 반면, 지대넓얕은 상당히 일관된 방송시간을 보여주고 있는 것을 알 수 있습니다.</p>
+
+<p>같은 그래프이지만, 두 개로 나눠서 다시 그려볼게요.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">jdny_df</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">show</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"지대넓얕"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">bind_rows</span><span class="p">(</span><span class="n">mutate</span><span class="p">(</span><span class="n">grs_df</span><span class="p">,</span><span class="w"> </span><span class="n">show</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"그알싫"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">duration_minutes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duration_seconds</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">60</span><span class="p">,</span><span class="w">
+         </span><span class="n">Year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">year</span><span class="p">(</span><span class="n">pubDate</span><span class="p">),</span><span class="w"> </span><span class="n">levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2017</span><span class="o">:</span><span class="m">2014</span><span class="p">),</span><span class="w">
+         </span><span class="n">show</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">show</span><span class="p">,</span><span class="w"> </span><span class="n">levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"지대넓얕"</span><span class="p">,</span><span class="w"> </span><span class="s2">"그알싫"</span><span class="p">)))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">duration_minutes</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duration_minutes</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Year</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">show</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_density_ridges</span><span class="p">(</span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_jk_ridge</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">legend.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"방송시간 (분)"</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"연도"</span><span class="p">,</span><span class="w">
+       </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"연도별 방송시간 분포"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_x_continuous</span><span class="p">(</span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">180</span><span class="p">,</span><span class="w"> </span><span class="m">60</span><span class="p">),</span><span class="w"> </span><span class="n">limits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">180</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">facet_wrap</span><span class="p">(</span><span class="o">~</span><span class="w"> </span><span class="n">show</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><img src="/text/assets/figure/2017-10-14-podcast-analysis-ridge%20compare%202-1.png" alt="" /></p>
+
+<p>시각화를 위해 180분 이상은 그리지 않았습니다(<code class="highlighter-rouge">scale_x_continuous(limits = c(0, 180)))</code>). 결과는 위 그래프와 동일하고요. 어느 쪽을 사용할지는 자료에 따라 다른 것 같아요. 이 경우엔 앞의 그래프가 더 보기 좋다는 생각이 듭니다. 한 화면에서 두 개의 그래프로 나눌 때에는 <code class="highlighter-rouge">facet_wrap()</code> 함수를 추가한다는 점을 기억해주세요.</p>
+
+<p>마지막으로, 세 팟캐스트를 비교해보려고 합니다.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">jdny_df</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">show</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"지대넓얕"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">bind_rows</span><span class="p">(</span><span class="n">mutate</span><span class="p">(</span><span class="n">grs_df</span><span class="p">,</span><span class="w"> </span><span class="n">show</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"그알싫"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">bind_rows</span><span class="p">(</span><span class="n">mutate</span><span class="p">(</span><span class="n">ms_df</span><span class="p">,</span><span class="w"> </span><span class="n">show</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"망치부인"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">duration_minutes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duration_seconds</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">60</span><span class="p">,</span><span class="w">
+         </span><span class="n">Year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">year</span><span class="p">(</span><span class="n">pubDate</span><span class="p">),</span><span class="w"> </span><span class="n">levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2017</span><span class="o">:</span><span class="m">2014</span><span class="p">),</span><span class="w">
+         </span><span class="n">show</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">factor</span><span class="p">(</span><span class="n">show</span><span class="p">,</span><span class="w"> </span><span class="n">levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"지대넓얕"</span><span class="p">,</span><span class="w"> </span><span class="s2">"그알싫"</span><span class="p">,</span><span class="w"> </span><span class="s2">"망치부인"</span><span class="p">)))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">duration_minutes</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">ggplot</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">duration_minutes</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">show</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">show</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_density_ridges</span><span class="p">(</span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_jk_ridge</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme</span><span class="p">(</span><span class="n">legend.title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_blank</span><span class="p">())</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"방송시간 (분)"</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"방송"</span><span class="p">,</span><span class="w">
+       </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"방송별 방송시간 분포"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_x_continuous</span><span class="p">(</span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">300</span><span class="p">,</span><span class="w"> </span><span class="m">60</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_fill_manual</span><span class="p">(</span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wes_palette</span><span class="p">(</span><span class="s2">"GrandBudapest2"</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">))</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><img src="/text/assets/figure/2017-10-14-podcast-analysis-ridge%20compare%203-1.png" alt="" /></p>
+
+<p>망치부인의 시사수다는 두시간, 지대넓얕은 한시간에 쏠려 있어요. 반면 그알싫은 방송마다 시간이 다양하게 나타나는 것을 볼 수 있네요. 망치부인의 시사수다가 <a href="http://www.afreecatv.com/">아프리카TV</a>에서 출발한 것이 원인 중 하나가 아닐까 생각해봅니다.</p>
+
+<hr />
+
+<h2>키워드 시각화</h2>
+
+<p>마지막으로 지대넓얕의 키워드를 <code class="highlighter-rouge">wordcloud</code>로 시각화해볼 겁니다. 다른 자료도 있으면 좋을텐데, 키워드가 정리되어 있는 방송이 잘 없네요. 제목을 형태소 분석해서 써볼까도 생각했는데, 아무래도 문장이 아니다보니 아쉬워서 추가하지는 않았습니다. 먼저 코드를 볼게요.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">data_frame</span><span class="p">(</span><span class="n">keywords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">read_xml</span><span class="p">(</span><span class="s2">"http://api.podty.me/api/v1/share/cast/390937d3e5c758aa6f4005b63542cc83695b4d5e6925fe6a2d4d488d1d05d748/146364"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+             </span><span class="n">xml_nodes</span><span class="p">(</span><span class="s2">"item itunes\\:keywords"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+             </span><span class="n">xml_text</span><span class="p">())</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">unnest_tokens</span><span class="p">(</span><span class="n">words</span><span class="p">,</span><span class="w"> </span><span class="n">keywords</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">count</span><span class="p">(</span><span class="n">words</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="n">words</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"지적"</span><span class="p">,</span><span class="w"> </span><span class="s2">"지적대화"</span><span class="p">,</span><span class="w"> </span><span class="s2">"대화를"</span><span class="w">
+                       </span><span class="p">,</span><span class="w"> </span><span class="s2">"위한"</span><span class="p">,</span><span class="w"> </span><span class="s2">"넓고"</span><span class="p">,</span><span class="w"> </span><span class="s2">"얕은"</span><span class="p">,</span><span class="w"> </span><span class="s2">"지식"</span><span class="p">,</span><span class="w"> </span><span class="s2">"지대넓얕"</span><span class="p">,</span><span class="w"> </span><span class="s2">"jdny"</span><span class="p">,</span><span class="w"> </span><span class="s2">"팟티"</span><span class="p">,</span><span class="w"> </span><span class="s2">"채사장"</span><span class="p">,</span><span class="w"> </span><span class="s2">"김도인"</span><span class="p">,</span><span class="w"> </span><span class="s2">"깡선생"</span><span class="p">,</span><span class="w"> </span><span class="s2">"독실이"</span><span class="p">,</span><span class="w"> </span><span class="s2">"깡쌤"</span><span class="p">,</span><span class="w"> </span><span class="s2">"이독실"</span><span class="p">,</span><span class="w"> </span><span class="s2">"덕실이"</span><span class="p">,</span><span class="w"> </span><span class="s2">"이덕실"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">with</span><span class="p">(</span><span class="n">wordcloud</span><span class="p">(</span><span class="n">words</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="w"> </span><span class="m">.3</span><span class="p">),</span><span class="w"> </span><span class="n">min.freq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="n">random.order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">colors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wes_palette</span><span class="p">(</span><span class="s2">"Royal1"</span><span class="p">),</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Apple SD Gothic Neo"</span><span class="p">))</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><img src="/text/assets/figure/2017-10-14-podcast-analysis-jdny%20wordcloud-1.png" alt="" /></p>
+
+<p>앞서 정리하지 않았던 <code class="highlighter-rouge">&lt;keyword&gt;</code> 태그만을 추출했습니다(<code class="highlighter-rouge">xml_nodes("item itunes\\:keywords") %&gt;% xml_text()</code>). 다음 <code class="highlighter-rouge">tidytext</code>를 사용해서 단어 숫자로 정리했어요. <code class="highlighter-rouge">wordcloud</code> 그리실 때 <code class="highlighter-rouge">tm</code> 패키지로 <code class="highlighter-rouge">corpus</code> -&gt; <code class="highlighter-rouge">tm</code> -&gt; <code class="highlighter-rouge">findfreq</code>를 많이 쓰실텐데요, <code class="highlighter-rouge">tidytext</code>의 <code class="highlighter-rouge">unnest_tokens</code>와 <code class="highlighter-rouge">count</code> 함수를 쓰면 아주 간단하게 정리하실 수 있습니다. 한글 자료에서 형태소 분석한 뒤 tokenization 하는 부분은 제 패키지, <code class="highlighter-rouge">RmecabKo</code> 다음 판올림에 포함하려고 생각하고 있으니 기대해주세요.</p>
+
+<p>너무 많이 언급된 단어들을 <code class="highlighter-rouge">filter</code>를 통해 제외한 후, <code class="highlighter-rouge">wordcloud</code>를 그립니다. 워드클라우드 시각화의 핵심은 <code class="highlighter-rouge">scale</code> 값과 색깔 선택에 있다고 해도 과언이 아니예요. <code class="highlighter-rouge">min.freq</code> 값을 잘 정해서 잘 안나타나는 단어들을 제외하는 것도 중요하지만, <code class="highlighter-rouge">scale</code>의 두 값을 잘 정해서 단어 크기의 범위를 잘 정해주는 것이 중요합니다. <code class="highlighter-rouge">random.order = TRUE</code>를 설정하면 최빈 단어가 중심에, 빈도가 적을수록 외곽에 위치하면서 원형으로 시각화가 되는 반면, <code class="highlighter-rouge">random.order = FALSE</code>로 잡으면 빈도와 상관없이 위치가 결정되면서 사각형에 가깝게 시각화가 되니 자료에 따라 적절히 활용하시면 좋아요.</p>
+
+<p>의외로 제일 많이 다룬 것은 “역사”군요. “과학”과 “철학”이 그 뒤를 잇고 있고요. “영화”가 많이 다뤄졌다는 것도 생각지 못했던 부분인 것 같아요. “종교”, “영혼”, 여러 국가의 이름 등 어떤 주제들이 다뤄졌는지를 잘 보여주고 있다고 생각합니다. 이렇게 놓고 보니, 지대넓얕이 상당히 공평하게 분야를 다루고 있다고 생각했던 제 생각이 정확한 것은 아니었다는 생각이 드네요. 4년동안 방송을 진행해온 지대넓얕 패널 여러분께 이 자리를 빌어 감사를 표합니다.</p>
+
+<hr />
+
+<h2>마치며</h2>
+
+<p>오늘은 자료 분석 기법보다는 시각화 방법을 소개하는 데 초점을 맞춘 것 같아요. XML 파일 분석에는 동일한 방법을 적용할 수 있다는 점, (혹시라도 팟빵 정책이 변경된다던지 해서 다른 팟캐스트 RSS 파일을 구할 수 있다면) 팟캐스트의 변천과 주제를 분석할 수 있다는 점이 이번 포스트의 주안점이 아니었나 자평해 봅니다. 더 재미있는 자료로 찾아뵙겠습니다.</p>
+
+  </div>
+
+  
+    <div class="post-comments" itemprop="comment">
+      <hr />
+<h1>Comments</h1>
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'junhewk';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+    </div>
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://junhewk.github.io/text/feed.xml">RSS</a>
+
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
