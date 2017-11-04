@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>RmecabKo update to version 0.1.6.1</title>
+  <meta name="description" content="Version update of RmecabKo package to add tokenizer functionality and more">
+  
+    
+    <meta name="keywords" content="text analysis,R,package,pos tagger,tokenizer,MLP,Korean,update 0.1.6.1">
+  
+
+  <link rel="stylesheet" href="/text/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/text/2017/11/03/rmecabko-update-to-version-0161/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="http://localhost:4000/text/feed.xml">
+
+  
+
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="RmecabKo update to version 0.1.6.1">
+  <meta name="twitter:description" content="Version update of RmecabKo package to add tokenizer functionality and more">
+  
+  
+
+  <script type="text/javascript">
+  WebFontConfig = {
+    google: { families: [ 'Bitter:400,700,400italic:latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })();
+</script>
+
+  
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-102102649-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/text/">Study of Narrative Texts</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/text/about/">About</a>
+      
+        
+        <a class="page-link" href="/text/archives/">Archives</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">RmecabKo update to version 0.1.6.1</h1>
+    
+    <p class="post-meta"><time datetime="2017-11-03T17:45:00+00:00" itemprop="datePublished">Nov 3, 2017</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Junhewk Kim</span></span> • 
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <a href="/text/categories/pos-tagger/">pos tagger</a>
+    
+  
+    
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>잘 지내셨는지요? <a href="https://github.com/junhewk/RmecabKo">RmecabKo</a>을 0.1.6.1로 판올림했습니다. 이번에 추가한 중요한 기능은 역시 tokenizer일 것 같고, 다음 판올림을 위해 추가한 기능이 몇 가지 있습니다. 오늘은 tokenizer가 어떤 것인지부터 좀 더 상세하게 설명드리면 좋을 것 같아요. 아직 CRAN에는 등록하지 않았습니다. 몇 가지 문제가 해결되면 한꺼번에 올려야 할 것 같아요.</p>
+
+<p>이번 판올림(0.1.6.1)은 다음 내용으로 구성되어 있습니다.</p>
+
+<ul>
+  <li>tokenizers 추가</li>
+  <li>stopwords_ko 추가</li>
+  <li><code class="highlighter-rouge">install_dic</code> 함수 추가</li>
+</ul>
+
+<hr />
+
+<h2>Tokenizer?</h2>
+
+<p><em>Tokenization</em>은 입력 문자열의 구획을 나누는 것을 말합니다. 결과로 얻어지는 <em>token</em>을 분석의 자료로 활용하게 되죠(wikipedia: <a href="https://en.wikipedia.org/wiki/Lexical_analysis">Lexical analysis</a>). 언어의 통계적 분석을 위해서 문자열의 의미 요소를 추출해야 할텐데, 영어처럼 띄어쓰기로 분할하는 방식이 한국어에는 통하지 않죠. 한국어는 교착어(agglutinative language)로 어근과 접사에 의해 단어의 기능이 결정됩니다. 어근의 형태가 변하지 않고 형태소가 병렬적으로 나열되는 특성은 영어(대명사 격변화, 소유격 등 빼고는 굴절 어미가 거의 사라져서 현대 영어는 고립어의 특성을 보입니다)나 중국어처럼 형태소 자체로 낱말이 되는 고립어와는 다른 분석을 필요로 합니다(wikipedia: <a href="https://ko.wikipedia.org/wiki/고립어_(언어유형학)">고립어 (언어유형학)</a>).</p>
+
+<p>이미 많이 쓰고 계시겠지만, Part-of-speech (POS) analyzer를 이때 사용합니다. POS, 즉 품사 분석은 해당 형태소가 문장에서 어떤 역할을 수행하는지를 제시하며 따라서 이를 기초로 하여 문장 구조(syntax tree 또는 <a href="https://en.wikipedia.org/wiki/Parse_tree">parse tree</a>) 구축에 사용할 수 있고요. 하지만 품사 태그는 제외하고 형태소로 나눠진 결과만을 사용하는 것이 <em>tokenization</em>이 될 것입니다. 최근의 언어 통계 모형은 <em>bag of words</em>에 기초하고 있고, 이 모형은 아시는 것처럼 문장 구조 자체에는 관심이 없으니까요. 저희가 관심 있는 부분은 의미 형태소의 등장 빈도일 것입니다.</p>
+
+<p>물론 문장 구조나 복합어 등을 확인하기 위해서는 개별 형태소 만으로 분석하는 것에는 한계가 있습니다. 이때 등장하는 것이 <em>n-gram tokenization</em>이죠. n개의 인접 단어를 하나의 token으로 만들어 주는 <em>n-gram tokenizer</em>는 두 개 이상의 형태소로 이뤄진 단어(‘문재인 대통령’ 등)나 문장 구조의 영향(한국어는 어순의 영향이 약하기 때문에 중요도는 조금 떨어집니다. 중요한 것으로는 ‘안’, ‘없’ 등을 추가해 만든 부정어가 있을 것 같아요. bigram을 만들어 앞에 ‘안’이 붙어 있는 bigram을 추출하면 부정적인 의미로 사용된 형태소를 추출할 수 있죠.) 등을 분석에 포함시킬 수 있게 됩니다.</p>
+
+<p>기존의 한국어 분석 패키지들도 결국 tokenizer로 활용할 수 있었습니다만, 명시적으로 tokenizer를 포함시킬 필요가 있다고 생각했습니다. 특히 n-gram tokenizer를 포함하고, <a href="http://vita.had.co.nz/papers/tidy-data.html">tidy data</a> 원칙을 따라 텍스트를 분석할 수 있는 패키지인 <code class="highlighter-rouge">tidytext</code>에서 활용할 수 있는 형태로 함수를 만들면 추후 분석에서 유용하리라 판단하여 그동안 작업을 진행했습니다.</p>
+
+<h3><code class="highlighter-rouge">tokenizer</code> 함수</h3>
+
+<p>추가한 함수는 <code class="highlighter-rouge">token_morph</code>, <code class="highlighter-rouge">token_words</code>, <code class="highlighter-rouge">token_nouns</code>와 <code class="highlighter-rouge">token_ngrams</code>의 <em>tokenizer</em> 함수군입니다. 첫 세 가지는 낱개의 token을, 마지막 함수는 n-gram tokenization 결과를 돌려줍니다.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">token_morph</code>는 전체 형태소를 추출합니다.</li>
+  <li><code class="highlighter-rouge">token_words</code>는 실질형태소만 추출합니다. 실질형태소란 어휘적 의미가 있는 형태소를 말합니다. 은전한닢 품사 태그 기준으로 체언에 속하는 NNG (일반 명사), NNP (고유 명사), NNB (의존 명사), NNBC (단위를 나타내는 명사), NR (수사), NP (대명사), 용언에 속하는 VV (동사), VA (형용사), VX (보조 용언), VCP (긍정 지정사), VCN (부정 지정사), 수식언에 속하는 MM (관형사), MAG (일반 부사), MAJ (접속 부사), 독립언에 속하는 IC (감탄사)만 추출하여 결과값으로 제시합니다.</li>
+  <li><code class="highlighter-rouge">token_nouns</code>는 명사만 추출합니다.</li>
+</ul>
+
+<p>사용례를 볼까요?</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">RmecabKo</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># Twice, 'Likey'
+</span><span class="n">txt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">paste</span><span class="p">(</span><span class="s2">"자꾸 드러내고 싶지"</span><span class="p">,</span><span class="w">
+             </span><span class="s2">"자꾸만 사소한 것 하나까지 전부다"</span><span class="p">,</span><span class="w">
+             </span><span class="s2">"작은 화면 속에 내가"</span><span class="p">,</span><span class="w">
+             </span><span class="s2">"제일 예뻐 보이고파"</span><span class="p">,</span><span class="w">
+             </span><span class="s2">"아직은 감춰 이런 내 마음 꾹꾹"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">token_morph</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## [[1]]
+##     MAG       VV       EC       VX       EF      MAG       JX       XR  XSA+ETM      NNB 
+##  "자꾸" "드러내"     "고"     "싶"     "지"   "자꾸"     "만"   "사소"     "한"     "것" 
+##      NR       JX      MAG      MAG       VA      ETM      NNG      NNG      JKB       NP 
+##  "하나"   "까지"   "전부"     "다"     "작"     "은"   "화면"     "속"     "에"     "내" 
+##     JKS      MAG    VA+EC       VV       EC      MAG       JX    VV+EC       MM       MM 
+##    "가"   "제일"   "예뻐"   "보이"   "고파"   "아직"     "은"   "감춰"   "이런"     "내" 
+##     NNG      MAG    "마음"   "꾹꾹" 
+</code></pre>
+</div>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">token_words</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## [[1]]
+##  [1] "자꾸"   "드러내" "싶"     "자꾸"   "것"     "하나"   "전부"   "다"     "작"     "화면"  
+## [11] "속"     "내"     "제일"   "예뻐"   "보이"   "아직"   "감춰"   "이런"   "내"     "마음"  
+## [21] "꾹꾹"  
+</code></pre>
+</div>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">token_nouns</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## [[1]]
+## [1] "것"   "하나" "화면" "속"   "내"   "마음"
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">token_morph</code>의 경우, 형태소 분류를 별도로 진행하실 수 있을 것 같아 Vector name에 분석된 형태소 태그를 붙여 출력하고 있습니다. 추후 특정 형태소 태그만 출력하는 함수를 추가할 예정입니다. 다른 두 함수는 해당 형태소를 순서대로 출력합니다.</p>
+
+<p><code class="highlighter-rouge">token_ngrams</code>의 예를 볼까요?</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">token_ngrams</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2L</span><span class="p">)</span><span class="w"> </span><span class="c1"># bigram 출력, token_words 기반 n-gram 생성
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## [[1]]
+##  [1] "자꾸 드러내" "드러내 싶"   "싶 자꾸"     "자꾸 것"     "것 하나"     "하나 전부"   "전부 다"    
+##  [8] "다 작"       "작 화면"     "화면 속"     "속 내"       "내 제일"     "제일 예뻐"   "예뻐 보이"  
+## [15] "보이 아직"   "아직 감춰"   "감춰 이런"   "이런 내"     "내 마음"     "마음 꾹꾹"  
+</code></pre>
+</div>
+
+<p>그러면, 실례를 살펴볼게요. <code class="highlighter-rouge">tidytext</code>와 결합하여 소설 bigram 분석을 해볼게요. 자료는 이상의 날개를 사용했습니다.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">rvest</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">tidytext</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">magrittr</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">RmecabKo</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 이상, 날개
+</span><span class="n">url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"http://www.jikji.org/%EB%82%A0%EA%B0%9C?highlight=%28%5CbCategory%EC%86%8C%EC%84%A4%5Cb%29"</span><span class="w">
+
+</span><span class="n">wing</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_html</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">html_nodes</span><span class="p">(</span><span class="s2">".line874"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">html_text</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">extract</span><span class="p">(</span><span class="m">3</span><span class="o">:</span><span class="m">173</span><span class="p">)</span><span class="w">
+
+</span><span class="n">wing_book</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data_frame</span><span class="p">(</span><span class="n">book</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"날개"</span><span class="p">,</span><span class="w">
+                        </span><span class="n">author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"이상"</span><span class="p">,</span><span class="w">
+                        </span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">wing</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row_number</span><span class="p">())</span><span class="w">
+
+</span><span class="n">wing_bigrams</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">wing_book</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">unnest_tokens</span><span class="p">(</span><span class="n">bigram</span><span class="p">,</span><span class="w"> </span><span class="n">text</span><span class="p">,</span><span class="w"> </span><span class="n">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">token_ngrams</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+
+</span><span class="n">wing_bigrams</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## # A tibble: 6,008 x 4
+##     book author    id            bigram
+##    &lt;chr&gt;  &lt;chr&gt; &lt;int&gt;             &lt;chr&gt;
+##  1  날개   이상     1           박제 되
+##  2  날개   이상     1           되 버린
+##  3  날개   이상     1         버린 천재
+##  4  날개   이상     1           천재 아
+##  5  날개   이상     1             아 나
+##  6  날개   이상     1           나 이런
+##  7  날개   이상     1           이런 때
+##  8  날개   이상     1           때 연애
+##  9  날개   이상     2 육신 흐느적흐느적
+## 10  날개   이상     2   흐느적흐느적 하
+## # ... with 5,998 more rows
+</code></pre>
+</div>
+
+<p>먼저 bigram을 만들어 보았습니다. 소설 scraping은 <code class="highlighter-rouge">rvest</code>로 한 다음, <code class="highlighter-rouge">magrittr::extract</code>로 필요한 열만 선택했습니다. 다음, <code class="highlighter-rouge">tidytext::unnest_tokens</code> 함수를 활용합니다. 이때, parameter에 <code class="highlighter-rouge">token = token_grams, n = 2</code>를 넣어 bigram을 만들도록 합니다. token 하나를 열 하나에 배치(one-token-per-row)하고 metadata를 추가하는 tidy text format을 따르고 있음을 확인할 수 있습니다.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">wing_bigrams</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">count</span><span class="p">(</span><span class="n">bigram</span><span class="p">,</span><span class="w"> </span><span class="n">sort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## # A tibble: 4,814 x 2
+##     bigram     n
+##      &lt;chr&gt; &lt;int&gt;
+##  1   것 이    46
+##  2   수 없    29
+##  3   내 방    25
+##  4 내 아내    24
+##  5 아내 방    19
+##  6   이 나    19
+##  7   것 같    18
+##  8   한 번    16
+##  9   나 내    15
+## 10   것 다    14
+## # ... with 4,804 more rows
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">dplyr::count</code>를 사용해서 수를 세 보았습니다. 단편이라 단어 수가 많지 않네요. 역시나 “것 이”, “수 없” 등의 단어가 많이 나오는 것을 알 수 있습니다. 흔하지만 의미를 파악하기 힘든 단어들(불용어)을 제외해서 다시 갯수를 세볼게요.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">bigrams_separated</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">wing_bigrams</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">separate</span><span class="p">(</span><span class="n">bigram</span><span class="p">,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"word1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"word2"</span><span class="p">),</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">" "</span><span class="p">)</span><span class="w">
+
+</span><span class="n">bigrams_filtered</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">bigrams_separated</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="n">word1</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">stopwords_ko</span><span class="o">$</span><span class="n">word</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="n">word2</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">stopwords_ko</span><span class="o">$</span><span class="n">word</span><span class="p">)</span><span class="w">
+
+</span><span class="n">bigrams_counts</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">bigrams_filtered</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">count</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span><span class="w"> </span><span class="n">word2</span><span class="p">,</span><span class="w"> </span><span class="n">sort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">bigrams_counts</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## # A tibble: 2,345 x 3
+##       word1  word2     n
+##       &lt;chr&gt;  &lt;chr&gt; &lt;int&gt;
+##  1     아내     방    19
+##  2     이불     속    13
+##  3       돈     놓     8
+##  4     아내   내객     7
+##  5       일     없     7
+##  6   그러나   아내     6
+##  7 아스피린 아달린     6
+##  8       밤     낮     5
+##  9       밤   외출     5
+## 10     생각     보     5
+## # ... with 2,335 more rows
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">tidyr::separate</code>를 사용해 bigram을 두 단어로 나눈 뒤, 패키지에 새로 추가한 <code class="highlighter-rouge">stopwords_ko$word</code>를 포함하지 않는 bigram만을 남깁니다. 소설에서 상상과 시샘의 대상이 되는 공간인 “아내 방”과 그에 대비되는 화자의 위치인 “이불 속”이 가장 많이 등장하는 것을 알 수 있습니다. 낱개 형태소 분석으로는 파악하기 어려운 단어들이죠.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">bigrams_united</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">bigrams_filtered</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">unite</span><span class="p">(</span><span class="n">bigram</span><span class="p">,</span><span class="w"> </span><span class="n">word1</span><span class="p">,</span><span class="w"> </span><span class="n">word2</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">" "</span><span class="p">)</span><span class="w">
+
+</span><span class="n">bigrams_united</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## # A tibble: 2,599 x 4
+##     book author    id            bigram
+##  * &lt;chr&gt;  &lt;chr&gt; &lt;int&gt;             &lt;chr&gt;
+##  1  날개   이상     1         버린 천재
+##  2  날개   이상     2 육신 흐느적흐느적
+##  3  날개   이상     2         정신 은화
+##  4  날개   이상     2           은화 맑
+##  5  날개   이상     2         맑 니코틴
+##  6  날개   이상     2           횟배 앓
+##  7  날개   이상     2           앓 뱃속
+##  8  날개   이상     2         뱃속 스미
+##  9  날개   이상     2       스미 머릿속
+## 10  날개   이상     2       머릿속 으레
+## # ... with 2,589 more rows
+</code></pre>
+</div>
+
+<p>위의 불용어 제외 결과를 합쳐서 다시 원래 자료의 형태로 만들어 보았습니다.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">wing_book</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">unnest_tokens</span><span class="p">(</span><span class="n">trigram</span><span class="p">,</span><span class="w"> </span><span class="n">text</span><span class="p">,</span><span class="w"> </span><span class="n">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">token_ngrams</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">separate</span><span class="p">(</span><span class="n">trigram</span><span class="p">,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"word1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"word2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"word3"</span><span class="p">),</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">" "</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">filter</span><span class="p">(</span><span class="o">!</span><span class="n">word1</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">stopwords_ko</span><span class="o">$</span><span class="n">word</span><span class="p">,</span><span class="w">
+         </span><span class="o">!</span><span class="n">word2</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">stopwords_ko</span><span class="o">$</span><span class="n">word</span><span class="p">,</span><span class="w">
+         </span><span class="o">!</span><span class="n">word3</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">stopwords_ko</span><span class="o">$</span><span class="n">word</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">count</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span><span class="w"> </span><span class="n">word2</span><span class="p">,</span><span class="w"> </span><span class="n">word3</span><span class="p">,</span><span class="w"> </span><span class="n">sort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## # A tibble: 1,654 x 4
+##       word1    word2 word3     n
+##       &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;int&gt;
+##  1     아내       돈    놓     3
+##  2 가지각색   화장품    병     2
+##  3     끼니 가지런히  놓여     2
+##  4     내객     아내    돈     2
+##  5     바지     포켓    속     2
+##  6   벙어리     변소    갖     2
+##  7     생각     필요    없     2
+##  8     아내       방  통과     2
+##  9     아내   소중히  생각     2
+## 10     아내       손    쥐     2
+## # ... with 1,644 more rows
+</code></pre>
+</div>
+
+<p>trigram의 결과입니다. “아내(가) 돈(을) 놓(고)”라는 언급이 세 번으로 가장 많이 등장하는 것을 볼 수 있지만, 아무래도 한국어에서 trigram 이상이 의미있는 결과를 보이려면 문서 크기가 많이 커져야 합니다.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">bigrams_separated</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">filter</span><span class="p">(</span><span class="n">word1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"안"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">count</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span><span class="w"> </span><span class="n">word2</span><span class="p">,</span><span class="w"> </span><span class="n">sort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## # A tibble: 13 x 3
+##    word1 word2     n
+##    &lt;chr&gt; &lt;chr&gt; &lt;int&gt;
+##  1    안    되     4
+##  2    안    될     2
+##  3    안    드     2
+##  4    안  가지     1
+##  5    안  까닭     1
+##  6    안    나     1
+##  7    안    됐     1
+##  8    안    된     1
+##  9    안  된다     1
+## 10    안  온다     1
+## 11    안    왔     1
+## 12    안    집     1
+## 13    안    하     1
+</code></pre>
+</div>
+
+<p>부정어 “안”이 먼저 오는 bigram입니다. “안 되”, “안 될”, “안 드”가 그나마 반복적으로 등장하는 bigram입니다. 주인공의 상태 변화에 대한 부정적 인식이 소설 전반에 나타나는 것과 연결지어 볼 수 있겠네요.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">bigrams_separated</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">filter</span><span class="p">(</span><span class="n">word1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"없"</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">count</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span><span class="w"> </span><span class="n">word2</span><span class="p">,</span><span class="w"> </span><span class="n">sort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## # A tibble: 48 x 3
+##    word1  word2     n
+##    &lt;chr&gt;  &lt;chr&gt; &lt;int&gt;
+##  1    없     것    10
+##  2    없     나     9
+##  3    없   그러     3
+##  4    없 그러나     3
+##  5    없     내     3
+##  6    없     않     3
+##  7    없   그냥     2
+##  8    없   만일     2
+##  9    없   아내     2
+## 10    없   의문     2
+## # ... with 38 more rows
+</code></pre>
+</div>
+
+<p>다음, 부정어 “없”이 먼저 오는 bigram입니다. “없(는) 것”, “없 나”가 많이 등장하네요. 위의 “안”과 비교해볼 때, 소유에 대한 부정이 더 많이 언급되는 것을 살펴볼 수 있어요. 소위 가진 것 없는 ‘룸펜’인 화자의 처지를 살펴볼 수 있죠.</p>
+
+<hr />
+
+<h2>stopwords_ko</h2>
+
+<p>위에서도 사용한 것처럼, 불용어(관사, 전치사, 대명사 등 자주 사용되며 주제 및 제목 필드에서 개별 단어로 검색되지 않는 단어)의 목록을 구성해 보았습니다. 현재 목록을 계속 업데이트 중입니다. 최근 작업하고 있는 텍스트 자료를 기반으로 만들었습니다(이 자료 분석 결과는 곧 공개하겠습니다).</p>
+
+<p><code class="highlighter-rouge">stopwords_ko</code>로 불러올 수 있으며, <code class="highlighter-rouge">tibble</code> 형식을 띄고 있습니다. Character vector 형식으로 부르실 때에는 <code class="highlighter-rouge">stopwords_ko$word</code>로 사용하시면 됩니다.</p>
+
+<hr />
+
+<h2><code class="highlighter-rouge">install_dic</code> 함수</h2>
+
+<p><strong>아직 Mac OSX, unix에서만 지원합니다.</strong></p>
+
+<p>현재 사용자 사전 추가 기능을 작업중인데, 이를 위해서는 <code class="highlighter-rouge">Mecab-Ko-Dic</code>의 source를 패키지가 가지고 있어야 합니다. <code class="highlighter-rouge">install_dic</code> 함수를 추가하여 <code class="highlighter-rouge">Mecab-Ko-Dic</code>의 자동 설치 기능을 추가하고, 추후 사용자 사전 추가에서 활용할 수 있도록 만들었습니다.</p>
+
+<p>따라서 현재 Mac OSX, unix에서 <code class="highlighter-rouge">RmecabKo</code> 설치 과정은 다음과 같습니다.</p>
+
+<ol>
+  <li><code class="highlighter-rouge">Mecab-Ko</code> 설치</li>
+  <li><code class="highlighter-rouge">RmecabKo</code> 패키지 (Github version) 설치</li>
+  <li><code class="highlighter-rouge">install_dic()</code>으로 <code class="highlighter-rouge">Mecab-Ko-Dic</code> 설치</li>
+</ol>
+
+<p>곧 사용자 사전 기능까지 추가해서 CRAN에도 업데이트 할게요.</p>
+
+<hr />
+
+<p>최근 작업중인 텍스트 자료 분석 때문에 전체적으로 업데이트가 늦어졌어요. 곧 재미있는 분석 자료로 찾아뵐게요. 감사합니다.</p>
+
+
+    <div id="share-bar">
+
+    <h4>Share this:</h4>
+
+    <div class="share-buttons">
+        <a  href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/text/2017/11/03/rmecabko-update-to-version-0161/"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on Facebook" >
+            <i class="fa fa-facebook-official share-button"> facebook</i>
+        </a>
+
+        <a  href="https://twitter.com/intent/tweet?text=RmecabKo update to version 0.1.6.1&url=http://localhost:4000/text/2017/11/03/rmecabko-update-to-version-0161/"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on Twitter" >
+            <i class="fa fa-twitter share-button"> twitter</i>
+        </a>
+
+        <a  href="https://plus.google.com/share?url=http://localhost:4000/text/2017/11/03/rmecabko-update-to-version-0161/"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on Google+" >
+            <i class="fa fa-google-plus share-button"> google</i>
+        </a>
+
+        <a  href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/text/2017/11/03/rmecabko-update-to-version-0161/&title=RmecabKo update to version 0.1.6.1&summary=Version update of RmecabKo package to add tokenizer functionality and more&source=Study of Narrative Texts"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on LinkedIn" >
+            <i class="fa fa-linkedin share-button"> linkedin</i>
+        </a>
+
+        <a  href="mailto:?subject=RmecabKo update to version 0.1.6.1&amp;body=Check out this site http://localhost:4000/text/2017/11/03/rmecabko-update-to-version-0161/"
+            title="Share via Email" >
+            <i class="fa fa-envelope share-button"> email</i>
+        </a>
+    </div>
+
+</div>
+  </div>
+
+  
+    <div class="post-comments" itemprop="comment">
+      <hr />
+<h1>Comments</h1>
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'junhewk';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+    </div>
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="http://localhost:4000/text/feed.xml">RSS</a>
+
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
