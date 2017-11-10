@@ -5,7 +5,7 @@
   
   <link href="https://junhewk.github.io/text/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://junhewk.github.io/text/" rel="alternate" type="text/html" hreflang="en" />
-  <updated>2017-11-10T21:22:09+00:00</updated>
+  <updated>2017-11-10T22:48:45+00:00</updated>
   <id>https://junhewk.github.io/text//</id>
 
   
@@ -29,7 +29,7 @@
       <published>2017-11-10T14:38:00+00:00</published>
       <updated>2017-11-10T14:38:00+00:00</updated>
       <id>https://junhewk.github.io/text/2017/11/10/melonchart-lyrics</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2017/11/10/melonchart-lyrics/">&lt;p&gt;&lt;a href=&quot;http://www.melon.com/chart/age/index.htm?chartType=AG&amp;amp;chartGenre=KPOP&amp;amp;chartDate=1960&quot;&gt;멜론 시대별 차트&lt;/a&gt;는 미국 빌보드처럼 공식 가요 순위 기록이 없는 한국 가요를 여러 출처를 통해 정리한 좋은 자료입니다. 물론 음원 공급을 하는 특정 회사의 저작물이라는 한계가 있을 수 있으나, 2010년 이후부터는 멜론 차트가 한국 가요 순위를 말하는 데에 있어서 중요한 지표가 된 것도 사실이니까요. 시대별 차트는 64 ~ 83년도는 순위 없이 해당 년도의 인기곡을, 84 ~ 04년도는 무가지 뮤직박스 차트를, 05년도 이후는 멜론 차트를 제공하고 있습니다. 이번 포스트는 전체 차트와 각 곡의 가사를 scraping한 &lt;a href=&quot;https://github.com/junhewk/melonchartlyrics&quot;&gt;자료&lt;/a&gt;를 토대로 명멸해간 스타들, 그리고 가사를 중심으로 한 분석 기법들의 소개를 이어가려 합니다. 이번에는 순위 자료를 바탕으로 한 graph와 가사의 word cloud, tf-idf 기반 분석을 소개하고, 다음 포스트에서 word vector, stm (structural topic modeling)을 다뤄보고자 합니다.&lt;/p&gt;
+      <content type="html" xml:base="https://junhewk.github.io/text/2017/11/10/melonchart-lyrics/">&lt;p&gt;&lt;a href=&quot;http://www.melon.com/chart/age/index.htm?chartType=AG&amp;amp;chartGenre=KPOP&amp;amp;chartDate=1960&quot;&gt;멜론 시대별 차트&lt;/a&gt;는 미국 빌보드처럼 공식 가요 순위 기록이 없는 한국 가요를 여러 출처를 통해 정리한 좋은 자료입니다. 물론 음원 공급을 하는 특정 회사의 저작물이라는 한계가 있을 수 있으나, 2010년 이후부터는 멜론 차트가 한국 가요 순위를 말하는 데에 있어서 중요한 지표가 된 것도 사실이니까요. 시대별 차트는 1964 ~ 2016년도의 가요 차트를 보여줍니다. 64 ~ 83년도는 순위 없이 해당 년도의 인기곡을, 84 ~ 04년도는 무가지 뮤직박스 차트를, 05년도 이후는 멜론 차트를 제공하고 있습니다. 이번 포스트는 전체 차트와 각 곡의 가사를 scraping한 &lt;a href=&quot;https://github.com/junhewk/melonchartlyrics&quot;&gt;자료&lt;/a&gt;를 토대로 명멸해간 스타들, 그리고 가사를 중심으로 한 분석 기법들의 소개를 이어가려 합니다. 이번에는 순위 자료를 바탕으로 한 graph와 가사의 word cloud, tf-idf 기반 분석을 소개하고, 다음 포스트에서 word vector, stm (structural topic modeling)을 다뤄보고자 합니다.&lt;/p&gt;
 
 &lt;p&gt;자료와 scraping 방법은 &lt;a href=&quot;https://github.com/junhewk/melonchartlyrics&quot;&gt;github&lt;/a&gt;의 자료 및 R script를 참고해주세요. 더불어 이 포스트는&lt;/p&gt;
 
@@ -44,9 +44,9 @@
 
 &lt;h2&gt;한국 가요를 빛낸 스타들&lt;/h2&gt;
 
-&lt;p&gt;먼저 차트에 이름을 올린 가수들을 살펴볼께요. 한분 한분을 언급하는 건 다른 글에서 다루도록 하고, 여기에선 통계적인 분석에 집중하려 합니다. 먼저 ‘원 히트 원더(one-hit wonder)’, 차트에 한 번만 이름을 올린 가수는 전체의 41.5% (456명)입니다. 한 곡을 두 명 이상의 가수가 부른 경우는 제외했어요. 빌보드의 58%에 비하면 현저히 낮은 수치이지만, 83년까지의 차트가 20~30곡으로만 만들어져 있기 때문에 나타나는 편향인 것으로 보여요.&lt;/p&gt;
+&lt;p&gt;먼저 총 3969곡이 수집되었습니다. 이중, 약 4%에 해당하는 165곡의 가사는 멜론에 등록되어 있지 않았습니다.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/text/assets/figure/2017-11-10-melonchart-lyrics-analysis-top-artists-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;표: 차트 출현 빈도&amp;gt;&lt;/p&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -138,6 +138,10 @@
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
+
+&lt;p&gt;먼저 차트에 이름을 올린 가수들을 살펴볼께요. 한분 한분을 언급하는 건 다른 글에서 다루도록 하고, 여기에선 통계적인 분석에 집중하려 합니다. 먼저 ‘원 히트 원더(one-hit wonder)’, 차트에 한 번만 이름을 올린 가수는 전체의 41.5% (456명)입니다. 한 곡을 두 명 이상의 가수가 부른 경우는 제외했어요. 빌보드의 58%에 비하면 현저히 낮은 수치이지만, 83년까지의 차트가 20~30곡으로만 만들어져 있기 때문에 나타나는 편향인 것으로 보여요.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/text/assets/figure/2017-11-10-melonchart-lyrics-analysis-top-artists-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;다음은 불멸의 영예를 안은 가수들을 살펴볼게요. 차트에 이름을 올린 곡의 수대로 나열해 보았습니다. 역시 가왕 조용필이 41곡으로 최다 곡수를 자랑하고 있어요. 빅뱅이 2등인건 의외라고 해야할지. 각자의 활동과 유닛 활동까지 생각하면 그들의 영향력은 어마무시합니다. 이어서 이선희, 이승철, 이문세, 이미자의 이름이 보이네요. 각기 시대를 대표한 가수들이죠. 또, 다비치와 SG워너비가 음원 강자라더니, 차트를 정리하니 확 실감하게 됩니다. 10위권 안일거라고는 생각도 못했는데요.&lt;/p&gt;
 
@@ -472,7 +476,7 @@
       
 
       
-        <summary type="html">멜론 시대별 차트는 미국 빌보드처럼 공식 가요 순위 기록이 없는 한국 가요를 여러 출처를 통해 정리한 좋은 자료입니다. 물론 음원 공급을 하는 특정 회사의 저작물이라는 한계가 있을 수 있으나, 2010년 이후부터는 멜론 차트가 한국 가요 순위를 말하는 데에 있어서 중요한 지표가 된 것도 사실이니까요. 시대별 차트는 64 ~ 83년도는 순위 없이 해당 년도의 인기곡을, 84 ~ 04년도는 무가지 뮤직박스 차트를, 05년도 이후는 멜론 차트를 제공하고 있습니다. 이번 포스트는 전체 차트와 각 곡의 가사를 scraping한 자료를 토대로 명멸해간 스타들, 그리고 가사를 중심으로 한 분석 기법들의 소개를 이어가려 합니다. 이번에는 순위 자료를 바탕으로 한 graph와 가사의 word cloud, tf-idf 기반 분석을 소개하고, 다음 포스트에서 word vector, stm (structural topic modeling)을 다뤄보고자 합니다.</summary>
+        <summary type="html">멜론 시대별 차트는 미국 빌보드처럼 공식 가요 순위 기록이 없는 한국 가요를 여러 출처를 통해 정리한 좋은 자료입니다. 물론 음원 공급을 하는 특정 회사의 저작물이라는 한계가 있을 수 있으나, 2010년 이후부터는 멜론 차트가 한국 가요 순위를 말하는 데에 있어서 중요한 지표가 된 것도 사실이니까요. 시대별 차트는 1964 ~ 2016년도의 가요 차트를 보여줍니다. 64 ~ 83년도는 순위 없이 해당 년도의 인기곡을, 84 ~ 04년도는 무가지 뮤직박스 차트를, 05년도 이후는 멜론 차트를 제공하고 있습니다. 이번 포스트는 전체 차트와 각 곡의 가사를 scraping한 자료를 토대로 명멸해간 스타들, 그리고 가사를 중심으로 한 분석 기법들의 소개를 이어가려 합니다. 이번에는 순위 자료를 바탕으로 한 graph와 가사의 word cloud, tf-idf 기반 분석을 소개하고, 다음 포스트에서 word vector, stm (structural topic modeling)을 다뤄보고자 합니다.</summary>
       
 
       
