@@ -5,7 +5,7 @@
   
   <link href="https://junhewk.github.io/text/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://junhewk.github.io/text/" rel="alternate" type="text/html" hreflang="en" />
-  <updated>2017-11-12T01:46:07+00:00</updated>
+  <updated>2017-11-13T01:52:20+00:00</updated>
   <id>https://junhewk.github.io/text//</id>
 
   
@@ -48,98 +48,186 @@
 
 &lt;p&gt;&amp;lt;표: 차트 출현 빈도&amp;gt;&lt;/p&gt;
 
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Freq&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;3&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;4&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;5&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;6&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;7&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;8&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;9&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;10&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;11&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;12&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;13&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;14&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;15&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;16&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;17&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;18&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;19&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;20&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;22&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;23&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;26&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;32&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;40&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;n&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;422&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;192&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;108&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;78&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;38&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;45&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;34&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;22&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;16&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;14&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;12&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;9&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;6&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;7&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;9&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;4&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;7&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;3&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;3&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;1&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
+&lt;table class=&quot;table&quot; style=&quot;margin-left: auto; margin-right: auto;&quot;&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left;&quot;&gt;
+Freq
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+11
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+13
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+15
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+16
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+17
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+18
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+19
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+20
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+22
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+23
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+24
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+26
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+27
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+32
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+41
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:left;&quot;&gt;
+n
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+456
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+199
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+114
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+78
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+41
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+46
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+40
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+22
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+18
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+11
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+13
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&quot;text-align:right;&quot;&gt;
+1
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;먼저 차트에 이름을 올린 가수들을 살펴볼께요. 한분 한분을 언급하는 건 다른 글에서 다루도록 하고, 여기에선 통계적인 분석에 집중하려 합니다. 먼저 ‘원 히트 원더(one-hit wonder)’, 차트에 한 번만 이름을 올린 가수는 전체의 40.6% (422명)입니다. 한 곡을 두 명 이상의 가수가 부른 경우는 제외했어요. 빌보드의 58%에 비하면 현저히 낮은 수치이지만, 83년까지의 차트가 20~30곡으로만 만들어져 있기 때문에 나타나는 편향인 것으로 보여요.&lt;/p&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;먼저 차트에 이름을 올린 가수들을 살펴볼께요. 한분 한분을 언급하는 건 다른 글에서 다루도록 하고, 여기에선 통계적인 분석에 집중하려 합니다. 먼저 ‘원 히트 원더(one-hit wonder)’, 차트에 한 번만 이름을 올린 가수는 전체의 41.5% (456명)입니다. 한 곡을 두 명 이상의 가수가 부른 경우는 제외했어요. 빌보드의 58%에 비하면 현저히 낮은 수치이지만, 83년까지의 차트가 20~30곡으로만 만들어져 있기 때문에 나타나는 편향인 것으로 보여요.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/text/assets/figure/2017-11-10-melonchart-lyrics-analysis-top-artists-1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
