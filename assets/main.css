@@ -21,6 +21,37 @@ body {
   font-feature-settings: "kern" 1;
   font-kerning: normal; }
 
+table {
+  border-collapse: collapse;
+  width: 100%;
+  float: left;
+  margin: 0 0 2em; }
+  table thead {
+    border-bottom: 3px solid #008cba; }
+    table thead th {
+      padding: 0.35em 0 .35em;
+      font-weight: 400;
+      text-align: left;
+      font-size: 1.25em; }
+  table tbody {
+    border-bottom: 3px solid #008cba; }
+    table tbody tr {
+      border-bottom: 2px solid #ddd; }
+      table tbody tr td {
+        padding: .75em 0; }
+        table tbody tr td a {
+          color: #008cba;
+          text-decoration: none;
+          display: inline-block;
+          margin: 0 .5em 0 0; }
+          table tbody tr td a:hover, table tbody tr td a:active, table tbody tr td a:focus {
+            color: #006687;
+            border: none; }
+  table tfoot td {
+    padding: 0.35em 0 .35em;
+    text-align: left;
+    font-size: 1.25em; }
+
 /**
  * Set `margin-bottom` to maintain vertical rhythm
  */
