@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>Grad CAM으로 딥 러닝 모형 해석 (R version)</title>
+  <meta name="description" content="Deep Learning Model Interpretation by Grad CAM, R refactoring">
+  
+    
+    <meta name="keywords" content="deep learning,text analysis,R,model interpretation,Grad CAM,RmecabKo,Korean">
+  
+
+  <link rel="stylesheet" href="/text/assets/main.css">
+  <link rel="canonical" href="https://junhewk.github.io/text/2017/12/09/grad-cam-interpretation/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="https://junhewk.github.io/text/feed.xml">
+
+  
+
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="Grad CAM으로 딥 러닝 모형 해석 (R version)">
+  <meta name="twitter:description" content="Deep Learning Model Interpretation by Grad CAM, R refactoring">
+  
+  
+
+  <script type="text/javascript">
+  WebFontConfig = {
+    google: { families: [ 'Bitter:400,700,400italic:latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })();
+</script>
+
+  
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-102102649-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/text/">Study of Narrative Texts</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/text/about/">About</a>
+      
+        
+        <a class="page-link" href="/text/archives/">Archives</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Grad CAM으로 딥 러닝 모형 해석 (R version)</h1>
+    
+    <p class="post-meta"><time datetime="2017-12-09T10:39:00+00:00" itemprop="datePublished">Dec 9, 2017</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Junhewk Kim</span></span> • 
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <a href="/text/categories/deep-learning/">deep learning</a>
+    
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>여러 곳에서 딥 러닝을 활용하고 있는 상황이지만, 개인적으로는 집중해서 매달리지는 않는 편입니다. 가장 큰 이유는 제가 관심 있는 것이 분석 결과가 아니라 해석이기 때문일 텐데요. 학문적 관심으로 접근하는 입장에서 딥러닝이 내는 좋은 결과도 해석하지 못하면 저에게는 크게 다가오지 않는 것 같습니다. 다행인 것은, 최근 머신 러닝 모형 해석을 위한 여러 가지 방법들이 제시되고 있다는 것이죠.</p>
+
+<p>attention mechanism과 <code class="highlighter-rouge">lime</code> 패키지( <a href="https://github.com/marcotcr/lime">python</a>, <a href="https://github.com/thomasp85/lime">R</a> )가 대표적인 예였던 것 같아요. Attention mechanism은 딥 러닝 모형이 가중치를 두고 살피는 부분이 어디인지를 알려주는 방법이었죠 ( <a href="http://www.wildml.com/2016/01/attention-and-memory-in-deep-learning-and-nlp/">Attention and Memory in Deep Learning and NLP</a> ). 이미지의 경우 어떤 지점을, 텍스트의 경우 어떤 단어를 모형이 중요하게 다루는지를 알려주었고요. 단, 모형에 구조가 추가된다는 것, 여전히 관심 지점이 어떤 식으로 작용하는지는 알기 어렵다는 단점이 있었습니다.</p>
+
+<p>LIME(Local Interpretable Model-agnostic Explanations)는 완성된 딥 러닝 모형에 feature 일부만을 적용한 결과를 통해, 예측에 해당 feature가 얼마나 영향을 미치는지 제시하는 방법이었죠. Random forest 모형 해석에 적용한 예시는 훌륭했지만, 딥 러닝에 적용한 사례( <a href="https://homes.cs.washington.edu/~marcotcr/blog/lime/">LIME</a> )에서, 방법론의 명칭 자체에서 볼 수 있는 것처럼 model-agnostic (모형에 관해서는 알 수 없음) 하다는 점, 그리고 대부분의 딥 러닝 모형처럼 feature가 많은 경우 사용이 어렵다는 점은 여전히 한계였던 것 같아요.</p>
+
+<p>최근 발표된 Selvaraju RR 등의 Grad CAM (Gradient-weighted Class Activation Mapping, <a href="https://arxiv.org/abs/1610.02391">arxiv</a> )은 CNN 모형에 적용할 수 있는 모형 해석 방법론입니다. 쉽게 설명하면 CNN 층(마지막)에 들어가는 그래디언트를 가지고 자료의 어느 부분에 가중치를 주는지 계산하는 방법이 될 것 같습니다. 별다른 구조 변경이나 재훈련 없이 바로 적용해볼 수 있다는 점, CNN이 사용되는 영역이 무척 넓다는 점(제가 주로 관심을 가지고 있는 텍스트 분석에도 마찬가지죠)이 매력적인 것 같아요.</p>
+
+<p>이번 포스트는 전희원님의 포스트( <a href="http://freesearch.pe.kr/archives/4685">Grad CAM을 이용한 모형 해석</a> )를 그저 R 코드로 다시 refactoring 한 것입니다. 부가적인 설명은 원 포스트를 참고해 주세요. 저 같이 모형 해석에 관심이 더 있으실 R 사용자분들이 계실까 하여 올려봅니다.</p>
+
+<hr />
+
+<h2>Code</h2>
+
+<p>먼저 사용한 라이브러리와 자료입니다. <a href="https://github.com/e9t/nsmc">Naver Sentiment Movie Corpus</a> 를 이용했습니다. 형태소 분석에는 <code class="highlighter-rouge">RmecabKo</code>를 사용했습니다.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="c1"># devtools::install_github("junhewk/RmecabKo")
+# 추가적인 설치 방법은 https://github.com/junhewk/RmecabKo 를 참고해주세요.
+</span><span class="n">library</span><span class="p">(</span><span class="n">RmecabKo</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">tidytext</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">stringr</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">keras</span><span class="p">)</span><span class="w">
+
+</span><span class="n">tbl</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"/Volumes/Database/Data/R/nsmc/ratings_train.txt"</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"\t"</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+
+</span><span class="n">glimpse</span><span class="p">(</span><span class="n">tbl</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## Observations: 150,000
+## Variables: 3
+## $ id       &lt;int&gt; 9976970, 3819312, 10265843, 9045019, 6483659, 5403919, 7797314, 9443947, 7156791, 5912145, 9008700, 10217543, 5957425, 8628627, ...
+## $ document &lt;chr&gt; "아 더빙.. 진짜 짜증나네요 목소리", "흠...포스터보고 초딩영화줄....오버연기조차 가볍지 않구나", "너무재밓었다그래서보는것을추천한다", "교도소 이야기구먼 ..솔직히 재미는 없다..평점 조정", "사이몬페그의 익살스런 연...
+## $ label    &lt;int&gt; 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1,...
+</code></pre>
+</div>
+
+<p>Training set 구축을 위해 텍스트를 (1) 형태소 분석, (2) 빈도 상위 5000개 단어 추리기, (3) ‘<em>PAD</em>’ (sequence 만들 때, 길이를 맞추는 데 쓰는 빈 공간 token) 와 ‘<em>UNK</em>’ (분석에 포함하지 않는 token) 추가, (4) <code class="highlighter-rouge">which</code> 와 <code class="highlighter-rouge">keras::pad_sequences</code> 함수를 통해 id list로 텍스트를 변환하는 과정을 거쳤습니다.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">tbl</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tbl</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">document</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">str_trim</span><span class="p">(</span><span class="n">document</span><span class="p">,</span><span class="w"> </span><span class="s2">"both"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">keywords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">token_morph</span><span class="p">(</span><span class="n">document</span><span class="p">,</span><span class="w"> </span><span class="n">strip_punct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">))</span><span class="w">
+
+</span><span class="n">keyword_cnt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">as.data.frame</span><span class="p">(</span><span class="n">table</span><span class="p">(</span><span class="n">unlist</span><span class="p">(</span><span class="n">tbl</span><span class="o">$</span><span class="n">keywords</span><span class="p">)))</span><span class="w">
+
+</span><span class="n">keyword_clip</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">keyword_cnt</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">as.tibble</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">arrange</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="n">Freq</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">head</span><span class="p">(</span><span class="m">5000</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">set_names</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"keyword"</span><span class="p">,</span><span class="w"> </span><span class="s2">"n"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">select</span><span class="p">(</span><span class="o">-</span><span class="n">n</span><span class="p">)</span><span class="w">
+
+</span><span class="n">keyword_clip</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">bind_rows</span><span class="p">(</span><span class="n">keyword_clip</span><span class="p">,</span><span class="w">
+                          </span><span class="n">data_frame</span><span class="p">(</span><span class="n">keyword</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s1">'_PAD_'</span><span class="p">,</span><span class="w"> </span><span class="s1">'_UNK_'</span><span class="p">)))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row_number</span><span class="p">())</span><span class="w">
+
+</span><span class="n">max_seq</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">median</span><span class="p">(</span><span class="n">do.call</span><span class="p">(</span><span class="n">rbind</span><span class="p">,</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="n">tbl</span><span class="o">$</span><span class="n">keywords</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">5</span><span class="w">
+
+</span><span class="n">train_x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="n">tbl</span><span class="o">$</span><span class="n">keywords</span><span class="p">,</span><span class="w"> 
+                  </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">as.list</span><span class="p">(</span><span class="n">match</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">keyword_clip</span><span class="o">$</span><span class="n">keyword</span><span class="p">,</span><span class="w"> 
+                                            </span><span class="n">nomatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">keyword_clip</span><span class="p">,</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"_UNK_"</span><span class="p">)</span><span class="o">$</span><span class="n">id</span><span class="p">)))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">pad_sequences</span><span class="p">(</span><span class="n">maxlen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max_seq</span><span class="p">,</span><span class="w"> </span><span class="n">padding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'pre'</span><span class="p">,</span><span class="w"> </span><span class="n">truncating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'pre'</span><span class="p">,</span><span class="w"> 
+                </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">keyword_clip</span><span class="p">,</span><span class="w"> </span><span class="n">keyword</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"_PAD_"</span><span class="p">)</span><span class="o">$</span><span class="n">id</span><span class="p">)</span><span class="w">
+
+</span><span class="n">train_y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tbl</span><span class="o">$</span><span class="n">label</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>분석에 사용할 CNN 모형입니다. 세 층의 Convolution Layer를 결합하고 위에 GRU Layer를 bidirectional로 쌓았습니다.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">x_dim</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">dim</span><span class="p">(</span><span class="n">train_x</span><span class="p">)[</span><span class="m">2</span><span class="p">]</span><span class="w">
+
+</span><span class="n">input_txt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">layer_input</span><span class="p">(</span><span class="n">shape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">x_dim</span><span class="p">),</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'input'</span><span class="p">)</span><span class="w">
+
+</span><span class="n">embeddings_out</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">input_txt</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">layer_embedding</span><span class="p">(</span><span class="n">input_dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nrow</span><span class="p">(</span><span class="n">keyword_clip</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">output_dim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'embedding'</span><span class="p">)</span><span class="w">
+
+</span><span class="n">conv_1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">embeddings_out</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">layer_conv_1d</span><span class="p">(</span><span class="m">32</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">padding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'same'</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">layer_average_pooling_1d</span><span class="p">()</span><span class="w">
+
+</span><span class="n">conv_2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">embeddings_out</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">layer_conv_1d</span><span class="p">(</span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">padding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'same'</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">layer_average_pooling_1d</span><span class="p">()</span><span class="w">
+
+</span><span class="n">conv_3</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">embeddings_out</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">layer_conv_1d</span><span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">padding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'same'</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">layer_average_pooling_1d</span><span class="p">()</span><span class="w">
+
+</span><span class="n">concat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">layer_concatenate</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">conv_1</span><span class="p">,</span><span class="w"> </span><span class="n">conv_2</span><span class="p">,</span><span class="w"> </span><span class="n">conv_3</span><span class="p">),</span><span class="w"> </span><span class="n">axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+
+</span><span class="n">bidir</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">concat</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">bidirectional</span><span class="p">(</span><span class="n">layer_gru</span><span class="p">(</span><span class="n">units</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">recurrent_dropout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="p">,</span><span class="w"> </span><span class="n">dropout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.2</span><span class="p">))</span><span class="w">
+
+</span><span class="n">output</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">bidir</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">layer_dense</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">activation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'sigmoid'</span><span class="p">)</span><span class="w">
+
+</span><span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">keras_model</span><span class="p">(</span><span class="n">inputs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input_txt</span><span class="p">,</span><span class="w"> </span><span class="n">outputs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">output</span><span class="p">)</span><span class="w">
+
+</span><span class="n">model</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">summary</span><span class="p">()</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## ________________________________________________________________________________
+## Layer (type)              Output Shape      Param #  Connected to               
+## ================================================================================
+## input (InputLayer)        (None, 19)        0                                   
+## ________________________________________________________________________________
+## embedding (Embedding)     (None, 19, 50)    250150   input[0][0]                
+## ________________________________________________________________________________
+## conv1d_1 (Conv1D)         (None, 19, 32)    1632     embedding[0][0]            
+## ________________________________________________________________________________
+## conv1d_2 (Conv1D)         (None, 19, 16)    1616     embedding[0][0]            
+## ________________________________________________________________________________
+## conv1d_3 (Conv1D)         (None, 19, 8)     1208     embedding[0][0]            
+## ________________________________________________________________________________
+## average_pooling1d_1 (Aver (None, 9, 32)     0        conv1d_1[0][0]             
+## ________________________________________________________________________________
+## average_pooling1d_2 (Aver (None, 9, 16)     0        conv1d_2[0][0]             
+## ________________________________________________________________________________
+## average_pooling1d_3 (Aver (None, 9, 8)      0        conv1d_3[0][0]             
+## ________________________________________________________________________________
+## concatenate_1 (Concatenat (None, 9, 56)     0        average_pooling1d_1[0][0]  
+##                                                      average_pooling1d_2[0][0]  
+##                                                      average_pooling1d_3[0][0]  
+## ________________________________________________________________________________
+## bidirectional_1 (Bidirect (None, 20)        4020     concatenate_1[0][0]        
+## ________________________________________________________________________________
+## dense_1 (Dense)           (None, 1)         21       bidirectional_1[0][0]      
+## ================================================================================
+## Total params: 258,647
+## Trainable params: 258,647
+## Non-trainable params: 0
+## ________________________________________________________________________________
+</code></pre>
+</div>
+
+<p>모형 훈련 과정입니다. mini batch 100개씩 해서 10회 반복하여 훈련시켰고, 슬슬 낡아가고 있는 제 컴퓨터에서도 그리 긴 시간은 걸리지 않았습니다. Validation이 적당히 내려가면서 training도 적절히 되고 있는 모습을 보여주네요.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">model</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'rmsprop'</span><span class="p">,</span><span class="w"> </span><span class="n">loss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'binary_crossentropy'</span><span class="p">)</span><span class="w">
+
+</span><span class="n">hist</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">train_x</span><span class="p">,</span><span class="w">
+      </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">train_y</span><span class="p">,</span><span class="w">
+      </span><span class="n">batch_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">,</span><span class="w">
+      </span><span class="n">epochs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w">
+      </span><span class="n">validation_split</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.1</span><span class="p">)</span><span class="w">
+
+</span><span class="n">plot</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><img src="/text/assets/figure/2017-12-08-grad-cam-interpretation-training-1.png" alt="plot of chunk training" /></p>
+
+<p>Test set을 불러와서 ROC 커브를 그려보았습니다. 0.93이면 괜찮은 것 같아요.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">tbl_test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"/Volumes/Database/Data/R/nsmc/ratings_test.txt"</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"\t"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">tbl_test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tbl_test</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">document</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">str_trim</span><span class="p">(</span><span class="n">document</span><span class="p">,</span><span class="w"> </span><span class="s2">"both"</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">keywords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">token_morph</span><span class="p">(</span><span class="n">document</span><span class="p">))</span><span class="w">
+
+</span><span class="n">test_x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lapply</span><span class="p">(</span><span class="n">tbl_test</span><span class="o">$</span><span class="n">keywords</span><span class="p">,</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">as.list</span><span class="p">(</span><span class="n">match</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">keyword_clip</span><span class="o">$</span><span class="n">keyword</span><span class="p">,</span><span class="w"> </span><span class="n">nomatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5002</span><span class="p">)))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">pad_sequences</span><span class="p">(</span><span class="n">maxlen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max_seq</span><span class="p">,</span><span class="w"> </span><span class="n">padding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'pre'</span><span class="p">,</span><span class="w"> </span><span class="n">truncating</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'pre'</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5001</span><span class="p">)</span><span class="w">
+
+</span><span class="n">test_y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tbl_test</span><span class="o">$</span><span class="n">label</span><span class="w">
+
+</span><span class="nf">dim</span><span class="p">(</span><span class="n">test_x</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## [1] 50000    19
+</code></pre>
+</div>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">prob</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">predict</span><span class="p">(</span><span class="n">test_x</span><span class="p">)</span><span class="w">
+
+</span><span class="n">library</span><span class="p">(</span><span class="n">pROC</span><span class="p">)</span><span class="w">
+
+</span><span class="n">plot</span><span class="p">(</span><span class="n">roc</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span><span class="w"> </span><span class="n">prob</span><span class="p">),</span><span class="w"> </span><span class="n">print.auc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><img src="/text/assets/figure/2017-12-08-grad-cam-interpretation-test_set-1.png" alt="plot of chunk test_set" /></p>
+
+<p>이번 포스트의 핵심인 Grad CAM 함수입니다. 모형에서 원하는 layer의 정보(가중치)를 가져옵니다. 다음, output -&gt; 해당 신경층까지의 그래디언트를 가져왔어요(grads). 이어서 평균으로 합친 다음 (pooled_grads), 훈련에 사용했던 자료를 넣어서 필터의 가중치를 구합니다.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">grad_cam_conv1D</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">target_model</span><span class="p">,</span><span class="w"> </span><span class="n">layer_nm</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">sample_weight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">keras_phase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  
+  </span><span class="n">layers</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">target_model</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">get_layer</span><span class="p">(</span><span class="n">layer_nm</span><span class="p">)</span><span class="w">
+  </span><span class="n">layers_wt</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">layers</span><span class="o">$</span><span class="n">weights</span><span class="w">
+  </span><span class="n">layers_weights</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">layers</span><span class="o">$</span><span class="n">get_weights</span><span class="p">()</span><span class="w">
+  
+  </span><span class="n">grads</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">k_gradients</span><span class="p">(</span><span class="n">target_model</span><span class="o">$</span><span class="n">output</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">],</span><span class="w"> </span><span class="n">layers_wt</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span><span class="w">
+  
+  </span><span class="n">pooled_grads</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">k_mean</span><span class="p">(</span><span class="n">grads</span><span class="p">,</span><span class="w"> </span><span class="n">axis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">))</span><span class="w">
+  </span><span class="n">get_pooled_grads</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">k_function</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">target_model</span><span class="o">$</span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">target_model</span><span class="o">$</span><span class="n">sample_weights</span><span class="p">[[</span><span class="m">1</span><span class="p">]],</span><span class="w"> </span><span class="n">k_learning_phase</span><span class="p">()),</span><span class="w">
+                                 </span><span class="nf">list</span><span class="p">(</span><span class="n">pooled_grads</span><span class="p">,</span><span class="w"> </span><span class="n">layers</span><span class="o">$</span><span class="n">output</span><span class="p">))</span><span class="w">
+  
+  </span><span class="n">value</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">get_pooled_grads</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">sample_weight</span><span class="p">),</span><span class="w"> </span><span class="n">keras_phase</span><span class="p">))</span><span class="w">
+  
+  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="nf">dim</span><span class="p">(</span><span class="n">value</span><span class="p">[[</span><span class="m">2</span><span class="p">]])[</span><span class="nf">length</span><span class="p">(</span><span class="nf">dim</span><span class="p">(</span><span class="n">value</span><span class="p">[[</span><span class="m">2</span><span class="p">]]))],</span><span class="w"> </span><span class="m">1</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">value</span><span class="p">[[</span><span class="m">2</span><span class="p">]][,</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span><span class="p">[[</span><span class="m">2</span><span class="p">]][,</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">value</span><span class="p">[[</span><span class="m">1</span><span class="p">]][</span><span class="n">i</span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+  
+  </span><span class="n">heatmap</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">apply</span><span class="p">(</span><span class="n">value</span><span class="p">[[</span><span class="m">2</span><span class="p">]],</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="p">)</span><span class="w">
+  </span><span class="nf">return</span><span class="p">(</span><span class="n">heatmap</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>91번 자료를 통해 각 token의 가중치를 확인해 보았습니다. “굉장히”, “사랑”, “도”, “느낌”이 결과를 부정적으로 판정하는데, “즐겨”, “이”, “좀”, “였”, “다”는 결과를 긍정적으로 판정하는 데 기여했네요. 최종적으로 부정적인 리뷰로 판정되었습니다만, 평소에 생각하던 것과는 상당히 다른 결과라서 흥미로운 것 같아요. 다른 자료로 더 살펴봐야 겠네요.</p>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">tbl_test</span><span class="o">$</span><span class="n">document</span><span class="p">[</span><span class="m">91</span><span class="p">]</span><span class="w">
+</span></code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>## [1] "로코 굉장히 즐겨보는데, 이 영화는 좀 별로였다. 뭔가 사랑도 개그도 억지스런 느낌.."
+</code></pre>
+</div>
+
+<div class="language-r highlighter-rouge"><pre class="highlight"><code><span class="n">hw</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">grad_cam_conv1D</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="s1">'conv1d_1'</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">test_x</span><span class="p">[</span><span class="m">91</span><span class="p">,</span><span class="w"> </span><span class="p">])</span><span class="w">
+
+</span><span class="n">hm_tbl</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">keyword_clip</span><span class="p">[</span><span class="n">test_x</span><span class="p">[</span><span class="m">91</span><span class="p">,</span><span class="w"> </span><span class="p">],</span><span class="w"> </span><span class="m">1</span><span class="p">]</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">bind_cols</span><span class="p">(</span><span class="n">data_frame</span><span class="p">(</span><span class="n">heat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hw</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> 
+  </span><span class="n">mutate</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row_number</span><span class="p">())</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">hm_tbl</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">heat</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+  </span><span class="n">geom_bar</span><span class="p">(</span><span class="n">stat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'identity'</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+  </span><span class="n">theme_bw</span><span class="p">(</span><span class="n">base_family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Apple SD Gothic Neo"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">scale_x_continuous</span><span class="p">(</span><span class="w">
+    </span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hm_tbl</span><span class="o">$</span><span class="n">id</span><span class="p">,</span><span class="w">
+    </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hm_tbl</span><span class="o">$</span><span class="n">keyword</span><span class="p">,</span><span class="w">
+    </span><span class="n">expand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w">
+  </span><span class="p">)</span><span class="w">
+</span></code></pre>
+</div>
+
+<p><img src="/text/assets/figure/2017-12-08-grad-cam-interpretation-grad_cam_test-1.png" alt="plot of chunk grad_cam_test" /></p>
+
+<hr />
+
+<h2>마치며</h2>
+
+<p>전희원님도 말씀하고 계시지만 이 방법을 통해 긍정, 부정 단어 사전을 구축할 수 있겠다는 생각을 해봅니다. 랜덤 샘플링을 하면 여러 단어의 가중치를 구해서, 거꾸로 각 단어가 해당 corpus의 결과에 어떤 영향을 미치는지를 생각해 볼 수 있겠죠. 이렇게 다시 한 번 한국어 감정 사전의 꿈을 꿔봅니다만, 언제 할 지는 모르겠네요.</p>
+
+<p>좋은 포스트에 사족을 하나 붙였습니다. 다시 한 번, 좋은 내용 소개해주신 전희원님께 감사드려요. 언제나, 궁금한 점은 말씀주셔요. 같이 풀어나갔으면 좋겠습니다. 다음 포스트까지 행복하시길 바라며!</p>
+
+    <div id="share-bar">
+
+    <h4>Share this:</h4>
+
+    <div class="share-buttons">
+        <a  href="https://www.facebook.com/sharer/sharer.php?u=https://junhewk.github.io/text/2017/12/09/grad-cam-interpretation/"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on Facebook" >
+            <i class="fa fa-facebook-official share-button"> facebook</i>
+        </a>
+
+        <a  href="https://twitter.com/intent/tweet?text=Grad CAM으로 딥 러닝 모형 해석 (R version)&url=https://junhewk.github.io/text/2017/12/09/grad-cam-interpretation/"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on Twitter" >
+            <i class="fa fa-twitter share-button"> twitter</i>
+        </a>
+
+        <a  href="https://plus.google.com/share?url=https://junhewk.github.io/text/2017/12/09/grad-cam-interpretation/"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on Google+" >
+            <i class="fa fa-google-plus share-button"> google</i>
+        </a>
+
+        <a  href="https://www.linkedin.com/shareArticle?mini=true&url=https://junhewk.github.io/text/2017/12/09/grad-cam-interpretation/&title=Grad CAM으로 딥 러닝 모형 해석 (R version)&summary=Deep Learning Model Interpretation by Grad CAM, R refactoring&source=Study of Narrative Texts"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on LinkedIn" >
+            <i class="fa fa-linkedin share-button"> linkedin</i>
+        </a>
+
+        <a  href="mailto:?subject=Grad CAM으로 딥 러닝 모형 해석 (R version)&amp;body=Check out this site https://junhewk.github.io/text/2017/12/09/grad-cam-interpretation/"
+            title="Share via Email" >
+            <i class="fa fa-envelope share-button"> email</i>
+        </a>
+    </div>
+
+</div>
+  </div>
+
+  
+    <div class="post-comments" itemprop="comment">
+      <hr />
+<h1>Comments</h1>
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'junhewk';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+    </div>
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://junhewk.github.io/text/feed.xml">RSS</a>
+
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
