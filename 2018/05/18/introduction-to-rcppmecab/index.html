@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>Introduction to RcppMeCab 0.0.1.0</title>
+  <meta name="description" content="A brief explanation of the new R package RcppMeCab">
+  
+    
+    <meta name="keywords" content="text analysis,R,CJK character,Korean,Japanese,Chinese">
+  
+
+  <link rel="stylesheet" href="/text/assets/main.css">
+  <link rel="canonical" href="https://junhewk.github.io/text/2018/05/18/introduction-to-rcppmecab/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="https://junhewk.github.io/text/feed.xml">
+
+  
+
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="Introduction to RcppMeCab 0.0.1.0">
+  <meta name="twitter:description" content="A brief explanation of the new R package RcppMeCab">
+  
+  
+
+  <script type="text/javascript">
+  WebFontConfig = {
+    google: { families: [ 'Bitter:400,700,400italic:latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })();
+</script>
+
+  
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-102102649-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/text/">Study of Narrative Texts</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/text/about/">About</a>
+      
+        
+        <a class="page-link" href="/text/archives/">Archives</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">Introduction to RcppMeCab 0.0.1.0</h1>
+    
+    <p class="post-meta"><time datetime="2018-05-18T16:53:00+00:00" itemprop="datePublished">May 18, 2018</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Junhewk Kim</span></span> • 
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <a href="/text/categories/text-analysis/">text analysis</a>
+    
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>There are several part-of-speech morphological analyzers in Asian languages. Contrary to English, East Asian language needs morphological analyzer for natural language processing, since the same character could have several meanings based on its position of the sentence and there are some languages which are not segmented.</p>
+
+<p>For Japanese, MeCab is the current state of the art part of speech and morphological analyzer. For Korean, MeCab is one of the best analyzers for this purpose. I don’t know much about Chinese, but MeCab could be used since Japanese also makes extensive use of Chinese characters.</p>
+
+<h2>Behind Story of Developing RcppMeCab</h2>
+
+<p>As a researcher who has the interest to analyze text, R is an attractive tool. Active research infrastructure for text mining for English exists, so a lot of resources could be drawn to the research of Korean text. For better research results, vast numbers of corpus should be analyzed. But the most widely used R package for analyzing Korean <a href="https://github.com/haven-jeon/KoNLP">KoNLP</a> runs in RJava. Since RJava operates on JVM, there are limitations on memory size and processing speed.</p>
+
+<p>Hence, I developed <a href="https://github.com/junhewk/RmecabKo">Rmecab</a> which runs on C++ with <a href="http://www.rcpp.org/">Rcpp</a> in 2017. But it has several shortcomings. First, MeCab supports CJK (and there is a reference for the Thai language), but Rmecab analyzes Korean only. Second, I failed to build a stable Windows version for that package.</p>
+
+<p>Rmecab package got a warm attention from Korean R community. And Heewon Jeon, the developer of KoNLP package and a member of the R text analysis software developer community, gave a comment about expanding a language support of the package. I started to tackle the problems I failed to solve before. And this is the result of the effort I have paid.</p>
+
+<h2>RcppMeCab: Installation</h2>
+
+<p>It is possible to install <code class="highlighter-rouge">RcppMeCab</code> from <a href="https://github.com/junhewk/RcppMeCab">Github repository</a>. For the present, I don’t consider offering compiled packages, since this package tries to support various languages based on the MeCab binary the user installed. If there’s a good way to provide compiled versions of each language, it might be supported later.</p>
+
+<h3>Mac OSX &amp; Linux</h3>
+
+<p>First, install <code class="highlighter-rouge">MeCab</code>.</p>
+
+<ul>
+  <li>For Korean: <a href="https://bitbucket.org/eunjeon/mecab-ko">mecab-ko</a></li>
+  <li>For Japanese and Chinese: <a href="https://drive.google.com/uc?export=download&amp;id=0B4y35FiV1wh7cENtOXlicTFaRUE">MeCab</a></li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ tar zxfv mecab-X.X.tar.gz (or mecab-ko-XX.tar.gz)
+$ cd mecab-X.X (or cd mecab-ko-XX)
+$ ./configure
+$ make
+($ make check)
+$ su
+# make install
+</code></pre>
+</div>
+
+<p>Second, install MeCab dictionary you want to use for analyzing.</p>
+
+<ul>
+  <li>For Korean: <a href="https://bitbucket.org/eunjeon/mecab-ko-dic">mecab-ko-dic</a></li>
+  <li>For Japanese: please refer to <a href="http://taku910.github.io/mecab/">MeCab</a>
+    <ul>
+      <li><a href="https://drive.google.com/uc?export=download&amp;id=0B4y35FiV1wh7MWVlSDBCSXZMTXM">IPA dictionary</a></li>
+      <li><a href="https://drive.google.com/uc?export=download&amp;id=0B4y35FiV1wh7X2pESGlLREpxdXM">Juman dictionary</a></li>
+      <li><a href="http://www.tokuteicorpus.jp/dist/">Unidic dictionary</a></li>
+    </ul>
+  </li>
+  <li>For Chinese: please refer to <a href="https://blog.csdn.net/zhzhx1204/article/details/78388494">blog</a>
+    <ul>
+      <li><a href="http://pan.baidu.com/s/1sjFXflF">mecab_chinese_data_binary_v0.3.tar.gz</a></li>
+    </ul>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ tar zxfv mecab-ipadic-2.7.0-XXXX.tar.gz (or tar zxfv mecab-ko-dic-XX.tar.gz)
+$ cd mecab-ipdadic-2.7.0-XXXX (or cd mecab-ko-dic-XX)
+$ ./configure
+$ make
+$ su
+# make install
+</code></pre>
+</div>
+
+<p>Third, install <code class="highlighter-rouge">RcppMeCab</code> in the R console.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>install.packages("devtools")
+devtools::install_github("junhewk/RcppMeCab")
+</code></pre>
+</div>
+
+<h3>Windows OS</h3>
+
+<p>First, install <code class="highlighter-rouge">MeCab</code> binary.</p>
+
+<ul>
+  <li>For Korean: download and uncompress <a href="https://github.com/Pusnow/mecab-ko-msvc">mecab-ko-msvc</a> and <a href="https://github.com/Pusnow/mecab-ko-dic-msvc">mecab-ko-dic-msvc</a>.</li>
+  <li>For Japanese: install <a href="https://drive.google.com/uc?export=download&amp;id=0B4y35FiV1wh7WElGUGt6ejlpVXc">mecab-0.996.exe</a>.</li>
+</ul>
+
+<p>I don’t know there is a MeCab Chinese version for Windows OS. If there is, please let me know to test and support it.</p>
+
+<p>Second, install <code class="highlighter-rouge">RcppMeCab</code> in the R console. You need to install <a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a> since it is installed with compiling. And, download <a href="https://github.com/junhewk/RcppMeCab/releases/tag/0.0.1">MeCab dll</a> and uncompress it before the installation.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># download and install `Rtools`
+# download and uncompress `mecab` DLLs
+install.packages("devtools")
+devtools::install_github("junhewk/RcppMeCab")
+</code></pre>
+</div>
+
+<h2>RcppMeCab: Basic</h2>
+
+<p>RcppMeCab tries to utilize simplicity and power Rcpp provides. Rcpp’s data type <code class="highlighter-rouge">vector</code> and its subtypes support UTF-8 handling in C++ level, thus RcppMeCab ensures CJK developing and analyzing environment without painful endeavor to struggle with encoding. It is also much faster than RJava or R native coding.</p>
+
+<p>RcppMeCab supports Windows OS also. Since its shared dll compiles a dll file from <code class="highlighter-rouge">mecab-ko</code>, I’m not sure it could analyze Japanese and Chinese sentences, too. But <code class="highlighter-rouge">MeCab</code> could analyze different languages if the user supplies an appropriate dictionary, I think this package could also analyze languages other than Korean. If you could test this package in such a language environment like Japanese, please give me feedback.</p>
+
+<p>To date, the package provides <code class="highlighter-rouge">pos</code> function only.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>pos(sentence, dict)
+</code></pre>
+</div>
+
+<ul>
+  <li>You can input a text in <code class="highlighter-rouge">sentence</code>. It only accepts a character vector, encoded in UTF-8. You should check the vector is encoded in UTF-8. You can change the encoding with <code class="highlighter-rouge">iconv</code> function. <code class="highlighter-rouge">stringi</code> package offers various functions to manage encodings of a character vector.</li>
+  <li>You can supply a user-specific location of <code class="highlighter-rouge">mecab-dic</code> in <code class="highlighter-rouge">dict</code>. If you want to use other than an installed dictionary, please input the full location of it. The package doesn’t offer compiled dictionary. The default value is “”, hence, it’s okay to not enter anything in <code class="highlighter-rouge">dict</code>.</li>
+</ul>
+
+<p>For example,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>pos("안녕하세요.") # "안녕하세요." is Korean for "Hello."
+pos("こんにちは。", "/usr/local/libexec/mecab/ipadic") # "こんにちは。" is Japanese for "Hello."
+</code></pre>
+</div>
+
+<h2>Further Steps</h2>
+
+<p>I couldn’t test in the Chinese environment. I believe it would work, but give me feedback with your experience about installation and word segmentation.</p>
+
+<p>Other functions will be added. First, this package focuses on the process speed, therefore it’ll combine <code class="highlighter-rouge">RcppParallel</code> and MeCab’s own lattice mode to parse sentences simultaneously. Second, other results, like N-best or deinflected form of words, will be provided soon.</p>
+
+<p>This package will remain in a compact size to reduce memory usage to the highest degree. Other convenient functions, for instance, calculating sentiment scores or making N-grams, will be supplied by other packages linked with this.</p>
+
+
+    <div id="share-bar">
+
+    <h4>Share this:</h4>
+
+    <div class="share-buttons">
+        <a  href="https://www.facebook.com/sharer/sharer.php?u=https://junhewk.github.io/text/2018/05/18/introduction-to-rcppmecab/"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on Facebook" >
+            <i class="fa fa-facebook-official share-button"> facebook</i>
+        </a>
+
+        <a  href="https://twitter.com/intent/tweet?text=Introduction to RcppMeCab 0.0.1.0&url=https://junhewk.github.io/text/2018/05/18/introduction-to-rcppmecab/"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on Twitter" >
+            <i class="fa fa-twitter share-button"> twitter</i>
+        </a>
+
+        <a  href="https://plus.google.com/share?url=https://junhewk.github.io/text/2018/05/18/introduction-to-rcppmecab/"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on Google+" >
+            <i class="fa fa-google-plus share-button"> google</i>
+        </a>
+
+        <a  href="https://www.linkedin.com/shareArticle?mini=true&url=https://junhewk.github.io/text/2018/05/18/introduction-to-rcppmecab/&title=Introduction to RcppMeCab 0.0.1.0&summary=A brief explanation of the new R package RcppMeCab&source=Study of Narrative Texts"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on LinkedIn" >
+            <i class="fa fa-linkedin share-button"> linkedin</i>
+        </a>
+
+        <a  href="mailto:?subject=Introduction to RcppMeCab 0.0.1.0&amp;body=Check out this site https://junhewk.github.io/text/2018/05/18/introduction-to-rcppmecab/"
+            title="Share via Email" >
+            <i class="fa fa-envelope share-button"> email</i>
+        </a>
+    </div>
+
+</div>
+  </div>
+
+  
+    <div class="post-comments" itemprop="comment">
+      <hr />
+<h1>Comments</h1>
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'junhewk';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+    </div>
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://junhewk.github.io/text/feed.xml">RSS</a>
+
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

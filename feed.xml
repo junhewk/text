@@ -5,7 +5,7 @@
   
   <link href="https://junhewk.github.io/text/feed.xml" rel="self" type="application/atom+xml" />
   <link href="https://junhewk.github.io/text/" rel="alternate" type="text/html" hreflang="en" />
-  <updated>2017-12-13T16:31:24+00:00</updated>
+  <updated>2018-05-25T14:50:23+00:00</updated>
   <id>https://junhewk.github.io/text//</id>
 
   
@@ -19,6 +19,175 @@
 
   
 
+  
+  
+    <entry>
+      
+      <title type="html">Introduction to RcppMeCab 0.0.1.0</title>
+      
+      <link href="https://junhewk.github.io/text/2018/05/18/introduction-to-rcppmecab/" rel="alternate" type="text/html" title="Introduction to RcppMeCab 0.0.1.0" />
+      <published>2018-05-18T16:53:00+00:00</published>
+      <updated>2018-05-18T16:53:00+00:00</updated>
+      <id>https://junhewk.github.io/text/2018/05/18/introduction-to-rcppmecab</id>
+      <content type="html" xml:base="https://junhewk.github.io/text/2018/05/18/introduction-to-rcppmecab/">&lt;p&gt;There are several part-of-speech morphological analyzers in Asian languages. Contrary to English, East Asian language needs morphological analyzer for natural language processing, since the same character could have several meanings based on its position of the sentence and there are some languages which are not segmented.&lt;/p&gt;
+
+&lt;p&gt;For Japanese, MeCab is the current state of the art part of speech and morphological analyzer. For Korean, MeCab is one of the best analyzers for this purpose. I don’t know much about Chinese, but MeCab could be used since Japanese also makes extensive use of Chinese characters.&lt;/p&gt;
+
+&lt;h2&gt;Behind Story of Developing RcppMeCab&lt;/h2&gt;
+
+&lt;p&gt;As a researcher who has the interest to analyze text, R is an attractive tool. Active research infrastructure for text mining for English exists, so a lot of resources could be drawn to the research of Korean text. For better research results, vast numbers of corpus should be analyzed. But the most widely used R package for analyzing Korean &lt;a href=&quot;https://github.com/haven-jeon/KoNLP&quot;&gt;KoNLP&lt;/a&gt; runs in RJava. Since RJava operates on JVM, there are limitations on memory size and processing speed.&lt;/p&gt;
+
+&lt;p&gt;Hence, I developed &lt;a href=&quot;https://github.com/junhewk/RmecabKo&quot;&gt;Rmecab&lt;/a&gt; which runs on C++ with &lt;a href=&quot;http://www.rcpp.org/&quot;&gt;Rcpp&lt;/a&gt; in 2017. But it has several shortcomings. First, MeCab supports CJK (and there is a reference for the Thai language), but Rmecab analyzes Korean only. Second, I failed to build a stable Windows version for that package.&lt;/p&gt;
+
+&lt;p&gt;Rmecab package got a warm attention from Korean R community. And Heewon Jeon, the developer of KoNLP package and a member of the R text analysis software developer community, gave a comment about expanding a language support of the package. I started to tackle the problems I failed to solve before. And this is the result of the effort I have paid.&lt;/p&gt;
+
+&lt;h2&gt;RcppMeCab: Installation&lt;/h2&gt;
+
+&lt;p&gt;It is possible to install &lt;code class=&quot;highlighter-rouge&quot;&gt;RcppMeCab&lt;/code&gt; from &lt;a href=&quot;https://github.com/junhewk/RcppMeCab&quot;&gt;Github repository&lt;/a&gt;. For the present, I don’t consider offering compiled packages, since this package tries to support various languages based on the MeCab binary the user installed. If there’s a good way to provide compiled versions of each language, it might be supported later.&lt;/p&gt;
+
+&lt;h3&gt;Mac OSX &amp;amp; Linux&lt;/h3&gt;
+
+&lt;p&gt;First, install &lt;code class=&quot;highlighter-rouge&quot;&gt;MeCab&lt;/code&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;For Korean: &lt;a href=&quot;https://bitbucket.org/eunjeon/mecab-ko&quot;&gt;mecab-ko&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;For Japanese and Chinese: &lt;a href=&quot;https://drive.google.com/uc?export=download&amp;amp;id=0B4y35FiV1wh7cENtOXlicTFaRUE&quot;&gt;MeCab&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ tar zxfv mecab-X.X.tar.gz (or mecab-ko-XX.tar.gz)
+$ cd mecab-X.X (or cd mecab-ko-XX)
+$ ./configure
+$ make
+($ make check)
+$ su
+# make install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Second, install MeCab dictionary you want to use for analyzing.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;For Korean: &lt;a href=&quot;https://bitbucket.org/eunjeon/mecab-ko-dic&quot;&gt;mecab-ko-dic&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;For Japanese: please refer to &lt;a href=&quot;http://taku910.github.io/mecab/&quot;&gt;MeCab&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://drive.google.com/uc?export=download&amp;amp;id=0B4y35FiV1wh7MWVlSDBCSXZMTXM&quot;&gt;IPA dictionary&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://drive.google.com/uc?export=download&amp;amp;id=0B4y35FiV1wh7X2pESGlLREpxdXM&quot;&gt;Juman dictionary&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;http://www.tokuteicorpus.jp/dist/&quot;&gt;Unidic dictionary&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;For Chinese: please refer to &lt;a href=&quot;https://blog.csdn.net/zhzhx1204/article/details/78388494&quot;&gt;blog&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;http://pan.baidu.com/s/1sjFXflF&quot;&gt;mecab_chinese_data_binary_v0.3.tar.gz&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ tar zxfv mecab-ipadic-2.7.0-XXXX.tar.gz (or tar zxfv mecab-ko-dic-XX.tar.gz)
+$ cd mecab-ipdadic-2.7.0-XXXX (or cd mecab-ko-dic-XX)
+$ ./configure
+$ make
+$ su
+# make install
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Third, install &lt;code class=&quot;highlighter-rouge&quot;&gt;RcppMeCab&lt;/code&gt; in the R console.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;junhewk/RcppMeCab&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3&gt;Windows OS&lt;/h3&gt;
+
+&lt;p&gt;First, install &lt;code class=&quot;highlighter-rouge&quot;&gt;MeCab&lt;/code&gt; binary.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;For Korean: download and uncompress &lt;a href=&quot;https://github.com/Pusnow/mecab-ko-msvc&quot;&gt;mecab-ko-msvc&lt;/a&gt; and &lt;a href=&quot;https://github.com/Pusnow/mecab-ko-dic-msvc&quot;&gt;mecab-ko-dic-msvc&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;For Japanese: install &lt;a href=&quot;https://drive.google.com/uc?export=download&amp;amp;id=0B4y35FiV1wh7WElGUGt6ejlpVXc&quot;&gt;mecab-0.996.exe&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I don’t know there is a MeCab Chinese version for Windows OS. If there is, please let me know to test and support it.&lt;/p&gt;
+
+&lt;p&gt;Second, install &lt;code class=&quot;highlighter-rouge&quot;&gt;RcppMeCab&lt;/code&gt; in the R console. You need to install &lt;a href=&quot;https://cran.r-project.org/bin/windows/Rtools/&quot;&gt;Rtools&lt;/a&gt; since it is installed with compiling. And, download &lt;a href=&quot;https://github.com/junhewk/RcppMeCab/releases/tag/0.0.1&quot;&gt;MeCab dll&lt;/a&gt; and uncompress it before the installation.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# download and install `Rtools`
+# download and uncompress `mecab` DLLs
+install.packages(&quot;devtools&quot;)
+devtools::install_github(&quot;junhewk/RcppMeCab&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2&gt;RcppMeCab: Basic&lt;/h2&gt;
+
+&lt;p&gt;RcppMeCab tries to utilize simplicity and power Rcpp provides. Rcpp’s data type &lt;code class=&quot;highlighter-rouge&quot;&gt;vector&lt;/code&gt; and its subtypes support UTF-8 handling in C++ level, thus RcppMeCab ensures CJK developing and analyzing environment without painful endeavor to struggle with encoding. It is also much faster than RJava or R native coding.&lt;/p&gt;
+
+&lt;p&gt;RcppMeCab supports Windows OS also. Since its shared dll compiles a dll file from &lt;code class=&quot;highlighter-rouge&quot;&gt;mecab-ko&lt;/code&gt;, I’m not sure it could analyze Japanese and Chinese sentences, too. But &lt;code class=&quot;highlighter-rouge&quot;&gt;MeCab&lt;/code&gt; could analyze different languages if the user supplies an appropriate dictionary, I think this package could also analyze languages other than Korean. If you could test this package in such a language environment like Japanese, please give me feedback.&lt;/p&gt;
+
+&lt;p&gt;To date, the package provides &lt;code class=&quot;highlighter-rouge&quot;&gt;pos&lt;/code&gt; function only.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pos(sentence, dict)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You can input a text in &lt;code class=&quot;highlighter-rouge&quot;&gt;sentence&lt;/code&gt;. It only accepts a character vector, encoded in UTF-8. You should check the vector is encoded in UTF-8. You can change the encoding with &lt;code class=&quot;highlighter-rouge&quot;&gt;iconv&lt;/code&gt; function. &lt;code class=&quot;highlighter-rouge&quot;&gt;stringi&lt;/code&gt; package offers various functions to manage encodings of a character vector.&lt;/li&gt;
+  &lt;li&gt;You can supply a user-specific location of &lt;code class=&quot;highlighter-rouge&quot;&gt;mecab-dic&lt;/code&gt; in &lt;code class=&quot;highlighter-rouge&quot;&gt;dict&lt;/code&gt;. If you want to use other than an installed dictionary, please input the full location of it. The package doesn’t offer compiled dictionary. The default value is “”, hence, it’s okay to not enter anything in &lt;code class=&quot;highlighter-rouge&quot;&gt;dict&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For example,&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pos(&quot;안녕하세요.&quot;) # &quot;안녕하세요.&quot; is Korean for &quot;Hello.&quot;
+pos(&quot;こんにちは。&quot;, &quot;/usr/local/libexec/mecab/ipadic&quot;) # &quot;こんにちは。&quot; is Japanese for &quot;Hello.&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2&gt;Further Steps&lt;/h2&gt;
+
+&lt;p&gt;I couldn’t test in the Chinese environment. I believe it would work, but give me feedback with your experience about installation and word segmentation.&lt;/p&gt;
+
+&lt;p&gt;Other functions will be added. First, this package focuses on the process speed, therefore it’ll combine &lt;code class=&quot;highlighter-rouge&quot;&gt;RcppParallel&lt;/code&gt; and MeCab’s own lattice mode to parse sentences simultaneously. Second, other results, like N-best or deinflected form of words, will be provided soon.&lt;/p&gt;
+
+&lt;p&gt;This package will remain in a compact size to reduce memory usage to the highest degree. Other convenient functions, for instance, calculating sentiment scores or making N-grams, will be supplied by other packages linked with this.&lt;/p&gt;</content>
+
+      
+      
+      
+      
+      
+
+      
+        <author>
+            <name>Junhewk Kim</name>
+          
+          
+        </author>
+      
+
+      
+        <category term="text analysis" />
+      
+
+      
+        <category term="text analysis" />
+      
+        <category term="R" />
+      
+        <category term="POS tagger" />
+      
+        <category term="morpheme analyzer" />
+      
+        <category term="Asian language" />
+      
+
+      
+        <summary type="html">There are several part-of-speech morphological analyzers in Asian languages. Contrary to English, East Asian language needs morphological analyzer for natural language processing, since the same character could have several meanings based on its position of the sentence and there are some languages which are not segmented.</summary>
+      
+
+      
+      
+    </entry>
+  
   
   
     <entry>
