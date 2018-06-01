@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+  
+  <title>RcppMeCab 0.0.1.1 Release</title>
+  <meta name="description" content="RcppMeCab patch 0.0.1.1 released with parallelization support">
+  
+    
+    <meta name="keywords" content="text analysis,R,CJK character,Korean,Japanese,Chinese,Parallelization">
+  
+
+  <link rel="stylesheet" href="/text/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/text/2018/05/31/rcppmecab-0011-release/">
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="http://localhost:4000/text/feed.xml">
+
+  
+
+  
+  <meta name="twitter:card" content="summary">
+  
+  <meta name="twitter:title" content="RcppMeCab 0.0.1.1 Release">
+  <meta name="twitter:description" content="RcppMeCab patch 0.0.1.1 released with parallelization support">
+  
+  
+
+  <script type="text/javascript">
+  WebFontConfig = {
+    google: { families: [ 'Bitter:400,700,400italic:latin' ] }
+  };
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })();
+</script>
+
+  
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-102102649-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/text/">Study of Narrative Texts</a>
+
+    <nav class="site-nav">
+      
+        
+        <a class="page-link" href="/text/about/">About</a>
+      
+        
+        <a class="page-link" href="/text/archives/">Archives</a>
+      
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+      <h1 class="post-title" itemprop="name headline">RcppMeCab 0.0.1.1 Release</h1>
+    
+    <p class="post-meta"><time datetime="2018-05-31T21:28:00+00:00" itemprop="datePublished">May 31, 2018</time> • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">Junhewk Kim</span></span> • 
+  
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <a href="/text/categories/text-analysis/">text analysis</a>
+    
+  
+
+</p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>RcppMeCab 0.0.1.1 is released in <a href="https://github.com/junhewk/RcppMeCab">Github</a>. This version supports:</p>
+
+<ul>
+  <li>Parallelization with Intel TBB library</li>
+  <li><code class="highlighter-rouge">join</code> parameter is added</li>
+  <li>Code tidying</li>
+</ul>
+
+<h2>Parallelization</h2>
+
+<p>The package supports parallel computation with <code class="highlighter-rouge">Intel TBB</code> library which is included in <code class="highlighter-rouge">RcppParallel</code> package. <code class="highlighter-rouge">RcppParallel</code> package isn’t fully occupied in <code class="highlighter-rouge">RcppMeCab</code> package because it doesn’t support <code class="highlighter-rouge">CharacterVector</code> conversion.</p>
+
+<p>Now the package shows 50x faster morpheme analyzing compared to NLP packages based on <code class="highlighter-rouge">RJava</code>. For example,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># temp is a 100-length CharacterVector
+# SimplePos22 is KoNLP's POS function
+# sapply(temp, function(x) pos(x, "")) is RcppMeCab's pos function with R loop
+# posLoop(temp, "") is RcppMeCab's loop version which runs in C++
+# posParallel(temp, "") is RcppMeCab's parallelized version with Intel TBB library
+
+&gt; microbenchmark(SimplePos22(temp), sapply(temp, function(x) pos(x, "")), posLoop(temp, ""), posParallel(temp, ""))
+Unit: milliseconds
+                                 expr        min         lq      mean     median
+                    SimplePos22(temp) 579.159705 613.425725 650.97500 635.938074
+ sapply(temp, function(x) pos(x, "")) 156.958030 163.132787 183.11562 174.995390
+                    posLoop(temp, "")  74.441377  81.289487  90.00520  84.931590
+                posParallel(temp, "")   7.406578   8.639878  12.43173   9.694593
+        uq       max neval
+ 657.36901 1014.7603   100
+ 188.84118  356.2329   100
+  90.50949  218.8578   100
+  10.69478  213.4961   100
+
+&gt; sessionInfo()
+R version 3.5.0 (2018-04-23)
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+Running under: macOS High Sierra 10.13.4
+
+Matrix products: default
+BLAS: /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] microbenchmark_1.4-4 KoNLP_0.80.1         RcppParallel_4.4.0  
+[4] Rcpp_0.12.16        
+
+loaded via a namespace (and not attached):
+ [1] digest_0.6.15   withr_2.1.2     DBI_1.0.0       magrittr_1.5   
+ [5] RSQLite_2.1.1   stringi_1.2.2   blob_1.1.1      hash_2.2.6     
+ [9] tau_0.0-20      devtools_1.13.5 tools_3.5.0     stringr_1.3.1  
+[13] bit64_0.9-7     bit_1.1-14      compiler_3.5.0  rJava_0.9-10   
+[17] memoise_1.1.0   Sejong_0.01   
+
+# RcppMeCab is not loaded for the comparison of basic tagger and loop version
+</code></pre>
+</div>
+
+<p>This package uses <code class="highlighter-rouge">RcppParallel</code> for futher development. Although <code class="highlighter-rouge">RcppParallel</code> doesn’t support parallelization over <code class="highlighter-rouge">CharacterVector</code>, I expect it’ll be added sometime.</p>
+
+<h2>join parameter</h2>
+
+<p>You can set <code class="highlighter-rouge">join = FALSE</code> in <code class="highlighter-rouge">pos</code> and <code class="highlighter-rouge">posParallel</code> functions. If <code class="highlighter-rouge">join = FALSE</code> is given, then the return value will be morphemes only. Tags will be returned in the vector names. For example,</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&gt; pos("Hi")
+[1] "Hi/SL"
+&gt; pos("Hi", join = FALSE)
+  SL 
+"Hi" 
+# SL is mecab-ko's pos id for foreign languages
+</code></pre>
+</div>
+
+    <div id="share-bar">
+
+    <h4>Share this:</h4>
+
+    <div class="share-buttons">
+        <a  href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/text/2018/05/31/rcppmecab-0011-release/"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on Facebook" >
+            <i class="fa fa-facebook-official share-button"> facebook</i>
+        </a>
+
+        <a  href="https://twitter.com/intent/tweet?text=RcppMeCab 0.0.1.1 Release&url=http://localhost:4000/text/2018/05/31/rcppmecab-0011-release/"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on Twitter" >
+            <i class="fa fa-twitter share-button"> twitter</i>
+        </a>
+
+        <a  href="https://plus.google.com/share?url=http://localhost:4000/text/2018/05/31/rcppmecab-0011-release/"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on Google+" >
+            <i class="fa fa-google-plus share-button"> google</i>
+        </a>
+
+        <a  href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/text/2018/05/31/rcppmecab-0011-release/&title=RcppMeCab 0.0.1.1 Release&summary=RcppMeCab patch 0.0.1.1 released with parallelization support&source=Study of Narrative Texts"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on LinkedIn" >
+            <i class="fa fa-linkedin share-button"> linkedin</i>
+        </a>
+
+        <a  href="mailto:?subject=RcppMeCab 0.0.1.1 Release&amp;body=Check out this site http://localhost:4000/text/2018/05/31/rcppmecab-0011-release/"
+            title="Share via Email" >
+            <i class="fa fa-envelope share-button"> email</i>
+        </a>
+    </div>
+
+</div>
+  </div>
+
+  
+    <div class="post-comments" itemprop="comment">
+      <hr />
+<h1>Comments</h1>
+<section class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'junhewk';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+    </div>
+  
+
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <p>
+      
+
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="http://localhost:4000/text/feed.xml">RSS</a>
+
+    </p>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
