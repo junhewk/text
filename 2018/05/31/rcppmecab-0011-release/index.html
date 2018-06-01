@@ -17,10 +17,10 @@
   
 
   <link rel="stylesheet" href="/text/assets/main.css">
-  <link rel="canonical" href="http://localhost:4000/text/2018/05/31/rcppmecab-0011-release/">
+  <link rel="canonical" href="https://junhewk.github.io/text/2018/05/31/rcppmecab-0011-release/">
   
   
-  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="http://localhost:4000/text/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Study of Narrative Texts" href="https://junhewk.github.io/text/feed.xml">
 
   
 
@@ -133,6 +133,7 @@
 <ul>
   <li>Parallelization with Intel TBB library</li>
   <li><code class="highlighter-rouge">join</code> parameter is added</li>
+  <li><code class="highlighter-rouge">user_dic</code> parameter is added</li>
   <li>Code tidying</li>
 </ul>
 
@@ -193,7 +194,7 @@ loaded via a namespace (and not attached):
 
 <p>This package uses <code class="highlighter-rouge">RcppParallel</code> for futher development. Although <code class="highlighter-rouge">RcppParallel</code> doesn’t support parallelization over <code class="highlighter-rouge">CharacterVector</code>, I expect it’ll be added sometime.</p>
 
-<h2>join parameter</h2>
+<h2>join Parameter</h2>
 
 <p>You can set <code class="highlighter-rouge">join = FALSE</code> in <code class="highlighter-rouge">pos</code> and <code class="highlighter-rouge">posParallel</code> functions. If <code class="highlighter-rouge">join = FALSE</code> is given, then the return value will be morphemes only. Tags will be returned in the vector names. For example,</p>
 
@@ -206,36 +207,52 @@ loaded via a namespace (and not attached):
 </code></pre>
 </div>
 
+<h2>User Dictionary</h2>
+
+<p>You can apply your compiled user dictionary to <code class="highlighter-rouge">pos</code> and <code class="highlighter-rouge">posParallel</code> function. To compile your CSV file, please refer <a href="https://github.com/junhewk/RcppMeCab">Github</a>. I’ll provide a full explanation about using <code class="highlighter-rouge">mecab-dict-index</code> in later post.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># person.csv has its content,
+# 폼페이오,,,,NNP,인명,F,폼페이오,*,*,*,*,*
+# (폼페이오 = Pompeo, who is an American politician serves Secretary of State currently)
+# The file is compiled by `mecab-dict-index` with `mecab-ko-dic` model and CSV files.
+
+&gt; pos("폼페이오")
+[1] "폼페이/NNG" "오/VCP+EC" 
+&gt; pos("폼페이오", user_dic = "~/user_dic.dic")
+[1] "폼페이오/NNP"
+</code></pre>
+</div>
+
     <div id="share-bar">
 
     <h4>Share this:</h4>
 
     <div class="share-buttons">
-        <a  href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/text/2018/05/31/rcppmecab-0011-release/"
+        <a  href="https://www.facebook.com/sharer/sharer.php?u=https://junhewk.github.io/text/2018/05/31/rcppmecab-0011-release/"
             onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
             title="Share on Facebook" >
             <i class="fa fa-facebook-official share-button"> facebook</i>
         </a>
 
-        <a  href="https://twitter.com/intent/tweet?text=RcppMeCab 0.0.1.1 Release&url=http://localhost:4000/text/2018/05/31/rcppmecab-0011-release/"
+        <a  href="https://twitter.com/intent/tweet?text=RcppMeCab 0.0.1.1 Release&url=https://junhewk.github.io/text/2018/05/31/rcppmecab-0011-release/"
             onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
             title="Share on Twitter" >
             <i class="fa fa-twitter share-button"> twitter</i>
         </a>
 
-        <a  href="https://plus.google.com/share?url=http://localhost:4000/text/2018/05/31/rcppmecab-0011-release/"
+        <a  href="https://plus.google.com/share?url=https://junhewk.github.io/text/2018/05/31/rcppmecab-0011-release/"
             onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
             title="Share on Google+" >
             <i class="fa fa-google-plus share-button"> google</i>
         </a>
 
-        <a  href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/text/2018/05/31/rcppmecab-0011-release/&title=RcppMeCab 0.0.1.1 Release&summary=RcppMeCab patch 0.0.1.1 released with parallelization support&source=Study of Narrative Texts"
+        <a  href="https://www.linkedin.com/shareArticle?mini=true&url=https://junhewk.github.io/text/2018/05/31/rcppmecab-0011-release/&title=RcppMeCab 0.0.1.1 Release&summary=RcppMeCab patch 0.0.1.1 released with parallelization support&source=Study of Narrative Texts"
             onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
             title="Share on LinkedIn" >
             <i class="fa fa-linkedin share-button"> linkedin</i>
         </a>
 
-        <a  href="mailto:?subject=RcppMeCab 0.0.1.1 Release&amp;body=Check out this site http://localhost:4000/text/2018/05/31/rcppmecab-0011-release/"
+        <a  href="mailto:?subject=RcppMeCab 0.0.1.1 Release&amp;body=Check out this site https://junhewk.github.io/text/2018/05/31/rcppmecab-0011-release/"
             title="Share via Email" >
             <i class="fa fa-envelope share-button"> email</i>
         </a>
@@ -279,7 +296,7 @@ loaded via a namespace (and not attached):
     <p>
       
 
-&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="http://localhost:4000/text/feed.xml">RSS</a>
+&copy;  - Powered by <a href="https://jekyllrb.com">Jekyll</a> &amp; <a href="https://github.com/yous/whiteglass">whiteglass</a> - Subscribe via <a href="https://junhewk.github.io/text/feed.xml">RSS</a>
 
     </p>
 
