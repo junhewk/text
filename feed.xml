@@ -3,10 +3,10 @@
   <generator uri="http://jekyllrb.com" version="3.5.1">Jekyll</generator>
   
   
-  <link href="https://junhewk.github.io/text/feed.xml" rel="self" type="application/atom+xml" />
-  <link href="https://junhewk.github.io/text/" rel="alternate" type="text/html" hreflang="en" />
-  <updated>2018-07-04T23:22:54+00:00</updated>
-  <id>https://junhewk.github.io/text//</id>
+  <link href="http://localhost:4000/text/feed.xml" rel="self" type="application/atom+xml" />
+  <link href="http://localhost:4000/text/" rel="alternate" type="text/html" hreflang="en" />
+  <updated>2018-10-12T02:08:11+00:00</updated>
+  <id>http://localhost:4000/text//</id>
 
   
     <title type="html">Study of Narrative Texts</title>
@@ -25,11 +25,11 @@
       
       <title type="html">RcppMeCab 0.0.1.2 Release on CRAN</title>
       
-      <link href="https://junhewk.github.io/text/2018/07/04/rcppmecab-0012-release/" rel="alternate" type="text/html" title="RcppMeCab 0.0.1.2 Release on CRAN" />
+      <link href="http://localhost:4000/text/2018/07/04/rcppmecab-0012-release/" rel="alternate" type="text/html" title="RcppMeCab 0.0.1.2 Release on CRAN" />
       <published>2018-07-04T19:06:00+00:00</published>
       <updated>2018-07-04T19:06:00+00:00</updated>
-      <id>https://junhewk.github.io/text/2018/07/04/rcppmecab-0012-release</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2018/07/04/rcppmecab-0012-release/">&lt;p&gt;RcppMeCab 0.0.1.2 is released on &lt;a href=&quot;https://cran.r-project.org/web/packages/RcppMeCab/index.html&quot;&gt;CRAN&lt;/a&gt;. You can install the package via &lt;code class=&quot;highlighter-rouge&quot;&gt;install.packages&lt;/code&gt; in Windows/Mac OS X/Linux (Solaris is not supported). In this version:&lt;/p&gt;
+      <id>http://localhost:4000/text/2018/07/04/rcppmecab-0012-release</id>
+      <content type="html" xml:base="http://localhost:4000/text/2018/07/04/rcppmecab-0012-release/">&lt;p&gt;RcppMeCab 0.0.1.2 is released on &lt;a href=&quot;https://cran.r-project.org/web/packages/RcppMeCab/index.html&quot;&gt;CRAN&lt;/a&gt;. You can install the package via &lt;code class=&quot;highlighter-rouge&quot;&gt;install.packages&lt;/code&gt; in Windows/Mac OS X/Linux (Solaris is not supported). In this version:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Several errors are fixed&lt;/li&gt;
@@ -127,11 +127,11 @@ $안녕하세요.
       
       <title type="html">RcppMeCab 0.0.1.1 Release</title>
       
-      <link href="https://junhewk.github.io/text/2018/05/31/rcppmecab-0011-release/" rel="alternate" type="text/html" title="RcppMeCab 0.0.1.1 Release" />
+      <link href="http://localhost:4000/text/2018/05/31/rcppmecab-0011-release/" rel="alternate" type="text/html" title="RcppMeCab 0.0.1.1 Release" />
       <published>2018-05-31T21:28:00+00:00</published>
       <updated>2018-05-31T21:28:00+00:00</updated>
-      <id>https://junhewk.github.io/text/2018/05/31/rcppmecab-0011-release</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2018/05/31/rcppmecab-0011-release/">&lt;p&gt;RcppMeCab 0.0.1.1 is released in &lt;a href=&quot;https://github.com/junhewk/RcppMeCab&quot;&gt;Github&lt;/a&gt;. This version supports:&lt;/p&gt;
+      <id>http://localhost:4000/text/2018/05/31/rcppmecab-0011-release</id>
+      <content type="html" xml:base="http://localhost:4000/text/2018/05/31/rcppmecab-0011-release/">&lt;p&gt;RcppMeCab 0.0.1.1 is released in &lt;a href=&quot;https://github.com/junhewk/RcppMeCab&quot;&gt;Github&lt;/a&gt;. This version supports:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Parallelization with Intel TBB library&lt;/li&gt;
@@ -270,11 +270,11 @@ loaded via a namespace (and not attached):
       
       <title type="html">Introduction to RcppMeCab 0.0.1.0</title>
       
-      <link href="https://junhewk.github.io/text/2018/05/18/introduction-to-rcppmecab/" rel="alternate" type="text/html" title="Introduction to RcppMeCab 0.0.1.0" />
+      <link href="http://localhost:4000/text/2018/05/18/introduction-to-rcppmecab/" rel="alternate" type="text/html" title="Introduction to RcppMeCab 0.0.1.0" />
       <published>2018-05-18T16:53:00+00:00</published>
       <updated>2018-05-18T16:53:00+00:00</updated>
-      <id>https://junhewk.github.io/text/2018/05/18/introduction-to-rcppmecab</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2018/05/18/introduction-to-rcppmecab/">&lt;p&gt;There are several part-of-speech morphological analyzers in Asian languages. Contrary to English, East Asian language needs morphological analyzer for natural language processing, since the same character could have several meanings based on its position of the sentence and there are some languages which are not segmented.&lt;/p&gt;
+      <id>http://localhost:4000/text/2018/05/18/introduction-to-rcppmecab</id>
+      <content type="html" xml:base="http://localhost:4000/text/2018/05/18/introduction-to-rcppmecab/">&lt;p&gt;There are several part-of-speech morphological analyzers in Asian languages. Contrary to English, East Asian language needs morphological analyzer for natural language processing, since the same character could have several meanings based on its position of the sentence and there are some languages which are not segmented.&lt;/p&gt;
 
 &lt;p&gt;For Japanese, MeCab is the current state of the art part of speech and morphological analyzer. For Korean, MeCab is one of the best analyzers for this purpose. I don’t know much about Chinese, but MeCab could be used since Japanese also makes extensive use of Chinese characters.&lt;/p&gt;
 
@@ -439,11 +439,11 @@ pos(&quot;こんにちは。&quot;, &quot;/usr/local/libexec/mecab/ipadic&quot;)
       
       <title type="html">Grad CAM으로 딥 러닝 모형 해석 (R version)</title>
       
-      <link href="https://junhewk.github.io/text/2017/12/09/grad-cam-interpretation/" rel="alternate" type="text/html" title="Grad CAM으로 딥 러닝 모형 해석 (R version)" />
+      <link href="http://localhost:4000/text/2017/12/09/grad-cam-interpretation/" rel="alternate" type="text/html" title="Grad CAM으로 딥 러닝 모형 해석 (R version)" />
       <published>2017-12-09T10:39:00+00:00</published>
       <updated>2017-12-09T10:39:00+00:00</updated>
-      <id>https://junhewk.github.io/text/2017/12/09/grad-cam-interpretation</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2017/12/09/grad-cam-interpretation/">&lt;p&gt;여러 곳에서 딥 러닝을 활용하고 있는 상황이지만, 개인적으로는 집중해서 매달리지는 않는 편입니다. 가장 큰 이유는 제가 관심 있는 것이 분석 결과가 아니라 해석이기 때문일 텐데요. 학문적 관심으로 접근하는 입장에서 딥러닝이 내는 좋은 결과도 해석하지 못하면 저에게는 크게 다가오지 않는 것 같습니다. 다행인 것은, 최근 머신 러닝 모형 해석을 위한 여러 가지 방법들이 제시되고 있다는 것이죠.&lt;/p&gt;
+      <id>http://localhost:4000/text/2017/12/09/grad-cam-interpretation</id>
+      <content type="html" xml:base="http://localhost:4000/text/2017/12/09/grad-cam-interpretation/">&lt;p&gt;여러 곳에서 딥 러닝을 활용하고 있는 상황이지만, 개인적으로는 집중해서 매달리지는 않는 편입니다. 가장 큰 이유는 제가 관심 있는 것이 분석 결과가 아니라 해석이기 때문일 텐데요. 학문적 관심으로 접근하는 입장에서 딥러닝이 내는 좋은 결과도 해석하지 못하면 저에게는 크게 다가오지 않는 것 같습니다. 다행인 것은, 최근 머신 러닝 모형 해석을 위한 여러 가지 방법들이 제시되고 있다는 것이죠.&lt;/p&gt;
 
 &lt;p&gt;Attention mechanism과 &lt;code class=&quot;highlighter-rouge&quot;&gt;lime&lt;/code&gt; 패키지( &lt;a href=&quot;https://github.com/marcotcr/lime&quot;&gt;python&lt;/a&gt;, &lt;a href=&quot;https://github.com/thomasp85/lime&quot;&gt;R&lt;/a&gt; )가 대표적인 예였던 것 같아요. Attention mechanism은 딥 러닝 모형이 가중치를 두고 살피는 부분이 어디인지를 알려주는 방법이었죠 ( &lt;a href=&quot;http://www.wildml.com/2016/01/attention-and-memory-in-deep-learning-and-nlp/&quot;&gt;Attention and Memory in Deep Learning and NLP&lt;/a&gt; ). 이미지의 경우 어떤 지점을, 텍스트의 경우 어떤 단어를 모형이 중요하게 다루는지를 알려주었고요. 단, 모형에 구조가 추가된다는 것, 여전히 관심 지점이 어떤 식으로 작용하는지는 알기 어렵다는 단점이 있었습니다.&lt;/p&gt;
 
@@ -739,11 +739,11 @@ pos(&quot;こんにちは。&quot;, &quot;/usr/local/libexec/mecab/ipadic&quot;)
       
       <title type="html">한국 가요 50년사, 가사 분석</title>
       
-      <link href="https://junhewk.github.io/text/2017/11/10/melonchart-lyrics/" rel="alternate" type="text/html" title="한국 가요 50년사, 가사 분석" />
+      <link href="http://localhost:4000/text/2017/11/10/melonchart-lyrics/" rel="alternate" type="text/html" title="한국 가요 50년사, 가사 분석" />
       <published>2017-11-10T14:38:00+00:00</published>
       <updated>2017-11-10T14:38:00+00:00</updated>
-      <id>https://junhewk.github.io/text/2017/11/10/melonchart-lyrics</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2017/11/10/melonchart-lyrics/">&lt;p&gt;&lt;a href=&quot;http://www.melon.com/chart/age/index.htm?chartType=AG&amp;amp;chartGenre=KPOP&amp;amp;chartDate=1960&quot;&gt;멜론 시대별 차트&lt;/a&gt;는 미국 빌보드처럼 공식 가요 순위 기록이 없는 한국 가요를 여러 출처를 통해 정리한 좋은 자료입니다. 물론 음원 공급을 하는 특정 회사의 저작물이라는 한계가 있을 수 있으나, 2010년 이후부터는 멜론 차트가 한국 가요 순위를 말하는 데에 있어서 중요한 지표가 된 것도 사실이니까요. 시대별 차트는 1964 ~ 2016년도의 가요 차트를 보여줍니다. 64 ~ 83년도는 순위 없이 해당 연도의 인기곡을, 84 ~ 04년도는 무가지 뮤직박스 차트를, 05년도 이후는 멜론 차트를 제공하고 있습니다. 이번 포스트는 전체 차트와 각 곡의 가사를 scraping한 &lt;a href=&quot;https://github.com/junhewk/melonchartlyrics&quot;&gt;자료&lt;/a&gt;를 토대로 명멸해간 스타들, 그리고 가사를 중심으로 한 분석 기법들의 소개를 이어가려 합니다. 이번에는 순위 자료를 바탕으로 한 graph와 가사의 word cloud, tf-idf 기반 분석을 소개하고, 다음 포스트에서 word vector, stm (structural topic modeling)을 다뤄보고자 합니다.&lt;/p&gt;
+      <id>http://localhost:4000/text/2017/11/10/melonchart-lyrics</id>
+      <content type="html" xml:base="http://localhost:4000/text/2017/11/10/melonchart-lyrics/">&lt;p&gt;&lt;a href=&quot;http://www.melon.com/chart/age/index.htm?chartType=AG&amp;amp;chartGenre=KPOP&amp;amp;chartDate=1960&quot;&gt;멜론 시대별 차트&lt;/a&gt;는 미국 빌보드처럼 공식 가요 순위 기록이 없는 한국 가요를 여러 출처를 통해 정리한 좋은 자료입니다. 물론 음원 공급을 하는 특정 회사의 저작물이라는 한계가 있을 수 있으나, 2010년 이후부터는 멜론 차트가 한국 가요 순위를 말하는 데에 있어서 중요한 지표가 된 것도 사실이니까요. 시대별 차트는 1964 ~ 2016년도의 가요 차트를 보여줍니다. 64 ~ 83년도는 순위 없이 해당 연도의 인기곡을, 84 ~ 04년도는 무가지 뮤직박스 차트를, 05년도 이후는 멜론 차트를 제공하고 있습니다. 이번 포스트는 전체 차트와 각 곡의 가사를 scraping한 &lt;a href=&quot;https://github.com/junhewk/melonchartlyrics&quot;&gt;자료&lt;/a&gt;를 토대로 명멸해간 스타들, 그리고 가사를 중심으로 한 분석 기법들의 소개를 이어가려 합니다. 이번에는 순위 자료를 바탕으로 한 graph와 가사의 word cloud, tf-idf 기반 분석을 소개하고, 다음 포스트에서 word vector, stm (structural topic modeling)을 다뤄보고자 합니다.&lt;/p&gt;
 
 &lt;p&gt;자료와 scraping 방법은 &lt;a href=&quot;https://github.com/junhewk/melonchartlyrics&quot;&gt;github&lt;/a&gt;의 자료 및 R script를 참고해주세요. 더불어 이 포스트는&lt;/p&gt;
 
@@ -1291,11 +1291,11 @@ n
       
       <title type="html">RmecabKo update to version 0.1.6.1</title>
       
-      <link href="https://junhewk.github.io/text/2017/11/03/rmecabko-update-to-version-0161/" rel="alternate" type="text/html" title="RmecabKo update to version 0.1.6.1" />
+      <link href="http://localhost:4000/text/2017/11/03/rmecabko-update-to-version-0161/" rel="alternate" type="text/html" title="RmecabKo update to version 0.1.6.1" />
       <published>2017-11-03T17:45:00+00:00</published>
       <updated>2017-11-03T17:45:00+00:00</updated>
-      <id>https://junhewk.github.io/text/2017/11/03/rmecabko-update-to-version-0161</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2017/11/03/rmecabko-update-to-version-0161/">&lt;p&gt;잘 지내셨는지요? &lt;a href=&quot;https://github.com/junhewk/RmecabKo&quot;&gt;RmecabKo&lt;/a&gt;을 0.1.6.1로 판올림했습니다. 이번에 추가한 중요한 기능은 역시 tokenizer일 것 같고, 다음 판올림을 위해 추가한 기능이 몇 가지 있습니다. 오늘은 tokenizer가 어떤 것인지부터 좀 더 상세하게 설명드리면 좋을 것 같아요. 아직 CRAN에는 등록하지 않았습니다. 몇 가지 문제가 해결되면 한꺼번에 올려야 할 것 같아요.&lt;/p&gt;
+      <id>http://localhost:4000/text/2017/11/03/rmecabko-update-to-version-0161</id>
+      <content type="html" xml:base="http://localhost:4000/text/2017/11/03/rmecabko-update-to-version-0161/">&lt;p&gt;잘 지내셨는지요? &lt;a href=&quot;https://github.com/junhewk/RmecabKo&quot;&gt;RmecabKo&lt;/a&gt;을 0.1.6.1로 판올림했습니다. 이번에 추가한 중요한 기능은 역시 tokenizer일 것 같고, 다음 판올림을 위해 추가한 기능이 몇 가지 있습니다. 오늘은 tokenizer가 어떤 것인지부터 좀 더 상세하게 설명드리면 좋을 것 같아요. 아직 CRAN에는 등록하지 않았습니다. 몇 가지 문제가 해결되면 한꺼번에 올려야 할 것 같아요.&lt;/p&gt;
 
 &lt;p&gt;이번 판올림(0.1.6.1)은 다음 내용으로 구성되어 있습니다.&lt;/p&gt;
 
@@ -1675,11 +1675,11 @@ n
       
       <title type="html">지대넓얕 팟캐스트 분석, XML parsing</title>
       
-      <link href="https://junhewk.github.io/text/2017/10/14/podcast-analysis/" rel="alternate" type="text/html" title="지대넓얕 팟캐스트 분석, XML parsing" />
+      <link href="http://localhost:4000/text/2017/10/14/podcast-analysis/" rel="alternate" type="text/html" title="지대넓얕 팟캐스트 분석, XML parsing" />
       <published>2017-10-14T11:48:00+00:00</published>
       <updated>2017-10-14T11:48:00+00:00</updated>
-      <id>https://junhewk.github.io/text/2017/10/14/podcast-analysis</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2017/10/14/podcast-analysis/">&lt;p&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/팟캐스트&quot;&gt;팟캐스트&lt;/a&gt;의 대중화에 기여한 것은 2011년 &lt;a href=&quot;https://www.ddanzi.com/&quot;&gt;딴지일보&lt;/a&gt;에서 제작한 &lt;a href=&quot;https://ko.wikipedia.org/wiki/팟캐스트&quot;&gt;나는 꼼수다&lt;/a&gt;였던 것으로 기억합니다. 인기였던 TV 프로그램 &lt;a href=&quot;https://ko.wikipedia.org/wiki/나는_가수다&quot;&gt;나는 가수다&lt;/a&gt;에서 제목을 빌린 이 팟캐스트는 당시 대통령에 대한 비난 여론을 집중시키는 창구 역할을 하면서, 이후 한국 정치 지형 변화의 기폭제가 되었다고 말해도 좋을 것 같습니다.&lt;/p&gt;
+      <id>http://localhost:4000/text/2017/10/14/podcast-analysis</id>
+      <content type="html" xml:base="http://localhost:4000/text/2017/10/14/podcast-analysis/">&lt;p&gt;&lt;a href=&quot;https://ko.wikipedia.org/wiki/팟캐스트&quot;&gt;팟캐스트&lt;/a&gt;의 대중화에 기여한 것은 2011년 &lt;a href=&quot;https://www.ddanzi.com/&quot;&gt;딴지일보&lt;/a&gt;에서 제작한 &lt;a href=&quot;https://ko.wikipedia.org/wiki/팟캐스트&quot;&gt;나는 꼼수다&lt;/a&gt;였던 것으로 기억합니다. 인기였던 TV 프로그램 &lt;a href=&quot;https://ko.wikipedia.org/wiki/나는_가수다&quot;&gt;나는 가수다&lt;/a&gt;에서 제목을 빌린 이 팟캐스트는 당시 대통령에 대한 비난 여론을 집중시키는 창구 역할을 하면서, 이후 한국 정치 지형 변화의 기폭제가 되었다고 말해도 좋을 것 같습니다.&lt;/p&gt;
 
 &lt;p&gt;제가 처음 팟캐스트를 들었던 것은 2008년 정도부터 였던 것 같습니다. 영어 공부를 하겠다는 핑계로 당시 막 생겨나고 있던 영어 팟캐스트를 어줍잖게 듣다가 포기했었던 기억과, 2010년에 당시 미국으로 건너간 &lt;a href=&quot;https://ko.wikipedia.org/wiki/김영하_(소설가)&quot;&gt;김영하&lt;/a&gt; 작가가 막 시작했던 &lt;a href=&quot;https://itunes.apple.com/us/podcast/김영하의-책-읽는-시간/id356061083?mt=2&quot;&gt;김영하의 책 읽는 시간&lt;/a&gt;을 들으면서 신기해 했던 기억이 나네요. 해당 팟캐스트는 지금까지도 듣고 있지만, 요새 전방위로 활동하고 있는 작가의 일정 때문인지 업데이트가 뜸해서 아쉽습니다.&lt;/p&gt;
 
@@ -2021,11 +2021,11 @@ n
       
       <title type="html">소설 분석, googleLanguageR 소개</title>
       
-      <link href="https://junhewk.github.io/text/2017/10/05/googlelanguageR-and-novel-analysis/" rel="alternate" type="text/html" title="소설 분석, googleLanguageR 소개" />
+      <link href="http://localhost:4000/text/2017/10/05/googlelanguageR-and-novel-analysis/" rel="alternate" type="text/html" title="소설 분석, googleLanguageR 소개" />
       <published>2017-10-05T15:20:00+00:00</published>
       <updated>2017-10-05T15:20:00+00:00</updated>
-      <id>https://junhewk.github.io/text/2017/10/05/googlelanguageR-and-novel-analysis</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2017/10/05/googlelanguageR-and-novel-analysis/">&lt;p&gt;&lt;a href=&quot;https://ropensci.org&quot;&gt;ropensci&lt;/a&gt;에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;googleLanguageR&lt;/code&gt; 패키지를 공개했습니다. 패키지에 관한 자세한 설명은 &lt;a href=&quot;http://code.markedmondson.me/googleLanguageR/&quot;&gt;페이지&lt;/a&gt;에서 확인하실 수 있습니다. 간단히 말씀드리면, &lt;code class=&quot;highlighter-rouge&quot;&gt;googleLanguageR&lt;/code&gt; 패키지는 &lt;a href=&quot;https://cloud.google.com/products/machine-learning/&quot;&gt;google Cloud API&lt;/a&gt;의 언어 관련 API인 &lt;a href=&quot;https://cloud.google.com/natural-language/&quot;&gt;Google Natural Language API&lt;/a&gt;, &lt;a href=&quot;https://cloud.google.com/translate/&quot;&gt;Google Cloud Translation API&lt;/a&gt;, &lt;a href=&quot;https://cloud.google.com/speech/&quot;&gt;Google Cloud Speech API&lt;/a&gt;의 R interface입니다. 패키지로 할 수 있는 것을 살펴볼까요?&lt;/p&gt;
+      <id>http://localhost:4000/text/2017/10/05/googlelanguageR-and-novel-analysis</id>
+      <content type="html" xml:base="http://localhost:4000/text/2017/10/05/googlelanguageR-and-novel-analysis/">&lt;p&gt;&lt;a href=&quot;https://ropensci.org&quot;&gt;ropensci&lt;/a&gt;에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;googleLanguageR&lt;/code&gt; 패키지를 공개했습니다. 패키지에 관한 자세한 설명은 &lt;a href=&quot;http://code.markedmondson.me/googleLanguageR/&quot;&gt;페이지&lt;/a&gt;에서 확인하실 수 있습니다. 간단히 말씀드리면, &lt;code class=&quot;highlighter-rouge&quot;&gt;googleLanguageR&lt;/code&gt; 패키지는 &lt;a href=&quot;https://cloud.google.com/products/machine-learning/&quot;&gt;google Cloud API&lt;/a&gt;의 언어 관련 API인 &lt;a href=&quot;https://cloud.google.com/natural-language/&quot;&gt;Google Natural Language API&lt;/a&gt;, &lt;a href=&quot;https://cloud.google.com/translate/&quot;&gt;Google Cloud Translation API&lt;/a&gt;, &lt;a href=&quot;https://cloud.google.com/speech/&quot;&gt;Google Cloud Speech API&lt;/a&gt;의 R interface입니다. 패키지로 할 수 있는 것을 살펴볼까요?&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;자연어 분석: 문장의 객체 인식(Named Entity Recognition), 감정 분석(Sentiment Analysis), 문법 분석(Syntax Analysis), 분류(Classification)을 지원합니다. 한국어 분류는 아직 지원하지 않습니다.&lt;/li&gt;
@@ -2368,11 +2368,11 @@ n
       
       <title type="html">RmecabKo update to version 0.1.6</title>
       
-      <link href="https://junhewk.github.io/text/2017/10/02/rmecabko-update-to-version-016/" rel="alternate" type="text/html" title="RmecabKo update to version 0.1.6" />
+      <link href="http://localhost:4000/text/2017/10/02/rmecabko-update-to-version-016/" rel="alternate" type="text/html" title="RmecabKo update to version 0.1.6" />
       <published>2017-10-02T10:02:00+00:00</published>
       <updated>2017-10-02T10:02:00+00:00</updated>
-      <id>https://junhewk.github.io/text/2017/10/02/rmecabko-update-to-version-016</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2017/10/02/rmecabko-update-to-version-016/">&lt;p&gt;안녕하세요? 지난번 소개한 &lt;a href=&quot;https://github.com/junhewk/RmecabKo&quot;&gt;RmecabKo&lt;/a&gt;의 중요 판올림이 있었습니다. 드디어 &lt;strong&gt;Windows&lt;/strong&gt;를 지원합니다. 아쉽게도 Rcpp 자체의 문제로, Windows에서는 R에서 직접 C++ 소스를 구동해서 빠르게 형태소 분석 결과를 확인할 수는 없어요. Rcpp를 개발한 &lt;a href=&quot;http://dirk.eddelbuettel.com&quot;&gt;Dirk Eddelbuettel&lt;/a&gt;이 &lt;a href=&quot;http://dirk.eddelbuettel.com/code/rcpp/Rcpp-FAQ.pdf&quot;&gt;&lt;strong&gt;Rcpp는 Visual C++를 지원하지 않는다&lt;/strong&gt;&lt;/a&gt;고 몇 번이나 강조하고 있었다는 걸 이번 판올림에서 배웠습니다. R core가 Mingw 기반으로 빌드되어 있으므로, Visual Studio library를 섞으면 오류가 발생한다고 하네요.&lt;/p&gt;
+      <id>http://localhost:4000/text/2017/10/02/rmecabko-update-to-version-016</id>
+      <content type="html" xml:base="http://localhost:4000/text/2017/10/02/rmecabko-update-to-version-016/">&lt;p&gt;안녕하세요? 지난번 소개한 &lt;a href=&quot;https://github.com/junhewk/RmecabKo&quot;&gt;RmecabKo&lt;/a&gt;의 중요 판올림이 있었습니다. 드디어 &lt;strong&gt;Windows&lt;/strong&gt;를 지원합니다. 아쉽게도 Rcpp 자체의 문제로, Windows에서는 R에서 직접 C++ 소스를 구동해서 빠르게 형태소 분석 결과를 확인할 수는 없어요. Rcpp를 개발한 &lt;a href=&quot;http://dirk.eddelbuettel.com&quot;&gt;Dirk Eddelbuettel&lt;/a&gt;이 &lt;a href=&quot;http://dirk.eddelbuettel.com/code/rcpp/Rcpp-FAQ.pdf&quot;&gt;&lt;strong&gt;Rcpp는 Visual C++를 지원하지 않는다&lt;/strong&gt;&lt;/a&gt;고 몇 번이나 강조하고 있었다는 걸 이번 판올림에서 배웠습니다. R core가 Mingw 기반으로 빌드되어 있으므로, Visual Studio library를 섞으면 오류가 발생한다고 하네요.&lt;/p&gt;
 
 &lt;p&gt;결국, Rcpp 코드 개발은 포기하고 &lt;a href=&quot;https://github.com/Pusnow&quot;&gt;윤원섭&lt;/a&gt;님의 &lt;code class=&quot;highlighter-rouge&quot;&gt;mecab-ko-msvc&lt;/code&gt; 빌드를 받아 바이너리 형태로 작동하는 방식을 택했습니다. file I/O를 통해 작동하고요. 따라서 Windows에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;RmecabKo&lt;/code&gt; 구동은 Mac OSX/Linux와 비교하면 상당히 느립니다. &lt;a href=&quot;https://github.com/Microsoft/RTVS&quot;&gt;RTVS&lt;/a&gt;(R Tools for Visual Studio)가 판올림을 거듭하다 보면 나중에는 방법이 있지 않을까 싶은데요, 아직은 좀 어렵네요.&lt;/p&gt;
 
@@ -2449,11 +2449,11 @@ n
       
       <title type="html">RmecabKo package version 0.1</title>
       
-      <link href="https://junhewk.github.io/text/2017/09/25/RmecabKo-package-version-01/" rel="alternate" type="text/html" title="RmecabKo package version 0.1" />
+      <link href="http://localhost:4000/text/2017/09/25/RmecabKo-package-version-01/" rel="alternate" type="text/html" title="RmecabKo package version 0.1" />
       <published>2017-09-25T10:20:00+00:00</published>
       <updated>2017-09-25T10:20:00+00:00</updated>
-      <id>https://junhewk.github.io/text/2017/09/25/RmecabKo-package-version-01</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2017/09/25/RmecabKo-package-version-01/">&lt;p&gt;한글 형태소 분석기인 은전한닢 프로젝트 &lt;a href=&quot;http://eunjeon.blogspot.kr/&quot;&gt;mecab-ko&lt;/a&gt;의 R wrapper를 만들었습니다. 한달동안 틈틈히 C++ 프로그래밍 기본부터 익히기 시작해서 패키지 완성까지 진행하면서 어려움이 많았지만, 올려놓고 나니 시원섭섭하네요. 천천히 수정, 보완해 나갈 예정입니다.&lt;/p&gt;
+      <id>http://localhost:4000/text/2017/09/25/RmecabKo-package-version-01</id>
+      <content type="html" xml:base="http://localhost:4000/text/2017/09/25/RmecabKo-package-version-01/">&lt;p&gt;한글 형태소 분석기인 은전한닢 프로젝트 &lt;a href=&quot;http://eunjeon.blogspot.kr/&quot;&gt;mecab-ko&lt;/a&gt;의 R wrapper를 만들었습니다. 한달동안 틈틈히 C++ 프로그래밍 기본부터 익히기 시작해서 패키지 완성까지 진행하면서 어려움이 많았지만, 올려놓고 나니 시원섭섭하네요. 천천히 수정, 보완해 나갈 예정입니다.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/junhewk/RmecabKo&quot;&gt;RmecabKo&lt;/a&gt; 에서 확인하실 수 있어요.&lt;/p&gt;
 
@@ -2517,11 +2517,11 @@ n
       
       <title type="html">시진은 뛰고, 모연은 건넨다 - “태양의 후예” 대본 텍스트 분석</title>
       
-      <link href="https://junhewk.github.io/text/2017/08/23/script-analysis.ds/" rel="alternate" type="text/html" title="시진은 뛰고, 모연은 건넨다 - &quot;태양의 후예&quot; 대본 텍스트 분석" />
+      <link href="http://localhost:4000/text/2017/08/23/script-analysis.ds/" rel="alternate" type="text/html" title="시진은 뛰고, 모연은 건넨다 - &quot;태양의 후예&quot; 대본 텍스트 분석" />
       <published>2017-08-23T23:08:00+00:00</published>
       <updated>2017-08-23T23:08:00+00:00</updated>
-      <id>https://junhewk.github.io/text/2017/08/23/script-analysis.ds</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2017/08/23/script-analysis.ds/">&lt;p&gt;아래 분석은 &lt;a href=&quot;https://pudding.cool/2017/08/screen-direction/&quot;&gt;Silge J. She giggles, he gallops&lt;/a&gt;가 제시한 텍스트 분석 기법을 한글 텍스트에 적용해본 예제입니다. 원문은 &lt;a href=&quot;https://pudding.cool/2017/03/film-dialogue/&quot;&gt;Anderson H, Daniels M. Film dialogue&lt;/a&gt;의 작업에서 만든 2000개의 영화 대본을 바탕으로 연어(bigram)를 검토, 대명사인 “he”와 “she”에 붙어 있는 단어를 찾아 나갑니다. 영어 구조 상, 대명사 뒤에는 동사가 따라나올 것이며, 따라서 영화 대본이 남자와 여자에게 어떤 행동을 지시하는 지를 파악할 수 있게 되겠지요. 결과, “he”는 “straps(채찍질하다)”, “gallops(말 달리다)”, “shot(쏘다)” 등의 행동을, “she”는 “snuggles(껴안다)”, “giggles(낄낄거리다)”, “squeals(울고 비명지르다)” 등의 행동을 더 많이 수행합니다. 영화에서 남, 여 등장인물에 관한 고정관념을 수치로 확인할 수 있는 훌륭한 분석이라고 생각합니다. 시대, 작가 등에 따른 차이도 제시해 놓았으니 링크는 한번 꼭 보셔요.&lt;/p&gt;
+      <id>http://localhost:4000/text/2017/08/23/script-analysis.ds</id>
+      <content type="html" xml:base="http://localhost:4000/text/2017/08/23/script-analysis.ds/">&lt;p&gt;아래 분석은 &lt;a href=&quot;https://pudding.cool/2017/08/screen-direction/&quot;&gt;Silge J. She giggles, he gallops&lt;/a&gt;가 제시한 텍스트 분석 기법을 한글 텍스트에 적용해본 예제입니다. 원문은 &lt;a href=&quot;https://pudding.cool/2017/03/film-dialogue/&quot;&gt;Anderson H, Daniels M. Film dialogue&lt;/a&gt;의 작업에서 만든 2000개의 영화 대본을 바탕으로 연어(bigram)를 검토, 대명사인 “he”와 “she”에 붙어 있는 단어를 찾아 나갑니다. 영어 구조 상, 대명사 뒤에는 동사가 따라나올 것이며, 따라서 영화 대본이 남자와 여자에게 어떤 행동을 지시하는 지를 파악할 수 있게 되겠지요. 결과, “he”는 “straps(채찍질하다)”, “gallops(말 달리다)”, “shot(쏘다)” 등의 행동을, “she”는 “snuggles(껴안다)”, “giggles(낄낄거리다)”, “squeals(울고 비명지르다)” 등의 행동을 더 많이 수행합니다. 영화에서 남, 여 등장인물에 관한 고정관념을 수치로 확인할 수 있는 훌륭한 분석이라고 생각합니다. 시대, 작가 등에 따른 차이도 제시해 놓았으니 링크는 한번 꼭 보셔요.&lt;/p&gt;
 
 &lt;p&gt;이런 작업을 보면 한글로 한번 해봐야 하지 않겠습니까. 영화 대본 수집은 다른 기회에 한번 도전해보도록 하고, 이번에는 검색하다가 인기 드라마였던 “태양의 후예” 1~16화 대본을 발견해서, 이 자료를 통해 분석해보기로 했습니다. 다음에는 김은숙 작가의 작품들을 모아서 해볼까 싶기도 해요. 오늘은 일단, 어떤 식으로 분석을 진행하는지만 간단히 확인해 보겠습니다.&lt;/p&gt;
 
@@ -2784,11 +2784,11 @@ n
       
       <title type="html">환자 불편 상담에 관한 Latent Dirichlet Allocation 분석</title>
       
-      <link href="https://junhewk.github.io/text/2017/08/15/complaint-LDA/" rel="alternate" type="text/html" title="환자 불편 상담에 관한 Latent Dirichlet Allocation 분석" />
+      <link href="http://localhost:4000/text/2017/08/15/complaint-LDA/" rel="alternate" type="text/html" title="환자 불편 상담에 관한 Latent Dirichlet Allocation 분석" />
       <published>2017-08-15T14:28:00+00:00</published>
       <updated>2017-08-15T14:28:00+00:00</updated>
-      <id>https://junhewk.github.io/text/2017/08/15/complaint-LDA</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2017/08/15/complaint-LDA/">&lt;p&gt;이번에는 지난 번에 활용했던 &lt;a href=&quot;http://www.1372.go.kr&quot;&gt;1372 소비자보호원&lt;/a&gt; 상담 자료를 통해 &lt;a href=&quot;https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation&quot;&gt;LDA&lt;/a&gt; (Latent Dirichlet Allocation)을 통한 분석을 진행해 보려 합니다. 먼저 참고한 페이지는 다음과 같습니다.&lt;/p&gt;
+      <id>http://localhost:4000/text/2017/08/15/complaint-LDA</id>
+      <content type="html" xml:base="http://localhost:4000/text/2017/08/15/complaint-LDA/">&lt;p&gt;이번에는 지난 번에 활용했던 &lt;a href=&quot;http://www.1372.go.kr&quot;&gt;1372 소비자보호원&lt;/a&gt; 상담 자료를 통해 &lt;a href=&quot;https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation&quot;&gt;LDA&lt;/a&gt; (Latent Dirichlet Allocation)을 통한 분석을 진행해 보려 합니다. 먼저 참고한 페이지는 다음과 같습니다.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;http://tidytextmining.com/topicmodeling.html&lt;/li&gt;
@@ -3222,11 +3222,11 @@ n
       
       <title type="html">네이버 블로그로 동시출현단어 분석 (co-occurence network anlysis)</title>
       
-      <link href="https://junhewk.github.io/text/2017/08/08/cooccurence-matrix-with-Naver-blog/" rel="alternate" type="text/html" title="네이버 블로그로 동시출현단어 분석 (co-occurence network anlysis)" />
+      <link href="http://localhost:4000/text/2017/08/08/cooccurence-matrix-with-Naver-blog/" rel="alternate" type="text/html" title="네이버 블로그로 동시출현단어 분석 (co-occurence network anlysis)" />
       <published>2017-08-08T11:35:00+00:00</published>
       <updated>2017-08-08T11:35:00+00:00</updated>
-      <id>https://junhewk.github.io/text/2017/08/08/cooccurence-matrix-with-Naver-blog</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2017/08/08/cooccurence-matrix-with-Naver-blog/">&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Co-occurrence&quot;&gt;동시출현(Co-occurrence)&lt;/a&gt;이란 한 문장, 문단 또는 텍스트 단위에서 같이 출현한 단어를 가리킵니다. 언어학적 의미에서 의미적 근접성을 가리키며, 단어의 연결(collocation)을 찾는 데 활용됩니다. 이 개념에서 출발한 &lt;a href=&quot;https://en.wikipedia.org/wiki/Co-occurrence_networks&quot;&gt;동시출현 네트워크(Co-occurrence networks)&lt;/a&gt;는 특정 텍스트 단위에서 공동으로 출현한 단어의 집합적 상호 연결을 표현하는 방식입니다. 나타나는 단어를 모두 표시한 뒤, 두 단어가 같은 문단에 들어가 있다면 둘 사이를 선으로 연결해 나가다 보면 단어의 네트워크를 만들 수 있게 되겠죠. 이번 포스트에서는 네이버 블로그를 검색하여, 동시출현 네트워크를 그려보는 것을 목표로 합니다. 시각화에는 두 개의 패키지, &lt;code class=&quot;highlighter-rouge&quot;&gt;qgraph&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;networkD3&lt;/code&gt;를 활용해볼 것입니다. 일반적으로 사용되는 &lt;code class=&quot;highlighter-rouge&quot;&gt;igraph&lt;/code&gt;가 군집 분석이 가능한 장점을 지니지만, 이번에는 단순히 시각화를 목적했습니다.&lt;/p&gt;
+      <id>http://localhost:4000/text/2017/08/08/cooccurence-matrix-with-Naver-blog</id>
+      <content type="html" xml:base="http://localhost:4000/text/2017/08/08/cooccurence-matrix-with-Naver-blog/">&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Co-occurrence&quot;&gt;동시출현(Co-occurrence)&lt;/a&gt;이란 한 문장, 문단 또는 텍스트 단위에서 같이 출현한 단어를 가리킵니다. 언어학적 의미에서 의미적 근접성을 가리키며, 단어의 연결(collocation)을 찾는 데 활용됩니다. 이 개념에서 출발한 &lt;a href=&quot;https://en.wikipedia.org/wiki/Co-occurrence_networks&quot;&gt;동시출현 네트워크(Co-occurrence networks)&lt;/a&gt;는 특정 텍스트 단위에서 공동으로 출현한 단어의 집합적 상호 연결을 표현하는 방식입니다. 나타나는 단어를 모두 표시한 뒤, 두 단어가 같은 문단에 들어가 있다면 둘 사이를 선으로 연결해 나가다 보면 단어의 네트워크를 만들 수 있게 되겠죠. 이번 포스트에서는 네이버 블로그를 검색하여, 동시출현 네트워크를 그려보는 것을 목표로 합니다. 시각화에는 두 개의 패키지, &lt;code class=&quot;highlighter-rouge&quot;&gt;qgraph&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;networkD3&lt;/code&gt;를 활용해볼 것입니다. 일반적으로 사용되는 &lt;code class=&quot;highlighter-rouge&quot;&gt;igraph&lt;/code&gt;가 군집 분석이 가능한 장점을 지니지만, 이번에는 단순히 시각화를 목적했습니다.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -3473,11 +3473,11 @@ n
       
       <title type="html">환자 불편 사항 상담 자료 Word Vector로 분석해보기 (Semantic Analysis)</title>
       
-      <link href="https://junhewk.github.io/text/2017/07/18/customer-complaint/" rel="alternate" type="text/html" title="환자 불편 사항 상담 자료 Word Vector로 분석해보기 (Semantic Analysis)" />
+      <link href="http://localhost:4000/text/2017/07/18/customer-complaint/" rel="alternate" type="text/html" title="환자 불편 사항 상담 자료 Word Vector로 분석해보기 (Semantic Analysis)" />
       <published>2017-07-18T13:28:00+00:00</published>
       <updated>2017-07-18T13:28:00+00:00</updated>
-      <id>https://junhewk.github.io/text/2017/07/18/customer-complaint</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2017/07/18/customer-complaint/">&lt;p&gt;이번에는 &lt;a href=&quot;http://www.1372.go.kr&quot;&gt;한국 소비자상담센터&lt;/a&gt;의 상담 자료를 Word Vector로 분석해 보려고 합니다. &lt;a href=&quot;/2017/06/18/single-word-analysis-korean-poem/&quot;&gt;지난 번 글&lt;/a&gt;에서 말씀드린 작업 중에서, 감정 사전 번역 후 하나씩 형태소 사전과 매칭하는 작업을 진행 중입니다만 생각보다 손이 많이 가네요. 일단 다른 작업부터 하나 해 보았습니다. &lt;a href=&quot;http://www.1372.go.kr/contents/include.ccn?gSiteCode=2&amp;amp;gMenuCode=4&amp;amp;nMenuCode=13&quot;&gt;소비자상담센터 - 상담조회 - 상담현황조회&lt;/a&gt;에는 서비스 불편 사항에 관한 여러 가지 상담 내용과 응답이 올라와 있습니다. 그 중에는 &lt;a href=&quot;http://www.1372.go.kr/contents/include.ccn?gSiteCode=2&amp;amp;gMenuCode=4&amp;amp;nMenuCode=13&amp;amp;mPart=&quot;&gt;의료서비스&lt;/a&gt;도 있고요. 2010년부터 지금까지 상담한 내용이 올라와 있고, 질의와 응답이 모두 올라와 있어요. &lt;a href=&quot;http://www.1372.go.kr/contents/include.ccn?gSiteCode=2&amp;amp;gMenuCode=4&amp;amp;nMenuCode=6&quot;&gt;모범 상담 조회&lt;/a&gt;에는 만족도도 표시되어 있으니 supervised learning도 해볼 수 있을 것 같고요. 오늘은 일단, 질문만 모두 모아서 word vector로 바꾸고, 어떤 작업들이 가능한지만 살펴볼 것입니다. 제가 이 자료에서 찾아보려는 것은 의과와는 구분되는 치과의 특성인데, 문제에 맞는 좋은 자료라고 생각합니다. 이 결과는 다음번에 소개드리겠습니다.&lt;/p&gt;
+      <id>http://localhost:4000/text/2017/07/18/customer-complaint</id>
+      <content type="html" xml:base="http://localhost:4000/text/2017/07/18/customer-complaint/">&lt;p&gt;이번에는 &lt;a href=&quot;http://www.1372.go.kr&quot;&gt;한국 소비자상담센터&lt;/a&gt;의 상담 자료를 Word Vector로 분석해 보려고 합니다. &lt;a href=&quot;/2017/06/18/single-word-analysis-korean-poem/&quot;&gt;지난 번 글&lt;/a&gt;에서 말씀드린 작업 중에서, 감정 사전 번역 후 하나씩 형태소 사전과 매칭하는 작업을 진행 중입니다만 생각보다 손이 많이 가네요. 일단 다른 작업부터 하나 해 보았습니다. &lt;a href=&quot;http://www.1372.go.kr/contents/include.ccn?gSiteCode=2&amp;amp;gMenuCode=4&amp;amp;nMenuCode=13&quot;&gt;소비자상담센터 - 상담조회 - 상담현황조회&lt;/a&gt;에는 서비스 불편 사항에 관한 여러 가지 상담 내용과 응답이 올라와 있습니다. 그 중에는 &lt;a href=&quot;http://www.1372.go.kr/contents/include.ccn?gSiteCode=2&amp;amp;gMenuCode=4&amp;amp;nMenuCode=13&amp;amp;mPart=&quot;&gt;의료서비스&lt;/a&gt;도 있고요. 2010년부터 지금까지 상담한 내용이 올라와 있고, 질의와 응답이 모두 올라와 있어요. &lt;a href=&quot;http://www.1372.go.kr/contents/include.ccn?gSiteCode=2&amp;amp;gMenuCode=4&amp;amp;nMenuCode=6&quot;&gt;모범 상담 조회&lt;/a&gt;에는 만족도도 표시되어 있으니 supervised learning도 해볼 수 있을 것 같고요. 오늘은 일단, 질문만 모두 모아서 word vector로 바꾸고, 어떤 작업들이 가능한지만 살펴볼 것입니다. 제가 이 자료에서 찾아보려는 것은 의과와는 구분되는 치과의 특성인데, 문제에 맞는 좋은 자료라고 생각합니다. 이 결과는 다음번에 소개드리겠습니다.&lt;/p&gt;
 
 &lt;h2&gt;Word Vector&lt;/h2&gt;
 
@@ -4010,11 +4010,11 @@ n
       
       <title type="html">Monkeylearn in R 소개 - 쉽게 텍스트 분석하기</title>
       
-      <link href="https://junhewk.github.io/text/2017/07/10/monkeylearn-in-R/" rel="alternate" type="text/html" title="Monkeylearn in R 소개 - 쉽게 텍스트 분석하기" />
+      <link href="http://localhost:4000/text/2017/07/10/monkeylearn-in-R/" rel="alternate" type="text/html" title="Monkeylearn in R 소개 - 쉽게 텍스트 분석하기" />
       <published>2017-07-10T10:10:20+00:00</published>
       <updated>2017-07-10T10:10:20+00:00</updated>
-      <id>https://junhewk.github.io/text/2017/07/10/monkeylearn-in-R</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2017/07/10/monkeylearn-in-R/">&lt;p&gt;&lt;a href=&quot;http://monkeylearn.com&quot;&gt;Monkeylearn&lt;/a&gt;은 머신 러닝을 통한 텍스트 분석 결과를 제시하고, 만든 모델을 API로 제공하여 이후 자료에 계속적으로 적용할 수 있도록 하는 서비스를 제공합니다. 복잡한 분석은 할 수 없는 대신, 대량의 자료를 쉬운 인터페이스로 처리할 수 있다는 것과, 한 번 모델을 구축하면 이후에 계속 자료를 분석할 수 있는 시스템을 쉽게 만들 수 있다는 장점이 있습니다. 한국어도 지원하고, 간단히 돌려보니 unigram &amp;amp; bigram으로 나름 괜찮은 분석 모형을 만들 수 있어서 다음에 Python &lt;a href=&quot;https://scrapy.org&quot;&gt;Scrapy&lt;/a&gt;로 한글 사이트 크롤링 및 분석 모형 제작 포스트를 올려보도록 하겠습니다. 오늘은 먼저, R에서 Monkeylearn API를 사용할 수 있도록 만들어 놓은 &lt;a href=&quot;https://github.com/ropensci/monkeylearn&quot;&gt;ropensci/monkeylearn package&lt;/a&gt;를 소개하도록 하겠습니다.&lt;/p&gt;
+      <id>http://localhost:4000/text/2017/07/10/monkeylearn-in-R</id>
+      <content type="html" xml:base="http://localhost:4000/text/2017/07/10/monkeylearn-in-R/">&lt;p&gt;&lt;a href=&quot;http://monkeylearn.com&quot;&gt;Monkeylearn&lt;/a&gt;은 머신 러닝을 통한 텍스트 분석 결과를 제시하고, 만든 모델을 API로 제공하여 이후 자료에 계속적으로 적용할 수 있도록 하는 서비스를 제공합니다. 복잡한 분석은 할 수 없는 대신, 대량의 자료를 쉬운 인터페이스로 처리할 수 있다는 것과, 한 번 모델을 구축하면 이후에 계속 자료를 분석할 수 있는 시스템을 쉽게 만들 수 있다는 장점이 있습니다. 한국어도 지원하고, 간단히 돌려보니 unigram &amp;amp; bigram으로 나름 괜찮은 분석 모형을 만들 수 있어서 다음에 Python &lt;a href=&quot;https://scrapy.org&quot;&gt;Scrapy&lt;/a&gt;로 한글 사이트 크롤링 및 분석 모형 제작 포스트를 올려보도록 하겠습니다. 오늘은 먼저, R에서 Monkeylearn API를 사용할 수 있도록 만들어 놓은 &lt;a href=&quot;https://github.com/ropensci/monkeylearn&quot;&gt;ropensci/monkeylearn package&lt;/a&gt;를 소개하도록 하겠습니다.&lt;/p&gt;
 
 &lt;p&gt;아래 코드는 package github에 올라와 있는 것을 그대로 따라한 것입니다.&lt;/p&gt;
 
@@ -4375,11 +4375,11 @@ Their argument to the room of technologically inclined students was that Wall St
       
       <title type="html">R에서 해보는 한국 일제강점기 시의 단어 분석</title>
       
-      <link href="https://junhewk.github.io/text/2017/06/18/single-word-analysis-korean-poem/" rel="alternate" type="text/html" title="R에서 해보는 한국 일제강점기 시의 단어 분석" />
+      <link href="http://localhost:4000/text/2017/06/18/single-word-analysis-korean-poem/" rel="alternate" type="text/html" title="R에서 해보는 한국 일제강점기 시의 단어 분석" />
       <published>2017-06-18T13:47:00+00:00</published>
       <updated>2017-06-18T13:47:00+00:00</updated>
-      <id>https://junhewk.github.io/text/2017/06/18/single-word-analysis-korean-poem</id>
-      <content type="html" xml:base="https://junhewk.github.io/text/2017/06/18/single-word-analysis-korean-poem/">&lt;ul&gt;
+      <id>http://localhost:4000/text/2017/06/18/single-word-analysis-korean-poem</id>
+      <content type="html" xml:base="http://localhost:4000/text/2017/06/18/single-word-analysis-korean-poem/">&lt;ul&gt;
   &lt;li&gt;본 포스트는 &lt;a href=&quot;http://blog.eighty20.co.za//package%20exploration/2017/06/12/sentiment-blog-post/&quot;&gt;Single World Analysis of Early 19th Century Poetry Using tidytext&lt;/a&gt;의 내용을 수정, 발전시킨 것입니다. 분석 방법은 기본적으로 모두 원 블로그에서 따온 것임을 밝힙니다.&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://freesearch.pe.kr&quot;&gt;전희원&lt;/a&gt;님의 &lt;a href=&quot;https://github.com/haven-jeon/KoNLP&quot;&gt;KoNLP&lt;/a&gt;는 정말 멋진 패키지이지만, 본문에서는 적용하지 않았습니다. 다음번 포스팅에는 독자분들이 좀 더 쉽게 접근하실 수 있도록 KoNLP를 통한 분석도 싣도록 하겠습니다.&lt;/li&gt;
   &lt;li&gt;여기에서는 &lt;a href=&quot;http://www.shineware.co.kr/products/komoran/&quot;&gt;코모란 3.0&lt;/a&gt;을 적용했습니다. 아쉽게도 R 포팅은 없기 때문에, &lt;a href=&quot;https://cran.r-project.org/web/packages/rJava/index.html&quot;&gt;rJava&lt;/a&gt; interface를 통해 Komoran 3.0 Java Archive를 직접 불러와 태깅했습니다.&lt;/li&gt;
